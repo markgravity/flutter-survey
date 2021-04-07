@@ -7,8 +7,8 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Screen(
       body: Center(
-        child: Text("Landing")
-      )
+        child: Text("Landing"),
+      ),
     );
   }
 }

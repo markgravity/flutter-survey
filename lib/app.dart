@@ -7,8 +7,7 @@ import 'package:survey/configs/routes.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       return MaterialApp(
         routes: routes,
       );
