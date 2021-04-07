@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:survey/core/environment.dart';
+import 'package:flutter/foundation.dart';
 
 class Screen extends StatelessWidget {
   final Widget body;
@@ -11,7 +9,7 @@ class Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
+    if (defaultTargetPlatform == TargetPlatform.android) {
       return Scaffold(
         body: body,
       );
