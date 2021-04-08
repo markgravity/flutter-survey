@@ -32,7 +32,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_flavorizr: ^1.0.11
   flutter_launcher_icons:
 
 # For information on the generic Dart part of this file, see the
@@ -80,3 +80,23 @@ flutter_icons:
   image_path: 'lib/assets/images/app-icon.png'
   android: true
   ios: true
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "stage"
+    ios:
+  flavors:
+    production:
+      app:
+        name: "Survey"
+      android:
+        applicationId: "dev.markg.survey"
+      ios:
+        bundleId: "dev.markg.survey"
+    staging:
+      app:
+        name: "Survey-Staging"
+      android:
+        applicationId: "dev.markg.survey.staging"
+      ios:
+        bundleId: "dev.markg.survey.staging"
