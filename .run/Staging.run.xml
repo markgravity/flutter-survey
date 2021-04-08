@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Staging" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="additionalArgs" value="--no-sound-null-safety" />
+    <option name="attachArgs" value="--no-sound-null-safety" />
+    <option name="buildFlavor" value="staging" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main-staging.dart" />
+    <method v="2" />
+  </configuration>
+</component>
