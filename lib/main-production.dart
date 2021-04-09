@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'app.dart';
-import 'const/flavors.dart';
+import 'package:survey/gen/flavors.gen.dart';
+import 'package:survey/app.dart';
 
 void main() {
-  F.appFlavor = Flavor.PRODUCTION;
+  Flavour.current = FlavorValue.production;
   runApp(App());
 }
