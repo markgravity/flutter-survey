@@ -10,7 +10,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 800),
     vsync: this,
@@ -36,7 +36,7 @@ class _LandingScreenState extends State<LandingScreen>
         Container(
           color: Colors.black,
         ),
-        Assets.images.background.image(fit: BoxFit.fill),
+        Assets.images.mainBackgroundDimmed.image(fit: BoxFit.fill),
         Center(
           child: FadeTransition(
             opacity: _animation,

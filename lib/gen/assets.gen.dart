@@ -12,10 +12,10 @@ class $AssetsImagesGen {
 
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app-icon.png');
-  AssetGenImage get background =>
-      const AssetGenImage('assets/images/background.png');
   SvgGenImage get logoWhite =>
       const SvgGenImage('assets/images/logo-white.svg');
+  AssetGenImage get mainBackgroundDimmed =>
+      const AssetGenImage('assets/images/main-background-dimmed.png');
 }
 
 class Assets {
