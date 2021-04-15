@@ -23,7 +23,6 @@ class Screen extends StatelessWidget {
           body: body,
         );
         break;
-
       default:
         child = CupertinoPageScaffold(
           child: body,
