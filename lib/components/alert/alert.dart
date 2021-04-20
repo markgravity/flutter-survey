@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/widgets.dart';
 import 'package:survey/core/classes/localized_exception.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<OkCancelResult> alert({
   required BuildContext context,
@@ -21,7 +22,7 @@ Future<OkCancelResult> alertError({
   required Object error,
   String? okLabel,
 }) {
-  String message = "Unknown error";
+  String message = AppLocalizations.of(context)!.alertErrorFallbackMessage;
   if (error is String) {
     message = error;
   }
@@ -32,8 +33,8 @@ Future<OkCancelResult> alertError({
 
   return alert(
     context: context,
-    title: "Error",
+    title: AppLocalizations.of(context)!.alertErrorTitle,
     message: message,
-    okLabel: "OK",
+    okLabel: AppLocalizations.of(context)!.alertErrorOKLabel,
   );
 }

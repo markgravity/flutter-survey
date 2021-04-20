@@ -1,3 +1,6 @@
 {
-    "helloWorld": "Xin chào Thế giới!"
+    "helloWorld": "Xin chào Thế giới!",
+    "alertErrorTitle": "Lỗi",
+    "alertErrorOKLabel": "OK",
+    "alertErrorFallbackMessage": "Lỗi không xác định"
 }
