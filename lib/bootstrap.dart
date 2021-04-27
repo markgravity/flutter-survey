@@ -1,4 +1,4 @@
-import 'package:survey/services/locator/locator_service_register.dart';
+import 'package:survey/services/locator/locator_service.dart';
 
 void bootstrap() {
   LocatorServiceRegister();
