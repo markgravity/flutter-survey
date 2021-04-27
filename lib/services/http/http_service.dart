@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:enumerated_class/enumerated_class.dart';
+import 'package:flutter/foundation.dart';
 
 part 'http_method.dart';
 part 'http_exception.dart';
@@ -18,10 +19,12 @@ class HttpServiceImpl implements HttpService {
   final _dio = Dio();
 
   HttpServiceImpl() {
-    _dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
-    ));
+    if (!kReleaseMode) {
+      _dio.interceptors.add(LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+      ));
+    }
   }
 
   @override
