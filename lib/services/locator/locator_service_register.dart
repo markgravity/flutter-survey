@@ -5,5 +5,6 @@ class LocatorServiceRegister {
     locator.registerFactory<HttpService>(() => HttpServiceImpl());
     locator.registerFactory<ApiService>(() => ApiServiceImpl());
     locator.registerFactory<UserService>(() => UserServiceImpl());
+    locator.registerFactory<AuthService>(() => AuthServiceImpl());
   }
 }
