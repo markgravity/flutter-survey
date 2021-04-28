@@ -1,3 +1,5 @@
 part of 'package:survey/gen/configs.gen.dart';
 
-final Map<Type, Function> _factories = {};
+final Map<Type, Function> _factories = {
+  UserInfo: () => UserInfo(),
+};
