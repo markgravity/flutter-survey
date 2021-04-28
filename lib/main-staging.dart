@@ -1,8 +1,11 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'app.dart';
-import 'flavors.dart';
+import 'package:survey/gen/flavors.gen.dart';
+import 'package:survey/app.dart';
+import 'package:survey/bootstrap.dart';
 
 void main() {
-  F.appFlavor = Flavor.STAGING;
+  Flavour.current = FlavorValue.staging;
+  bootstrap();
   runApp(App());
 }

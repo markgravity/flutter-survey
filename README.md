@@ -5,9 +5,9 @@ A survey conducting platform built with Flutter
 - Checkout the repository
 - Run the app with the desire app flavor:
    
-   - Staging: `$ flutter run --flavor staging -t lib/main-staging.dart`
+   - Staging: `$ flutter run --no-sound-null-safety --flavor staging -t lib/main-staging.dart`
    
-   - Production: `$ flutter run --flavor production -t lib/main-production.dart`
+   - Production: `$ flutter run --no-sound-null-safety --flavor production -t lib/main-production.dart`
 
 ## About
 
