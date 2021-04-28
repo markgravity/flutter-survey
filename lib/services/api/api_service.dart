@@ -1,3 +1,4 @@
+import 'package:survey/core/classes/localized_exception.dart';
 import 'package:survey/gen/configs.gen.dart';
 import 'package:survey/services/http/http_service.dart';
 import 'package:object_mapper/object_mapper.dart';
@@ -56,7 +57,7 @@ class ApiServiceImpl implements ApiService {
       ) as Map<String, dynamic>;
       return Mapper.fromJson(
               response["data"]["attributes"] as Map<String, dynamic>)
-          .toObject<T>();
+          .toObject<T>()!;
     } on HttpException catch (e) {
       throw ApiException.fromHttpException(e) ?? e;
     }

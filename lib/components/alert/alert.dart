@@ -1,7 +1,10 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/widgets.dart';
+import 'package:streams_provider/streams_provider.dart';
 import 'package:survey/core/classes/localized_exception.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:survey/core/viper/module.dart';
+export 'package:adaptive_dialog/adaptive_dialog.dart';
 
 Future<OkCancelResult> alert({
   required BuildContext context,
@@ -37,4 +40,17 @@ Future<OkCancelResult> alertError({
     message: message,
     okLabel: AppLocalizations.of(context)!.alertErrorOKLabel,
   );
+}
+
+abstract class AlertViewMixinDelegate {
+  BehaviorSubject<void> get alertDialogDidClose;
+}
+
+mixin AlertViewMixin<D extends AlertViewMixinDelegate> on View<D> {
+  void alert(Object error) {
+    alertError(
+      context: context,
+      error: error,
+    ).then((_) => delegate?.alertDialogDidClose.add(null));
+  }
 }
