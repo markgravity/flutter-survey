@@ -1,5 +1,6 @@
 import 'package:survey/gen/flavors.gen.dart';
 import 'package:flutter/widgets.dart';
+import 'package:survey/models/user_info.dart';
 import 'package:survey/screens/landing/landing_screen.dart';
 
 part 'package:survey/configs/app.dart';
