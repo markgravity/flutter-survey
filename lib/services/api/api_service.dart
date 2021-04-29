@@ -19,12 +19,13 @@ abstract class ApiService {
 
   void configureGlobalBaseUrl(String? baseUrl);
 
-  void configureGlobalToken(String? token);
+  void configureGlobalToken(String? token, String? tokenType);
 }
 
 class ApiServiceImpl implements ApiService {
   static String? _fallbackBaseUrl;
   static String? _fallbackToken;
+  static String _fallbackTokenType = "Bearer";
   final HttpService _httpService = locator.get();
 
   @override
@@ -34,6 +35,7 @@ class ApiServiceImpl implements ApiService {
     required String endPoint,
     ApiParams? params,
     String? token,
+    String? tokenType,
   }) async {
     final String? finalBaseUrl = baseUrl ?? _fallbackBaseUrl;
     assert(finalBaseUrl != null);
@@ -43,7 +45,8 @@ class ApiServiceImpl implements ApiService {
     // Append bearer token
     final String? finalToken = token ?? _fallbackToken;
     if (finalToken != null) {
-      headers["authorization"] = "Bearer $finalToken";
+      final finalTokenType = tokenType ?? _fallbackTokenType;
+      headers["authorization"] = "$finalTokenType $finalToken";
     }
 
     final url = finalBaseUrl! + endPoint;
@@ -68,7 +71,10 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  void configureGlobalToken(String? token) {
+  void configureGlobalToken(String? token, String? tokenType) {
     _fallbackToken = token;
+    if (tokenType != null) {
+      _fallbackTokenType = tokenType;
+    }
   }
 }
