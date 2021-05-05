@@ -13,6 +13,10 @@ import 'package:survey/services/user/user_service.dart';
 part 'params/auth_login_params.dart';
 
 abstract class AuthService {
+  static const loginEndPoint = "/oauth/token";
+  static const logoutEndPoint = "/oauth/revoke";
+  static const preferenceTokenKey = "auth_service_preference_token";
+
   bool get isAuthenticated;
 
   String? get token;
@@ -33,8 +37,6 @@ abstract class AuthService {
 }
 
 class AuthServiceImpl implements AuthService {
-  static const _preferenceTokenKey = "auth_service_preference_token";
-
   final ApiService _apiService = locator.get();
   final UserService _userService = locator.get();
   String? _token;
@@ -55,7 +57,7 @@ class AuthServiceImpl implements AuthService {
   }) async {
     final AuthTokenInfo token = await _apiService.call(
       method: HttpMethod.post,
-      endPoint: "/oauth/token",
+      endPoint: AuthService.loginEndPoint,
       params: params,
     );
     await _storeToken(token);
@@ -67,7 +69,7 @@ class AuthServiceImpl implements AuthService {
     try {
       await _apiService.call(
         method: HttpMethod.post,
-        endPoint: "/oauth/revoke",
+        endPoint: AuthService.logoutEndPoint,
       );
     } on Exception catch (_) {}
 
@@ -105,17 +107,17 @@ class AuthServiceImpl implements AuthService {
 
   Future<void> _storeToken(AuthTokenInfo tokenInfo) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(_preferenceTokenKey, tokenInfo.toJsonString());
+    prefs.setString(AuthService.preferenceTokenKey, tokenInfo.toJsonString());
   }
 
   Future<void> _clearToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(_preferenceTokenKey);
+    prefs.remove(AuthService.preferenceTokenKey);
   }
 
   Future<AuthTokenInfo?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString(_preferenceTokenKey);
+    final jsonString = prefs.getString(AuthService.preferenceTokenKey);
     if (jsonString == null) {
       return null;
     }
