@@ -6,6 +6,7 @@ import 'package:survey/services/locator/locator_service.dart';
 part 'api_exception.dart';
 
 part 'api_params.dart';
+
 part 'api_service_register.dart';
 
 abstract class ApiService {
@@ -23,9 +24,9 @@ abstract class ApiService {
 }
 
 class ApiServiceImpl implements ApiService {
-  static String? _fallbackBaseUrl;
-  static String? _fallbackToken;
-  static String _fallbackTokenType = "Bearer";
+  static String? _baseUrl;
+  static String? _token;
+  static String _tokenType = "Bearer";
   final HttpService _httpService = locator.get();
 
   @override
@@ -37,15 +38,15 @@ class ApiServiceImpl implements ApiService {
     String? token,
     String? tokenType,
   }) async {
-    final String? finalBaseUrl = baseUrl ?? _fallbackBaseUrl;
+    final String? finalBaseUrl = baseUrl ?? _baseUrl;
     assert(finalBaseUrl != null);
 
     final Map<String, dynamic> headers = {};
 
     // Append bearer token
-    final String? finalToken = token ?? _fallbackToken;
+    final String? finalToken = token ?? _token;
     if (finalToken != null) {
-      final finalTokenType = tokenType ?? _fallbackTokenType;
+      final finalTokenType = tokenType ?? _tokenType;
       headers["authorization"] = "$finalTokenType $finalToken";
     }
 
@@ -65,16 +66,24 @@ class ApiServiceImpl implements ApiService {
     }
   }
 
+  /// Configures a default base url when [call] with `baseUrl` is null.
+  ///
+  /// This value is stored in a static variable [_baseUrl] so it will be available in any
+  /// instance of [ApiServiceImpl], after set
   @override
   void configureGlobalBaseUrl(String? baseUrl) {
-    _fallbackBaseUrl = baseUrl;
+    _baseUrl = baseUrl;
   }
 
+  /// Configures a default token & tokenType when [call] with token or tokenType is null.
+  ///
+  /// This value is stored in a static variable [_token], [_tokenType] so it will be available in any
+  /// instance of [ApiServiceImpl], after set
   @override
   void configureGlobalToken(String? token, String? tokenType) {
-    _fallbackToken = token;
+    _token = token;
     if (tokenType != null) {
-      _fallbackTokenType = tokenType;
+      _tokenType = tokenType;
     }
   }
 }
