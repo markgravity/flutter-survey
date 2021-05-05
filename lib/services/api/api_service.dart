@@ -7,7 +7,10 @@ import 'package:survey/services/locator/locator_service.dart';
 part 'api_exception.dart';
 
 part 'api_params.dart';
+
 part 'api_service_register.dart';
+
+part 'api_void_object.dart';
 
 abstract class ApiService {
   Future<T> call<T extends Mappable>({
@@ -55,9 +58,13 @@ class ApiServiceImpl implements ApiService {
         url: url,
         headers: headers,
       ) as Map<String, dynamic>;
-      return Mapper.fromJson(
-              response["data"]["attributes"] as Map<String, dynamic>)
-          .toObject<T>()!;
+
+      // When T is void
+      if (response["data"] == null || response["data"]["attributes"] == null) {
+        return _ApiVoidObject() as T;
+      }
+
+      return Mapper.fromJson(response["data"]["attributes"] as Map<String, dynamic>).toObject<T>()!;
     } on HttpException catch (e) {
       throw ApiException.fromHttpException(e) ?? e;
     }

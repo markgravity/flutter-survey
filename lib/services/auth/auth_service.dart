@@ -12,6 +12,8 @@ import 'package:survey/services/user/user_service.dart';
 
 part 'params/auth_login_params.dart';
 
+part 'params/auth_reset_password_params.dart';
+
 abstract class AuthService {
   bool get isAuthenticated;
 
@@ -30,6 +32,8 @@ abstract class AuthService {
   Future<void> fetchUser();
 
   Future<void> attemptAndFetchUser();
+
+  Future<void> resetPassword({required AuthResetPasswordParams params});
 }
 
 class AuthServiceImpl implements AuthService {
@@ -101,6 +105,15 @@ class AuthServiceImpl implements AuthService {
   Future<void> attemptAndFetchUser() async {
     await attempt();
     await fetchUser();
+  }
+
+  @override
+  Future<void> resetPassword({required AuthResetPasswordParams params}) {
+    return _apiService.call(
+      method: HttpMethod.post,
+      endPoint: "/passwords",
+      params: params,
+    );
   }
 
   Future<void> _storeToken(AuthTokenInfo tokenInfo) async {

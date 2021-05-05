@@ -56,6 +56,12 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
       (super.noSuchMethod(Invocation.method(#attemptAndFetchUser, []),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> resetPassword({_i3.AuthResetPasswordParams? params}) =>
+      (super.noSuchMethod(
+          Invocation.method(#resetPassword, [], {#params: params}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [LoginInteractorDelegate].
