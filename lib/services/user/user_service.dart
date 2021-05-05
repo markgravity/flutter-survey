@@ -4,6 +4,8 @@ import 'package:survey/services/http/http_service.dart';
 import 'package:survey/services/locator/locator_service.dart';
 
 abstract class UserService {
+  static const meEndPoint = "/me";
+
   Future<UserInfo> me();
 }
 
@@ -14,7 +16,7 @@ class UserServiceImpl implements UserService {
   Future<UserInfo> me() {
     return _apiService.call(
       method: HttpMethod.get,
-      endPoint: "/me",
+      endPoint: UserService.meEndPoint,
     );
   }
 }
