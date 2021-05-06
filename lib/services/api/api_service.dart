@@ -15,7 +15,9 @@ abstract class ApiService {
     String? baseUrl,
     required String endPoint,
     ApiParams? params,
+    bool requiresAuthentication = true,
     String? token,
+    String? tokenType,
   });
 
   void configureGlobalBaseUrl(String? baseUrl);
