@@ -1,8 +1,24 @@
 part of 'landing_module.dart';
 
 abstract class LandingInteractor extends Interactor<LandingInteractorDelegate> {
+  void validateAuthentication();
 }
 
-abstract class LandingInteractorDelegate {}
+abstract class LandingInteractorDelegate {
+  BehaviorSubject<bool> get authenticationDidValidate;
 
-class LandingInteractorImpl extends LandingInteractor {}
+  BehaviorSubject<Object> get authenticationDidFailToValidate;
+}
+
+class LandingInteractorImpl extends LandingInteractor {
+  final AuthRepository _authRepository = locator.get();
+
+  @override
+  void validateAuthentication() {
+    _authRepository.attemptAndFetchUser().then((_) {
+      delegate?.authenticationDidValidate.add(_authRepository.isAuthenticated);
+    }).catchError((Object error) {
+      delegate?.authenticationDidFailToValidate.add(error);
+    });
+  }
+}
