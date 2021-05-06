@@ -95,7 +95,7 @@ class AuthServiceImpl implements AuthService {
   Future<void> fetchUser() async {
     if (_token == null) return;
 
-    final user = await _userService.me();
+    final user = await _userService.getProfile();
     _user = user;
   }
 
