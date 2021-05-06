@@ -6,14 +6,14 @@ import 'package:survey/services/locator/locator_service.dart';
 abstract class UserService {
   static const meEndPoint = "/me";
 
-  Future<UserInfo> me();
+  Future<UserInfo> getProfile();
 }
 
 class UserServiceImpl implements UserService {
   final ApiService _apiService = locator.get();
 
   @override
-  Future<UserInfo> me() {
+  Future<UserInfo> getProfile() {
     return _apiService.call(
       method: HttpMethod.get,
       endPoint: UserService.meEndPoint,
