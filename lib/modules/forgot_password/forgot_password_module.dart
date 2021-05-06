@@ -13,6 +13,8 @@ import 'package:survey/core/viper/module.dart';
 import 'package:survey/gen/assets.gen.dart';
 import 'package:survey/modules/screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:survey/repositories/auth_repository.dart';
+import 'package:survey/services/locator/locator_service.dart';
 
 part 'forgot_password_view.dart';
 part 'forgot_password_interactor.dart';
