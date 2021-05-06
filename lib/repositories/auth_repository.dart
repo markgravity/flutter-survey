@@ -27,6 +27,8 @@ abstract class AuthRepository {
   Future<void> fetchUser();
 
   Future<void> attemptAndFetchUser();
+
+  Future<void> resetPassword({required String email});
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -98,5 +100,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> attemptAndFetchUser() async {
     await attempt();
     await fetchUser();
+  }
+
+  @override
+  Future<void> resetPassword({required String email}) {
+    final params = AuthResetPasswordParams(email: email);
+    return _authApiService.resetPassword(params: params);
   }
 }

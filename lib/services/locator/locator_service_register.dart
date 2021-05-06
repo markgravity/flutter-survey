@@ -22,5 +22,13 @@ class LocatorServiceRegister {
     locator.registerFactory<LoginInteractor>(() => LoginInteractorImpl());
     locator.registerFactory<LoginRouter>(() => LoginRouterImpl());
     locator.registerFactory<LoginPresenter>(() => LoginPresenterImpl());
+
+    // Forgot Password
+    locator.registerFactory<ForgotPasswordInteractor>(
+        () => ForgotPasswordInteractorImpl());
+    locator.registerFactory<ForgotPasswordPresenter>(
+        () => ForgotPasswordPresenterImpl());
+    locator.registerFactory<ForgotPasswordRouter>(
+        () => ForgotPasswordRouterImpl());
   }
 }

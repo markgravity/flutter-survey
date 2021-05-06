@@ -7,6 +7,8 @@ import 'package:survey/services/http/http_service.dart';
 
 part 'params/auth_login_params.dart';
 
+part 'params/auth_reset_password_params.dart';
+
 abstract class AuthApiService {
   static const loginEndpoint = "/oauth/token";
   static const logoutEndpoint = "/oauth/revoke";
@@ -17,6 +19,8 @@ abstract class AuthApiService {
   });
 
   Future<void> logout();
+
+  Future<void> resetPassword({required AuthResetPasswordParams params});
 }
 
 class AuthApiServiceImpl implements AuthApiService {
@@ -38,6 +42,15 @@ class AuthApiServiceImpl implements AuthApiService {
     return _apiService.call(
       method: HttpMethod.post,
       endpoint: AuthApiService.logoutEndpoint,
+    );
+  }
+
+  @override
+  Future<void> resetPassword({required AuthResetPasswordParams params}) {
+    return _apiService.call(
+      method: HttpMethod.post,
+      endpoint: "/passwords",
+      params: params,
     );
   }
 }
