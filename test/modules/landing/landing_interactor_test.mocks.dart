@@ -57,6 +57,11 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
       (super.noSuchMethod(Invocation.method(#attemptAndFetchUser, []),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> resetPassword({String? email}) => (super.noSuchMethod(
+      Invocation.method(#resetPassword, [], {#email: email}),
+      returnValue: Future<void>.value(null),
+      returnValueForMissingStub: Future.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [LandingInteractorDelegate].
