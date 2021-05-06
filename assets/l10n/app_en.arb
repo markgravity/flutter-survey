@@ -1,6 +1,9 @@
 {
-    "helloWorld": "Hello World!",
     "alertErrorTitle": "Error",
     "alertErrorOKLabel": "OK",
-    "alertErrorFallbackMessage": "Unknown error"
+    "alertErrorFallbackMessage": "Unknown error",
+    "loginScreenLoginButtonText": "Login",
+    "loginScreenForgotButtonText": "Forgot?",
+    "loginScreenEmailTextFieldPlaceholderText": "Email",
+    "loginScreenPasswordTextFieldPlaceholderText": "Password"
 }

@@ -2,5 +2,9 @@
     "helloWorld": "Xin chào Thế giới!",
     "alertErrorTitle": "Lỗi",
     "alertErrorOKLabel": "OK",
-    "alertErrorFallbackMessage": "Lỗi không xác định"
+    "alertErrorFallbackMessage": "Lỗi không xác định",
+    "loginScreenLoginButtonText": "Đăng nhập",
+    "loginScreenForgotButtonText": "Quên?",
+    "loginScreenEmailTextFieldPlaceholderText": "Email",
+    "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu"
 }
