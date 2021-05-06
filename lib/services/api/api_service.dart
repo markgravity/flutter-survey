@@ -35,6 +35,7 @@ class ApiServiceImpl implements ApiService {
     String? baseUrl,
     required String endPoint,
     ApiParams? params,
+    bool requiresAuthentication = true,
     String? token,
     String? tokenType,
   }) async {
@@ -43,9 +44,9 @@ class ApiServiceImpl implements ApiService {
 
     final Map<String, dynamic> headers = {};
 
-    // Append bearer token
+    // Append token
     final String? finalToken = token ?? _token;
-    if (finalToken != null) {
+    if (requiresAuthentication && finalToken != null) {
       final finalTokenType = tokenType ?? _tokenType;
       headers["authorization"] = "$finalTokenType $finalToken";
     }
