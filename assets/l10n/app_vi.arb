@@ -6,5 +6,6 @@
     "loginScreenLoginButtonText": "Đăng nhập",
     "loginScreenForgotButtonText": "Quên?",
     "loginScreenEmailTextFieldPlaceholderText": "Email",
-    "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu"
+    "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu",
+    "homeScreenTodayText": "Hôm nay"
 }

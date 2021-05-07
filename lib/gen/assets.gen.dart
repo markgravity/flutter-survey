@@ -12,6 +12,10 @@ class $AssetsImagesGen {
 
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app-icon.png');
+  SvgGenImage get arrowRightIcon =>
+      const SvgGenImage('assets/images/arrow-right-icon.svg');
+  SvgGenImage get forgotPasswordBellIcon =>
+      const SvgGenImage('assets/images/forgot-password-bell-icon.svg');
   SvgGenImage get logoWhite =>
       const SvgGenImage('assets/images/logo-white.svg');
   AssetGenImage get mainBackgroundDimmed =>

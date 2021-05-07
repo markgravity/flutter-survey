@@ -22,5 +22,10 @@ class LocatorServiceRegister {
     locator.registerFactory<LoginInteractor>(() => LoginInteractorImpl());
     locator.registerFactory<LoginRouter>(() => LoginRouterImpl());
     locator.registerFactory<LoginPresenter>(() => LoginPresenterImpl());
+
+    // Home
+    locator.registerFactory<HomeInteractor>(() => HomeInteractorImpl());
+    locator.registerFactory<HomeRouter>(() => HomeRouterImpl());
+    locator.registerFactory<HomePresenter>(() => HomePresenterImpl());
   }
 }
