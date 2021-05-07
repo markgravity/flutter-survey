@@ -8,5 +8,6 @@
     "loginScreenPasswordTextFieldPlaceholderText": "Password",
     "forgotPasswordScreenDescription": "Enter your email to receive instructions for resetting your password.",
     "forgotPasswordScreenEmailTextFieldPlaceholder": "Email",
-    "forgotPasswordScreenResetButtonTitle": "Reset"
+    "forgotPasswordScreenResetButtonTitle": "Reset",
+    "homeScreenTodayText": "Today"
 }
