@@ -19,7 +19,8 @@ abstract class AuthService {
   UserInfo? get user;
 
   Future<void> login({
-    required AuthLoginParams params,
+    required String email,
+    required String password,
   });
 
   Future<void> logout();
@@ -51,9 +52,11 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> login({
-    required AuthLoginParams params,
+    required String email,
+    required String password,
   }) async {
-    final AuthTokenInfo token = await _authApiService.login(params: params);
+    final params = AuthLoginParams(email: email, password: password);
+    final token = await _authApiService.login(params: params);
     await _authLocalStorage.setToken(token);
     await attemptAndFetchUser();
   }
