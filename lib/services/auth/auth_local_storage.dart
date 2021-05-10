@@ -9,10 +9,11 @@ class AuthLocalStorage {
     // Remove
     if (token == null) {
       prefs.remove(AuthLocalStorage.preferenceTokenKey);
+      return;
     }
 
     // Set
-    prefs.setString(AuthLocalStorage.preferenceTokenKey, token!.toJsonString());
+    prefs.setString(AuthLocalStorage.preferenceTokenKey, token.toJsonString());
   }
 
   Future<AuthTokenInfo?> getToken() async {

@@ -82,7 +82,7 @@ class AuthServiceImpl implements AuthService {
     }
 
     _accessToken = token.accessToken;
-    _apiService.configureGlobalToken(_accessToken);
+    _apiService.configureGlobalToken(_accessToken, token.tokenType);
   }
 
   @override
