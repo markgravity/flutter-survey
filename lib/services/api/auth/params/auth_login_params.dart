@@ -1,4 +1,4 @@
-part of '../auth_service.dart';
+part of '../auth_api_service.dart';
 
 class AuthLoginParams extends ApiParams {
   factory AuthLoginParams({
