@@ -1,17 +1,11 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey/services/api/api_service.dart';
 import 'package:survey/services/api/auth/auth_api_service.dart';
 import 'package:survey/services/api/user/user_api_service.dart';
+import 'package:survey/services/auth_local_storage/auth_local_storage_service.dart';
 import 'package:survey/services/locator/locator_service.dart';
-import 'package:survey/models/auth_token_info.dart';
-import 'package:object_mapper/object_mapper.dart';
 import 'package:survey/models/user_info.dart';
 
-part 'auth_local_storage.dart';
-
-abstract class AuthService {
+abstract class AuthRepository {
   bool get isAuthenticated;
 
   String? get accessToken;
@@ -32,11 +26,11 @@ abstract class AuthService {
   Future<void> attemptAndFetchUser();
 }
 
-class AuthServiceImpl implements AuthService {
+class AuthRepositoryImpl implements AuthRepository {
   final AuthApiService _authApiService = locator.get();
   final UserApiService _userApiService = locator.get();
   final ApiService _apiService = locator.get();
-  final AuthLocalStorage _authLocalStorage = locator.get();
+  final AuthLocalStorageService _authLocalStorage = locator.get();
 
   String? _accessToken;
   UserInfo? _user;
