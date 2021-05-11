@@ -9,11 +9,23 @@ part 'api_params.dart';
 
 part 'api_service_register.dart';
 
+part 'api_list_object.dart';
+
 abstract class ApiService {
-  Future<T> call<T extends Mappable>({
+  Future<T> call<T>({
     required HttpMethod method,
     String? baseUrl,
-    required String endPoint,
+    required String endpoint,
+    ApiParams? params,
+    bool requiresAuthentication = true,
+    String? token,
+    String? tokenType,
+  });
+
+  Future<ApiListObject<T>> callForList<T extends Mappable>({
+    required HttpMethod method,
+    String? baseUrl,
+    required String endpoint,
     ApiParams? params,
     bool requiresAuthentication = true,
     String? token,
@@ -32,41 +44,49 @@ class ApiServiceImpl implements ApiService {
   final HttpService _httpService = locator.get();
 
   @override
-  Future<T> call<T extends Mappable>({
+  Future<T> call<T>({
     required HttpMethod method,
     String? baseUrl,
-    required String endPoint,
+    required String endpoint,
     ApiParams? params,
     bool requiresAuthentication = true,
     String? token,
     String? tokenType,
   }) async {
-    final String? finalBaseUrl = baseUrl ?? _baseUrl;
-    assert(finalBaseUrl != null);
+    final response = await _request(
+      method: method,
+      baseUrl: baseUrl,
+      endpoint: endpoint,
+      params: params,
+      requiresAuthentication: requiresAuthentication,
+      token: token,
+      tokenType: tokenType,
+    );
 
-    final Map<String, dynamic> headers = {};
+    return _convertResponseToObject<T>(response);
+  }
 
-    // Append token
-    final String? finalToken = token ?? _token;
-    if (requiresAuthentication && finalToken != null) {
-      final finalTokenType = tokenType ?? _tokenType;
-      headers["authorization"] = "$finalTokenType $finalToken";
-    }
+  @override
+  Future<ApiListObject<T>> callForList<T extends Mappable>({
+    required HttpMethod method,
+    String? baseUrl,
+    required String endpoint,
+    ApiParams? params,
+    bool requiresAuthentication = true,
+    String? token,
+    String? tokenType,
+  }) async {
+    final response = await _request(
+      method: method,
+      baseUrl: baseUrl,
+      endpoint: endpoint,
+      params: params,
+      requiresAuthentication: requiresAuthentication,
+      token: token,
+      tokenType: tokenType,
+    );
 
-    final url = finalBaseUrl! + endPoint;
-    try {
-      final response = await _httpService.request(
-        method: method,
-        data: params?.toJson(),
-        url: url,
-        headers: headers,
-      ) as Map<String, dynamic>;
-      return Mapper.fromJson(
-              response["data"]["attributes"] as Map<String, dynamic>)
-          .toObject<T>();
-    } on HttpException catch (e) {
-      throw ApiException.fromHttpException(e) ?? e;
-    }
+    return _convertResponseToListObject<T>(response);
   }
 
   /// Configures a default base url when [call] with `baseUrl` is null.
@@ -88,5 +108,69 @@ class ApiServiceImpl implements ApiService {
     if (tokenType != null) {
       _tokenType = tokenType;
     }
+  }
+
+  Future<Map<String, dynamic>> _request({
+    required HttpMethod method,
+    String? baseUrl,
+    required String endpoint,
+    ApiParams? params,
+    required bool requiresAuthentication,
+    String? token,
+    String? tokenType,
+  }) async {
+    final String? finalBaseUrl = baseUrl ?? _baseUrl;
+    assert(finalBaseUrl != null);
+
+    final Map<String, dynamic> headers = {};
+
+    // Append token
+    final String? finalToken = token ?? _token;
+    if (requiresAuthentication && finalToken != null) {
+      final finalTokenType = tokenType ?? _tokenType;
+      headers["authorization"] = "$finalTokenType $finalToken";
+    }
+
+    final url = finalBaseUrl! + endpoint;
+    try {
+      return await _httpService.request(
+        method: method,
+        data: params?.toJson(),
+        url: url,
+        headers: headers,
+      ) as Map<String, dynamic>;
+    } on HttpException catch (e) {
+      throw ApiException.fromHttpException(e) ?? e;
+    }
+  }
+
+  T _convertResponseToObject<T>(Map<String, dynamic> response) {
+    if (response["data"] == null && T.toString() == "void") {
+      return null as T;
+    }
+
+    if (response["data"] is! Map<String, dynamic> ||
+        response["data"]["attributes"] is! Map<String, dynamic>) {
+      throw ApiException.wrongResponseStructure;
+    }
+
+    return Mapper.fromJson(
+            response["data"]["attributes"] as Map<String, dynamic>)
+        .toObject<T>()!;
+  }
+
+  ApiListObject<T> _convertResponseToListObject<T>(
+      Map<String, dynamic> response) {
+    if (response["data"] is! List<dynamic>) {
+      throw ApiException.wrongResponseStructure;
+    }
+
+    final items = (response["data"] as List<dynamic>)
+        .where((e) => e["attributes"] is Map<String, dynamic>)
+        .map((e) => Mapper.fromJson(e["attributes"] as Map<String, dynamic>)
+            .toObject<T>()!)
+        .toList();
+
+    return ApiListObject<T>(items: items);
   }
 }

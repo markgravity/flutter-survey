@@ -30,17 +30,17 @@ class HttpServiceImpl implements HttpService {
   @override
   Future<dynamic> request({
     required HttpMethod method,
-    dynamic? data,
+    dynamic data,
     required String url,
     Map<String, dynamic>? headers,
   }) async {
     final options = Options(method: method.rawValue, headers: headers);
     try {
-      final response = await _dio.request(
-        url,
-        data: data,
-        options: options,
-      );
+      final response = await _dio.request(url,
+          data: method != HttpMethod.get ? data : null,
+          options: options,
+          queryParameters:
+              method == HttpMethod.get ? data as Map<String, dynamic>? : null);
       return response.data;
     } on DioError catch (e) {
       throw HttpException.fromDioError(e);

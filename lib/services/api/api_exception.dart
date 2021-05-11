@@ -25,6 +25,11 @@ class ApiException implements Exception {
     );
   }
 
+  static const wrongResponseStructure = ApiException(
+    source: "local",
+    message: "Wrong response structure",
+    code: "wrong_response_structure",
+  );
   final String source;
   final String message;
   final String code;
