@@ -1,11 +1,37 @@
 part of 'home_module.dart';
 
-abstract class HomeViewDelegate {}
+abstract class HomeViewDelegate implements AlertViewMixinDelegate {
+  BehaviorSubject<void> get stateDidInit;
 
-abstract class HomeView extends View<HomeViewDelegate> {
+  BehaviorSubject<SurveyInfo> get showDetailButtonDidTap;
+
+  BehaviorSubject<void> get didSwipeDown;
+}
+
+abstract class HomeView extends View<HomeViewDelegate>
+    with AlertViewMixin, ProgressHUDViewMixin {
+  static const currentDateTextKey = Key("current_date_text");
+  static const userAvatarImageKey = Key("user_avatar_image");
+  static const titleTextSlideItemKey = Key("title_text_slide_item");
+  static const descriptionTextSlideItemKey = Key("description_text_slide_item");
+  static const backgroundImageSlideItemKey = Key("background_image_slide_item");
+  static const dotPageControlKey = Key("dot_page_control_key");
+  static const skeletonKey = Key("skeleton_key");
+  static const showDetailButtonKey = Key("show_detail_button");
+  static const dotPageControlHighlightColor = Colors.white;
+  static const dotPageControlNormalColor = Color.fromRGBO(255, 255, 255, 0.2);
+
+  static const bodyKey = Key("body");
+
   void setDateTime(DateTime dateTime);
-  void setUser(UserInfo user);
-  void setSurveys(List<SurveyInfo> surveys);
+
+  void showUser(UserInfo user);
+
+  void showSurveys(List<SurveyInfo> surveys);
+
+  void beginSkeletonAnimation();
+
+  void stopSkeletonAnimation();
 }
 
 class HomeViewImpl extends StatefulWidget {
@@ -17,48 +43,26 @@ class HomeViewImpl extends StatefulWidget {
 
 class _HomeViewImplState
     extends ViewState<HomeViewImpl, HomeModule, HomeViewDelegate>
+    with AlertViewMixin, ProgressHUDViewMixin
     implements HomeView {
   final _dateTime = BehaviorSubject<DateTime>();
   final _user = BehaviorSubject<UserInfo>();
-  final _surveys = BehaviorSubject<List<SurveyInfo>>();
+  final _surveys = BehaviorSubject<List<SurveyInfo>>.seeded([]);
   final _pageController = CarouselController();
   final _currentPage = BehaviorSubject<int>.seeded(0);
   final _isLoading = BehaviorSubject<bool>.seeded(false);
 
   @override
   void initState() {
-    // TODO: Remove them when integrating
-    final user = UserInfo();
-    user.avatarUrl =
-        "https://en.gravatar.com/userimage/137591909/3a20ad06832bc4cbf461554c5df4f2c6.jpg?size=200";
-
-    final surveys = List<SurveyInfo>.empty(growable: true);
-    var survey = SurveyInfo();
-    survey.title = "Scarlett Bangkok";
-    survey.description = "We'd love ot hear from you!";
-    survey.coverImageUrl =
-        "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_";
-    surveys.add(survey);
-
-    survey = SurveyInfo();
-    survey.title = "ibis Bangkok Riverside";
-    survey.description = "We'd love ot hear from you!";
-    survey.coverImageUrl =
-        "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_";
-    surveys.add(survey);
-
-    setDateTime(DateTime.now());
-    setUser(user);
-    setSurveys(surveys);
-
-    _isLoading.add(true);
-    Future.delayed(const Duration(seconds: 2), () => _isLoading.add(false));
     super.initState();
+    delegate?.stateDidInit.add(null);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Body();
+    return const Body(
+      key: HomeView.bodyKey,
+    );
   }
 
   @override
@@ -67,12 +71,22 @@ class _HomeViewImplState
   }
 
   @override
-  void setSurveys(List<SurveyInfo> surveys) {
+  void showSurveys(List<SurveyInfo> surveys) {
     _surveys.add(surveys);
   }
 
   @override
-  void setUser(UserInfo user) {
+  void showUser(UserInfo user) {
     _user.add(user);
+  }
+
+  @override
+  void stopSkeletonAnimation() {
+    _isLoading.add(false);
+  }
+
+  @override
+  void beginSkeletonAnimation() {
+    _isLoading.add(true);
   }
 }

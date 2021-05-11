@@ -5,4 +5,6 @@ final Map<String, WidgetBuilder> _routes = {
   LoginModule.routePath: (_) => LoginModule(),
   HomeModule.routePath: (_) => HomeModule(),
   ForgotPasswordModule.routePath: (_) => ForgotPasswordModule(),
+  SideMenuModule.routePath: (_) => SideMenuModule(),
+  SurveyDetailModule.routePath: (_) => SurveyDetailModule(),
 };

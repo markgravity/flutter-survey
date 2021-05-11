@@ -20,12 +20,14 @@ class TopBar extends StatelessWidget {
                   Bone(
                     height: 18,
                     width: 117,
+                    borderRadius: BorderRadius.circular(16),
                     child: StreamsSelector0<DateTime>.value(
                       stream: state._dateTime,
                       builder: (_, dateTime, __) => Text(
                         DateFormat("EEEE, MMM d")
                             .format(dateTime)
                             .toUpperCase(),
+                        key: HomeView.currentDateTextKey,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,
@@ -37,6 +39,7 @@ class TopBar extends StatelessWidget {
                   Bone(
                     height: 18,
                     width: 100,
+                    borderRadius: BorderRadius.circular(16),
                     child: Text(
                       AppLocalizations.of(context)!.homeScreenTodayText,
                       style: const TextStyle(
@@ -64,6 +67,7 @@ class TopBar extends StatelessWidget {
                       child: StreamsSelector0<UserInfo>.value(
                         stream: state._user,
                         builder: (_, user, __) => Image(
+                          key: HomeView.userAvatarImageKey,
                           image: NetworkImage(user.avatarUrl!),
                         ),
                       ),
