@@ -1,5 +1,7 @@
 part of 'package:survey/gen/configs.gen.dart';
 
 final Map<String, WidgetBuilder> _routes = {
-  LandingScreen.path: (_) => LandingScreen(),
+  LandingModule.routePath: (_) => LandingModule(),
+  LoginModule.routePath: (_) => LoginModule(),
+  HomeModule.routePath: (_) => HomeModule(),
 };

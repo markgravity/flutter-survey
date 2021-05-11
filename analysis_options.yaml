@@ -5,6 +5,10 @@ linter:
     sort_pub_dependencies: false
 
 analyzer:
+  exclude:
+    - test/**/*.mocks.dart
+  
   errors:
     import_of_legacy_library_into_null_safe: ignore
     use_setters_to_change_properties: ignore
+    prefer_function_declarations_over_variables: ignore

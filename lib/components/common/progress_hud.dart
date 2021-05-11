@@ -2,15 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:streams_provider/streams_provider.dart';
+import 'package:survey/core/viper/module.dart';
 
 class ProgressHUD extends StatelessWidget {
   final Widget child;
   final bool isShow;
   const ProgressHUD({
+    Key? key,
     required this.child,
     this.isShow = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,5 +42,16 @@ class ProgressHUD extends StatelessWidget {
       progressIndicator: progressIndicator,
       child: child,
     );
+  }
+}
+
+mixin ProgressHUDViewMixin<D> on View<D> {
+  final isProgressHUDShown = BehaviorSubject<bool>.seeded(false);
+  void showProgressHUD() {
+    isProgressHUDShown.add(true);
+  }
+
+  void dismissProgressHUD() {
+    isProgressHUDShown.add(false);
   }
 }
