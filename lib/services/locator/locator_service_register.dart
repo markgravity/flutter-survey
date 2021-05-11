@@ -10,6 +10,7 @@ class LocatorServiceRegister {
     locator.registerFactory<UserApiService>(() => UserApiServiceImpl());
 
     locator.registerFactory<AuthRepository>(() => AuthRepositoryImpl());
+    locator.registerFactory<SurveyApiService>(() => SurveyApiServiceImpl());
 
     locator.registerFactory<NavigatorObserver>(() => NavigatorObserver());
 
