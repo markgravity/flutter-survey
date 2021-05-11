@@ -61,6 +61,8 @@ class AuthRepositoryImpl implements AuthRepository {
       await _authApiService.logout();
     } on Exception catch (_) {}
 
+    // TODO: Add a clearToken() to ApiService
+    _apiService.configureGlobalToken(null, null);
     await _authLocalStorage.setToken(null);
     _accessToken = null;
     _user = null;
