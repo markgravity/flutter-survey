@@ -7,5 +7,6 @@
     "loginScreenForgotButtonText": "Quên?",
     "loginScreenEmailTextFieldPlaceholderText": "Email",
     "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu",
-    "homeScreenTodayText": "Hôm nay"
+    "homeScreenTodayText": "Hôm nay",
+    "sideMenuLogoutButtonTitle": "Đăng xuất"
 }

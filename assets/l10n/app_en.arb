@@ -6,5 +6,6 @@
     "loginScreenForgotButtonText": "Forgot?",
     "loginScreenEmailTextFieldPlaceholderText": "Email",
     "loginScreenPasswordTextFieldPlaceholderText": "Password",
-    "homeScreenTodayText": "Today"
+    "homeScreenTodayText": "Today",
+    "sideMenuLogoutButtonTitle": "Logout"
 }

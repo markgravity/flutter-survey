@@ -39,6 +39,18 @@ class MockHomeViewDelegate extends _i1.Mock implements _i3.HomeViewDelegate {
       Invocation.getter(#didSwipeDown),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
   @override
+  _i2.BehaviorSubject<void> get userAvatarDidTap => (super.noSuchMethod(
+      Invocation.getter(#userAvatarDidTap),
+      returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
+  @override
+  _i2.BehaviorSubject<void> get sideMenuDidShow => (super.noSuchMethod(
+      Invocation.getter(#sideMenuDidShow),
+      returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
+  @override
+  _i2.BehaviorSubject<void> get sideMenuDidDismiss => (super.noSuchMethod(
+      Invocation.getter(#sideMenuDidDismiss),
+      returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
+  @override
   _i2.BehaviorSubject<void> get alertDialogDidClose => (super.noSuchMethod(
       Invocation.getter(#alertDialogDidClose),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);

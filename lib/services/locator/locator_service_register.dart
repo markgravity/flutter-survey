@@ -32,5 +32,11 @@ class LocatorServiceRegister {
     locator.registerFactory<HomeInteractor>(() => HomeInteractorImpl());
     locator.registerFactory<HomeRouter>(() => HomeRouterImpl());
     locator.registerFactory<HomePresenter>(() => HomePresenterImpl());
+
+    // Side Menu
+    locator.registerFactory<SideMenuModule>(() => SideMenuModule());
+    locator.registerFactory<SideMenuInteractor>(() => SideMenuInteractorImpl());
+    locator.registerFactory<SideMenuRouter>(() => SideMenuRouterImpl());
+    locator.registerFactory<SideMenuPresenter>(() => SideMenuPresenterImpl());
   }
 }

@@ -51,6 +51,7 @@ class TopBar extends StatelessWidget {
                 ],
               ),
               PlatformButton(
+                onPressed: () => state.delegate?.userAvatarDidTap.add(null),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
