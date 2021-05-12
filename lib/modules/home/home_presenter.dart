@@ -9,6 +9,7 @@ class HomePresenterImpl extends HomePresenter
     stateDidInit.voidListen(_stateDidInit).addTo(disposeBag);
     showDetailButtonDidTap.listen(_showDetailButtonDidTap).addTo(disposeBag);
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
+    userAvatarDidTap.voidListen(_userAvatarDidTap).addTo(disposeBag);
 
     surveysDidFetchFromCached
         .listen(_surveysDidFetchFromCached)
@@ -38,6 +39,15 @@ class HomePresenterImpl extends HomePresenter
 
   @override
   final alertDialogDidClose = BehaviorSubject<void>();
+
+  @override
+  final userAvatarDidTap = BehaviorSubject<void>();
+
+  @override
+  final sideMenuDidDismiss = BehaviorSubject<void>();
+
+  @override
+  final sideMenuDidShow = BehaviorSubject<void>();
 
   @override
   final surveysDidFailToFetchFromCached = BehaviorSubject<Exception>();
@@ -105,5 +115,9 @@ class HomePresenterImpl extends HomePresenter
   void _didSwipeDown() {
     view.showProgressHUD();
     interactor.fetchSurveysFromRemote();
+  }
+
+  void _userAvatarDidTap() {
+    view.showSideMenu();
   }
 }

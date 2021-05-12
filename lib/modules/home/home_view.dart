@@ -6,6 +6,12 @@ abstract class HomeViewDelegate implements AlertViewMixinDelegate {
   BehaviorSubject<SurveyInfo> get showDetailButtonDidTap;
 
   BehaviorSubject<void> get didSwipeDown;
+
+  BehaviorSubject<void> get userAvatarDidTap;
+
+  BehaviorSubject<void> get sideMenuDidShow;
+
+  BehaviorSubject<void> get sideMenuDidDismiss;
 }
 
 abstract class HomeView extends View<HomeViewDelegate>
@@ -18,6 +24,8 @@ abstract class HomeView extends View<HomeViewDelegate>
   static const dotPageControlKey = Key("dot_page_control_key");
   static const skeletonKey = Key("skeleton_key");
   static const showDetailButtonKey = Key("show_detail_button");
+  static const sliderMenuContainerKey = Key("slider_menu_container");
+
   static const dotPageControlHighlightColor = Colors.white;
   static const dotPageControlNormalColor = Color.fromRGBO(255, 255, 255, 0.2);
 
@@ -32,6 +40,10 @@ abstract class HomeView extends View<HomeViewDelegate>
   void beginSkeletonAnimation();
 
   void stopSkeletonAnimation();
+
+  void showSideMenu();
+
+  void setUserInteractionEnable({required bool isEnabled});
 }
 
 class HomeViewImpl extends StatefulWidget {
@@ -51,11 +63,30 @@ class _HomeViewImplState
   final _pageController = CarouselController();
   final _currentPage = BehaviorSubject<int>.seeded(0);
   final _isLoading = BehaviorSubject<bool>.seeded(false);
+  final _isUserInteractionEnabled = BehaviorSubject<bool>.seeded(true);
+  final _sliderMenuContainerKey = GlobalKey<SliderMenuContainerState>();
 
   @override
   void initState() {
     super.initState();
     delegate?.stateDidInit.add(null);
+
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      final animationController =
+          _sliderMenuContainerKey.currentState?.animationController;
+      animationController?.addListener(() {
+        switch (animationController.status) {
+          case AnimationStatus.completed:
+            delegate?.sideMenuDidShow.add(null);
+            break;
+          case AnimationStatus.dismissed:
+            delegate?.sideMenuDidDismiss.add(null);
+            break;
+          default:
+            break;
+        }
+      });
+    });
   }
 
   @override
@@ -88,5 +119,15 @@ class _HomeViewImplState
   @override
   void beginSkeletonAnimation() {
     _isLoading.add(true);
+  }
+
+  @override
+  void showSideMenu() {
+    _sliderMenuContainerKey.currentState?.openDrawer();
+  }
+
+  @override
+  void setUserInteractionEnable({required bool isEnabled}) {
+    _isUserInteractionEnabled.add(isEnabled);
   }
 }

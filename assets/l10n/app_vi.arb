@@ -12,5 +12,6 @@
     "forgotPasswordScreenResetButtonTitle": "Khôi phục",
     "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Kiểm tra hộp thư email của bạn.",
     "forgotPasswordScreenResetSuccessfullyNotificationMessage": "Chúng tôi vừa gửi email huớng dẫn khôi phục mật khẩu về email của bạn.",
-    "homeScreenTodayText": "Hôm nay"
+    "homeScreenTodayText": "Hôm nay",
+    "sideMenuLogoutButtonTitle": "Đăng xuất"
 }

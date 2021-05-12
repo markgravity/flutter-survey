@@ -11,10 +11,27 @@ import 'package:survey/models/user_info.dart';
 import 'package:survey/modules/home/home_module.dart';
 import 'package:survey/core/viper/module.dart';
 import 'package:mockito/mockito.dart';
+import 'package:survey/modules/side_menu/side_menu_module.dart';
+import 'package:survey/services/locator/locator_service.dart';
 import '../../fakers/fake_module.dart';
 import '../../helpers/behavior_subject_generator.dart';
 import '../../helpers/extensions/widget_tester.dart';
 import 'home_view_test.mocks.dart';
+
+class FakeSideMenuModule extends SideMenuModule {
+  @override
+  SideMenuInteractor get interactor => throw UnimplementedError();
+
+  @override
+  SideMenuPresenter get presenter => throw UnimplementedError();
+  @override
+  SideMenuRouter get router => throw UnimplementedError();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 
 @GenerateMocks([HomeViewDelegate])
 void main() {
@@ -36,6 +53,7 @@ void main() {
 
     beforeEach((tester) async {
       HttpOverrides.global = null;
+      locator.registerSingleton<SideMenuModule>(FakeSideMenuModule());
 
       generator = BehaviorSubjectGenerator();
       delegate = MockHomeViewDelegate();
@@ -201,6 +219,7 @@ void main() {
         module.view.beginSkeletonAnimation();
         await tester.pump();
         await tester.pump();
+        await tester.pump();
       });
 
       it("triggers skeleton to begin animation", (tester) async {
@@ -213,6 +232,7 @@ void main() {
     describe("its stopSkeletonAnimation() is called", () {
       beforeEach((tester) async {
         module.view.stopSkeletonAnimation();
+        await tester.pump();
         await tester.pump();
         await tester.pump();
       });
