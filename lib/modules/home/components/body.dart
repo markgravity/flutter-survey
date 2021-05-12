@@ -22,6 +22,7 @@ class Body extends StatelessWidget {
         sliderMain: StreamsSelector0<bool>.value(
           stream: state._isUserInteractionEnabled,
           builder: (_, isUserInteractionEnabled, child) => IgnorePointer(
+            key: HomeView.mainIgnorePointer,
             ignoring: !isUserInteractionEnabled,
             child: child,
           ),
@@ -59,7 +60,8 @@ class Body extends StatelessWidget {
                                     viewportFraction: 1,
                                     initialPage: state._currentPage.value,
                                     height: double.infinity,
-                                    onPageChanged: (index, _) => state._currentPage.add(index),
+                                    onPageChanged: (index, _) =>
+                                        state._currentPage.add(index),
                                   ),
                                 )
                               : SlideItem.empty();

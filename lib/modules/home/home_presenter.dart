@@ -9,7 +9,9 @@ class HomePresenterImpl extends HomePresenter
     stateDidInit.voidListen(_stateDidInit).addTo(disposeBag);
     showDetailButtonDidTap.listen(_showDetailButtonDidTap).addTo(disposeBag);
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
-    userAvatarDidTap.voidListen(_userAvatarDidTap).addTo(disposeBag);
+    userAvatarButtonDidTap
+        .voidListen(_userAvatarButtonDidTap)
+        .addTo(disposeBag);
     sideMenuDidShow.voidListen(_sideMenuDidShow).addTo(disposeBag);
     sideMenuDidDismiss.voidListen(_sideMenuDidDismiss).addTo(disposeBag);
 
@@ -32,7 +34,7 @@ class HomePresenterImpl extends HomePresenter
   final alertDialogDidClose = BehaviorSubject<void>();
 
   @override
-  final userAvatarDidTap = BehaviorSubject<void>();
+  final userAvatarButtonDidTap = BehaviorSubject<void>();
 
   @override
   final sideMenuDidDismiss = BehaviorSubject<void>();
@@ -90,7 +92,7 @@ class HomePresenterImpl extends HomePresenter
     interactor.fetchSurveys(force: true);
   }
 
-  void _userAvatarDidTap() {
+  void _userAvatarButtonDidTap() {
     view.showSideMenu();
   }
 

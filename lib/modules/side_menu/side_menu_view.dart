@@ -5,6 +5,9 @@ abstract class SideMenuViewDelegate {
 }
 
 abstract class SideMenuView extends View<SideMenuViewDelegate> {
+  static const userAvatarImageKey = Key("user_avatar_image");
+  static const logoutButtonKey = Key("logout_button");
+
   void setUser(UserInfo user);
 }
 

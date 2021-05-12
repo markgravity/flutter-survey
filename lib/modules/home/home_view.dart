@@ -7,7 +7,7 @@ abstract class HomeViewDelegate implements AlertViewMixinDelegate {
 
   BehaviorSubject<void> get didSwipeDown;
 
-  BehaviorSubject<void> get userAvatarDidTap;
+  BehaviorSubject<void> get userAvatarButtonDidTap;
 
   BehaviorSubject<void> get sideMenuDidShow;
 
@@ -18,6 +18,7 @@ abstract class HomeView extends View<HomeViewDelegate>
     with AlertViewMixin, ProgressHUDViewMixin {
   static const currentDateTextKey = Key("current_date_text");
   static const userAvatarImageKey = Key("user_avatar_image");
+  static const userAvatarButtonKey = Key("user_avatar_button");
   static const titleTextSlideItemKey = Key("title_text_slide_item");
   static const descriptionTextSlideItemKey = Key("description_text_slide_item");
   static const backgroundImageSlideItemKey = Key("background_image_slide_item");
@@ -25,6 +26,7 @@ abstract class HomeView extends View<HomeViewDelegate>
   static const skeletonKey = Key("skeleton_key");
   static const showDetailButtonKey = Key("show_detail_button");
   static const sliderMenuContainerKey = Key("slider_menu_container");
+  static const mainIgnorePointer = Key("home_ignore_pointer");
 
   static const dotPageControlHighlightColor = Colors.white;
   static const dotPageControlNormalColor = Color.fromRGBO(255, 255, 255, 0.2);
@@ -65,28 +67,15 @@ class _HomeViewImplState
   final _isLoading = BehaviorSubject<bool>.seeded(false);
   final _isUserInteractionEnabled = BehaviorSubject<bool>.seeded(true);
   final _sliderMenuContainerKey = GlobalKey<SliderMenuContainerState>();
+  final _widgetsBinding = WidgetsBinding.instance!;
 
   @override
   void initState() {
     super.initState();
     delegate?.stateDidInit.add(null);
-    
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      final animationController =
-          _sliderMenuContainerKey.currentState?.animationController;
-      animationController?.addListener(() {
-        switch (animationController.status) {
-          case AnimationStatus.completed:
-            delegate?.sideMenuDidShow.add(null);
-            break;
-          case AnimationStatus.dismissed:
-            delegate?.sideMenuDidDismiss.add(null);
-            break;
-          default:
-            break;
-        }
-      });
-    });
+
+    _widgetsBinding
+        .scheduleFrameCallback(_listenSliderMenuContainerAnimationController);
   }
 
   @override
@@ -129,5 +118,28 @@ class _HomeViewImplState
   @override
   void setUserInteractionEnable({required bool isEnabled}) {
     _isUserInteractionEnabled.add(isEnabled);
+  }
+
+  void _listenSliderMenuContainerAnimationController(Duration timestamp) {
+    final animationController =
+        _sliderMenuContainerKey.currentState?.animationController;
+    if (animationController == null) {
+      _widgetsBinding
+          .scheduleFrameCallback(_listenSliderMenuContainerAnimationController);
+      return;
+    }
+
+    animationController.addListener(() {
+      switch (animationController.status) {
+        case AnimationStatus.completed:
+          delegate?.sideMenuDidShow.add(null);
+          break;
+        case AnimationStatus.dismissed:
+          delegate?.sideMenuDidDismiss.add(null);
+          break;
+        default:
+          break;
+      }
+    });
   }
 }
