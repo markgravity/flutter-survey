@@ -10,6 +10,8 @@ class HomePresenterImpl extends HomePresenter
     showDetailButtonDidTap.listen(_showDetailButtonDidTap).addTo(disposeBag);
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
     userAvatarDidTap.voidListen(_userAvatarDidTap).addTo(disposeBag);
+    sideMenuDidShow.voidListen(_sideMenuDidShow).addTo(disposeBag);
+    sideMenuDidDismiss.voidListen(_sideMenuDidDismiss).addTo(disposeBag);
 
     surveysDidFetch.listen(_surveysDidFetch).addTo(disposeBag);
     surveysDidFailToFetch.listen(_surveysDidFailToFetch).addTo(disposeBag);
@@ -90,5 +92,13 @@ class HomePresenterImpl extends HomePresenter
 
   void _userAvatarDidTap() {
     view.showSideMenu();
+  }
+
+  void _sideMenuDidShow() {
+    view.setUserInteractionEnable(isEnabled: false);
+  }
+
+  void _sideMenuDidDismiss() {
+    view.setUserInteractionEnable(isEnabled: true);
   }
 }
