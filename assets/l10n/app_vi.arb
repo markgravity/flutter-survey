@@ -8,5 +8,6 @@
     "loginScreenEmailTextFieldPlaceholderText": "Email",
     "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu",
     "homeScreenTodayText": "Hôm nay",
-    "sideMenuLogoutButtonTitle": "Đăng xuất"
+    "sideMenuLogoutButtonTitle": "Đăng xuất",
+    "surveyDetailScreenStartSurveyButtonTitle": "Bắt đầu khảm sát"
 }

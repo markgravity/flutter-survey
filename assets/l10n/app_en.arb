@@ -7,5 +7,6 @@
     "loginScreenEmailTextFieldPlaceholderText": "Email",
     "loginScreenPasswordTextFieldPlaceholderText": "Password",
     "homeScreenTodayText": "Today",
-    "sideMenuLogoutButtonTitle": "Logout"
+    "sideMenuLogoutButtonTitle": "Logout",
+    "surveyDetailScreenStartSurveyButtonTitle": "Start Survey"
 }
