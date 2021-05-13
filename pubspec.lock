@@ -580,7 +580,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.26.0"
+    version: "0.27.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -683,7 +683,7 @@ packages:
       name: streams_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.8"
+    version: "0.1.0"
   string_scanner:
     dependency: transitive
     description:
