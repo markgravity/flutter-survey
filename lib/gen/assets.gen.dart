@@ -16,6 +16,8 @@ class $AssetsImagesGen {
       const SvgGenImage('assets/images/logo-white.svg');
   AssetGenImage get mainBackgroundDimmed =>
       const AssetGenImage('assets/images/main-background-dimmed.png');
+  SvgGenImage get navBackButton =>
+      const SvgGenImage('assets/images/nav-back-button.svg');
 }
 
 class Assets {
@@ -25,7 +27,10 @@ class Assets {
 }
 
 class AssetGenImage extends AssetImage {
-  const AssetGenImage(String assetName) : super(assetName);
+  const AssetGenImage(String assetName)
+      : _assetName = assetName,
+        super(assetName);
+  final String _assetName;
 
   Image image({
     Key? key,
@@ -70,7 +75,7 @@ class AssetGenImage extends AssetImage {
     );
   }
 
-  String get path => assetName;
+  String get path => _assetName;
 }
 
 class SvgGenImage {
