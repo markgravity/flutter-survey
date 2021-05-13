@@ -28,7 +28,7 @@ class LandingPresenterImpl extends LandingPresenter
   final animationDidFinish = BehaviorSubject<void>();
 
   @override
-  final authenticationDidFailToValidate = BehaviorSubject<Object>();
+  final authenticationDidFailToValidate = BehaviorSubject<Exception>();
 
   @override
   final authenticationDidValidate = BehaviorSubject<bool>();

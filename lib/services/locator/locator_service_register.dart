@@ -11,9 +11,6 @@ class LocatorServiceRegister {
 
     locator.registerFactory<AuthRepository>(() => AuthRepositoryImpl());
 
-    locator.registerFactoryParam<StreamsDisposeBag, List, dynamic>(
-      (streams, _) => StreamsDisposeBag(streams!),
-    );
     locator.registerFactory<NavigatorObserver>(() => NavigatorObserver());
 
     // Landing

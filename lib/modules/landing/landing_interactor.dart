@@ -7,7 +7,7 @@ abstract class LandingInteractor extends Interactor<LandingInteractorDelegate> {
 abstract class LandingInteractorDelegate {
   BehaviorSubject<bool> get authenticationDidValidate;
 
-  BehaviorSubject<Object> get authenticationDidFailToValidate;
+  BehaviorSubject<Exception> get authenticationDidFailToValidate;
 }
 
 class LandingInteractorImpl extends LandingInteractor {
@@ -17,8 +17,8 @@ class LandingInteractorImpl extends LandingInteractor {
   void validateAuthentication() {
     _authRepository.attemptAndFetchUser().then((_) {
       delegate?.authenticationDidValidate.add(_authRepository.isAuthenticated);
-    }).catchError((Object error) {
-      delegate?.authenticationDidFailToValidate.add(error);
+    }).onError<Exception>((exception, _) {
+      delegate?.authenticationDidFailToValidate.add(exception);
     });
   }
 }
