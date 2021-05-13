@@ -19,6 +19,7 @@ class ApiRawObject with Mappable {
   String? id;
   String? type;
   Map<String, dynamic>? attributes;
+  Map<String, dynamic>? relationships;
 
   @override
   void mapping(Mapper map) {
@@ -26,5 +27,7 @@ class ApiRawObject with Mappable {
     map<String>("type", type, (v) => type = v as String);
     map<Map<String, dynamic>>("attributes", attributes,
         (v) => attributes = v as Map<String, dynamic>);
+    map<Map<String, dynamic>>("relationships", relationships,
+        (v) => relationships = v as Map<String, dynamic>?);
   }
 }

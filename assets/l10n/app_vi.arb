@@ -9,5 +9,11 @@
     "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu",
     "homeScreenTodayText": "Hôm nay",
     "sideMenuLogoutButtonTitle": "Đăng xuất",
-    "surveyDetailScreenStartSurveyButtonTitle": "Bắt đầu khảm sát"
+    "surveyDetailScreenStartSurveyButtonTitle": "Bắt đầu khảm sát",
+    "surveyQuestionsScreenLowestScoreNPSText": "Hoàn toàn không",
+    "surveyQuestionsScreenHighestScoreNPSText": "Rất có thể",
+    "surveyQuestionsScreenCloseConfirmDialogTitle": "Cảnh báo",
+    "surveyQuestionsScreenCloseConfirmDialogMessage": "Bạn có chắc chắn muốn kết thúc khảo sát này?",
+    "surveyQuestionsScreenCloseConfirmDialogOkLabel": "Đúng",
+    "surveyQuestionsScreenSubmitButtonTitle": "Gửi"
 }

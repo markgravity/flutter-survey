@@ -35,7 +35,7 @@ dependencies:
   get_it: ^7.0.0
   json_annotation: ^4.0.1
   enumerated_class: ^0.0.1+1
-  object_mapper: ^1.2.0
+  object_mapper: ^1.2.1
   streams_provider: ^0.1.1
   shared_preferences: ^2.0.5
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
@@ -45,6 +45,8 @@ dependencies:
   skeletor: ^0.0.3
   simple_gesture_detector: ^0.2.0
   flutter_slider_drawer: ^2.0.0
+  scroll_snap_list: ^0.8.0
+  marquee: ^2.1.0
 
 dev_dependencies:
   flutter_test:

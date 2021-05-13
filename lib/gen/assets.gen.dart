@@ -20,6 +20,12 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/main-background-dimmed.png');
   SvgGenImage get navBackButton =>
       const SvgGenImage('assets/images/nav-back-button.svg');
+  SvgGenImage get navCloseButton =>
+      const SvgGenImage('assets/images/nav-close-button.svg');
+  SvgGenImage get roundedCheckboxNormal =>
+      const SvgGenImage('assets/images/rounded-checkbox-normal.svg');
+  SvgGenImage get roundedCheckboxSelected =>
+      const SvgGenImage('assets/images/rounded-checkbox-selected.svg');
 }
 
 class Assets {
@@ -29,7 +35,10 @@ class Assets {
 }
 
 class AssetGenImage extends AssetImage {
-  const AssetGenImage(String assetName) : super(assetName);
+  const AssetGenImage(String assetName)
+      : _assetName = assetName,
+        super(assetName);
+  final String _assetName;
 
   Image image({
     Key? key,
@@ -74,7 +83,7 @@ class AssetGenImage extends AssetImage {
     );
   }
 
-  String get path => assetName;
+  String get path => _assetName;
 }
 
 class SvgGenImage {

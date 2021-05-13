@@ -45,5 +45,13 @@ class LocatorServiceRegister {
     locator.registerFactory<SurveyDetailRouter>(() => SurveyDetailRouterImpl());
     locator.registerFactory<SurveyDetailPresenter>(
         () => SurveyDetailPresenterImpl());
+
+    // Survey Questions
+    locator.registerFactory<SurveyQuestionsInteractor>(
+        () => SurveyQuestionsInteractorImpl());
+    locator.registerFactory<SurveyQuestionsRouter>(
+        () => SurveyQuestionsRouterImpl());
+    locator.registerFactory<SurveyQuestionsPresenter>(
+        () => SurveyQuestionsPresenterImpl());
   }
 }

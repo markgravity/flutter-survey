@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/cupertino.dart';
 import 'package:streams_provider/streams_provider.dart';
 import 'package:survey/services/locator/locator_service.dart';
@@ -43,8 +45,14 @@ abstract class ArgumentsModule<
     P extends Presenter,
     R extends Router,
     A extends ModuleArguments> extends Module<V, I, P, R> {
+  late final A? overriddenArguments;
+
   void setArguments(Object? arguments) {
-    interactor.arguments = arguments as A?;
+    try {
+      interactor.arguments = overriddenArguments ?? arguments as A?;
+    } catch (e) {
+      interactor.arguments = arguments as A?;
+    }
   }
 }
 

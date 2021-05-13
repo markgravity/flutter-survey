@@ -1,5 +1,6 @@
 import 'package:object_mapper/object_mapper.dart';
 import 'package:survey/models/detailed_survey_info.dart';
+import 'package:survey/models/survey_answer_info.dart';
 import 'package:survey/models/survey_info.dart';
 import 'package:survey/models/survey_question_info.dart';
 import 'package:survey/services/api/api_service.dart';
@@ -32,12 +33,39 @@ class SurveyApiServiceImpl implements SurveyApiService {
         .toObject<DetailedSurveyInfo>()!;
 
     final questions = List<SurveyQuestionInfo>.empty(growable: true);
-    final included = (rawResponse.included ?? [])
-        .where((element) => element.type == "question");
 
-    for (final ApiRawObject rawObject in included) {
-      questions.add(
-          Mapper.fromJson(rawObject.toJson()).toObject<SurveyQuestionInfo>()!);
+    // Get all answers
+    final rawAnswers = (rawResponse.included ?? [])
+        .where((element) => element.type == "answer");
+    final allAnswers = List<SurveyAnswerInfo>.empty(growable: true);
+    for (final rawObject in rawAnswers) {
+      final answer =
+          Mapper.fromJson(rawObject.toJson()).toObject<SurveyAnswerInfo>()!;
+      allAnswers.add(answer);
+    }
+
+    // Get all questions
+    final rawQuestions = (rawResponse.included ?? [])
+        .where((element) => element.type == "question");
+    for (final ApiRawObject rawObject in rawQuestions) {
+      // Find all related answers for this question
+      final answers = List<SurveyAnswerInfo>.empty(growable: true);
+      if (rawObject.relationships?["answers"] != null &&
+          rawObject.relationships?["answers"]["data"] != null &&
+          rawObject.relationships?["answers"]["data"] is List<dynamic>) {
+        for (final item in rawObject.relationships?["answers"]["data"]) {
+          final answer = allAnswers.cast<SurveyAnswerInfo?>().firstWhere(
+              (element) => element!.id == item["id"],
+              orElse: () => null);
+          if (answer == null) continue;
+          answers.add(answer);
+        }
+      }
+
+      final question =
+          Mapper.fromJson(rawObject.toJson()).toObject<SurveyQuestionInfo>()!;
+      question.answers = answers;
+      questions.add(question);
     }
     info.questions = questions;
 

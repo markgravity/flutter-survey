@@ -1,4 +1,5 @@
 import 'package:object_mapper/object_mapper.dart';
+import 'package:survey/models/survey_answer_info.dart';
 
 class SurveyQuestionInfo with Mappable {
   String? id;
@@ -9,6 +10,9 @@ class SurveyQuestionInfo with Mappable {
   bool? isMandatory;
   String? coverImageUrl;
   double? coverImageOpacity;
+  List<SurveyAnswerInfo> answers = [];
+  List<SurveyAnswerInfo> get orderedAnswers => answers.toList()
+    ..sort((a, b) => a.displayOrder!.compareTo(b.displayOrder!));
 
   @override
   void mapping(Mapper map) {
@@ -59,29 +63,53 @@ class SurveyQuestionInfo with Mappable {
 
 // ignore: avoid_implementing_value_types
 class SurveyQuestionDisplayType extends Enumerable<String> {
-  const SurveyQuestionDisplayType(this.rawValue);
+  factory SurveyQuestionDisplayType(String rawValue) =>
+      Enumerable.factory(values, rawValue);
+
+  const SurveyQuestionDisplayType._(this.rawValue);
 
   @override
   final String rawValue;
 
-  static const intro = SurveyQuestionDisplayType("intro");
-  static const star = SurveyQuestionDisplayType("star");
-  static const heart = SurveyQuestionDisplayType("heart");
-  static const smiley = SurveyQuestionDisplayType("smiley");
-  static const choice = SurveyQuestionDisplayType("choice");
-  static const nps = SurveyQuestionDisplayType("NPS");
-  static const textarea = SurveyQuestionDisplayType("textarea");
-  static const textField = SurveyQuestionDisplayType("textfield");
-  static const outro = SurveyQuestionDisplayType("outro");
+  static const intro = SurveyQuestionDisplayType._("intro");
+  static const star = SurveyQuestionDisplayType._("star");
+  static const heart = SurveyQuestionDisplayType._("heart");
+  static const smiley = SurveyQuestionDisplayType._("smiley");
+  static const choice = SurveyQuestionDisplayType._("choice");
+  static const nps = SurveyQuestionDisplayType._("nps");
+  static const textarea = SurveyQuestionDisplayType._("textarea");
+  static const textField = SurveyQuestionDisplayType._("textfield");
+  static const outro = SurveyQuestionDisplayType._("outro");
+
+  static List<SurveyQuestionDisplayType> values = [
+    intro,
+    star,
+    heart,
+    smiley,
+    choice,
+    nps,
+    textField,
+    textarea,
+    outro,
+  ];
 }
 
 class SurveyQuestionPickType extends Enumerable<String> {
-  const SurveyQuestionPickType(this.rawValue);
+  factory SurveyQuestionPickType(String rawValue) =>
+      Enumerable.factory(values, rawValue);
+
+  const SurveyQuestionPickType._(this.rawValue);
 
   @override
   final String rawValue;
 
-  static const none = SurveyQuestionDisplayType("none");
-  static const one = SurveyQuestionDisplayType("one");
-  static const any = SurveyQuestionDisplayType("any");
+  static const none = SurveyQuestionPickType._("none");
+  static const one = SurveyQuestionPickType._("one");
+  static const any = SurveyQuestionPickType._("any");
+
+  static List<SurveyQuestionPickType> values = [
+    none,
+    one,
+    any,
+  ];
 }

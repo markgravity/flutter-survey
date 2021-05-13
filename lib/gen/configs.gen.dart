@@ -2,6 +2,7 @@ import 'package:survey/gen/flavors.gen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:survey/models/auth_token_info.dart';
 import 'package:survey/models/detailed_survey_info.dart';
+import 'package:survey/models/survey_answer_info.dart';
 import 'package:survey/models/survey_info.dart';
 import 'package:survey/models/survey_question_info.dart';
 import 'package:survey/models/user_info.dart';

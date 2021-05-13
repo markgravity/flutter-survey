@@ -10,4 +10,5 @@ final Map<Type, Function> _factories = {
   SurveyQuestionInfo: () => SurveyQuestionInfo(),
   SurveyQuestionDisplayType: (v) => SurveyQuestionDisplayType(v as String),
   SurveyQuestionPickType: (v) => SurveyQuestionPickType(v as String),
+  SurveyAnswerInfo: () => SurveyAnswerInfo(),
 };

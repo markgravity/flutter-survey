@@ -8,5 +8,11 @@
     "loginScreenPasswordTextFieldPlaceholderText": "Password",
     "homeScreenTodayText": "Today",
     "sideMenuLogoutButtonTitle": "Logout",
-    "surveyDetailScreenStartSurveyButtonTitle": "Start Survey"
+    "surveyDetailScreenStartSurveyButtonTitle": "Start Survey",
+    "surveyQuestionsScreenLowestScoreNPSText": "Not at all Likely",
+    "surveyQuestionsScreenHighestScoreNPSText": "Extremely Likely",
+    "surveyQuestionsScreenCloseConfirmDialogTitle": "Warning!",
+    "surveyQuestionsScreenCloseConfirmDialogMessage": "Are you sure you want to quit the survey?",
+    "surveyQuestionsScreenCloseConfirmDialogOkLabel": "Yes",
+    "surveyQuestionsScreenSubmitButtonTitle": "Submit"
 }
