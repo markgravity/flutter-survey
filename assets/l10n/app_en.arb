@@ -12,5 +12,6 @@
     "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Check your email.",
     "forgotPasswordScreenResetSuccessfullyNotificationMessage": "We’ve email you instructions to reset \u2028your password.",
     "homeScreenTodayText": "Today",
-    "sideMenuLogoutButtonTitle": "Logout"
+    "sideMenuLogoutButtonTitle": "Logout",
+    "surveyDetailScreenStartSurveyButtonTitle": "Start Survey"
 }

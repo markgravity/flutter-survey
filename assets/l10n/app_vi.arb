@@ -13,5 +13,6 @@
     "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Kiểm tra hộp thư email của bạn.",
     "forgotPasswordScreenResetSuccessfullyNotificationMessage": "Chúng tôi vừa gửi email huớng dẫn khôi phục mật khẩu về email của bạn.",
     "homeScreenTodayText": "Hôm nay",
-    "sideMenuLogoutButtonTitle": "Đăng xuất"
+    "sideMenuLogoutButtonTitle": "Đăng xuất",
+    "surveyDetailScreenStartSurveyButtonTitle": "Bắt đầu khảm sát"
 }

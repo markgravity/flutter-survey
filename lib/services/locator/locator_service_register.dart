@@ -46,5 +46,12 @@ class LocatorServiceRegister {
     locator.registerFactory<SideMenuInteractor>(() => SideMenuInteractorImpl());
     locator.registerFactory<SideMenuRouter>(() => SideMenuRouterImpl());
     locator.registerFactory<SideMenuPresenter>(() => SideMenuPresenterImpl());
+
+    // Survey Detail
+    locator.registerFactory<SurveyDetailInteractor>(
+        () => SurveyDetailInteractorImpl());
+    locator.registerFactory<SurveyDetailRouter>(() => SurveyDetailRouterImpl());
+    locator.registerFactory<SurveyDetailPresenter>(
+        () => SurveyDetailPresenterImpl());
   }
 }
