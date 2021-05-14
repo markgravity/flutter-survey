@@ -1,8 +1,6 @@
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:quick_test/quick_test.dart';
-import 'package:survey/models/survey_info.dart';
-import 'package:survey/models/user_info.dart';
 import 'package:survey/modules/side_menu/side_menu_module.dart';
 
 import '../../mocks/build_context.dart';

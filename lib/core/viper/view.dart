@@ -8,6 +8,7 @@ abstract class View<D> {
 
 abstract class ViewState<V extends StatefulWidget, M extends Widget, D>
     extends State<V> implements View<D> {
+  @visibleForTesting
   static Module? overriddenModule;
   Module? _disposedModule;
   @override
@@ -17,12 +18,19 @@ abstract class ViewState<V extends StatefulWidget, M extends Widget, D>
   void initState() {
     super.initState();
 
-    _getModule()?.assembly(this);
+    final module = _getModule();
+    module?.assembly(this);
   }
 
   @override
   void didChangeDependencies() {
-    _disposedModule = _getModule();
+    final module = _getModule();
+
+    if (module is ArgumentsModule) {
+      module.setArguments(ModalRoute.of(context)?.settings.arguments);
+    }
+
+    _disposedModule = module;
     super.didChangeDependencies();
   }
 

@@ -9,6 +9,9 @@ class HomeRouterImpl extends HomeRouter {
   @override
   void pushToSurveyDetail(
       {required BuildContext context, required SurveyInfo survey}) {
-    context.navigator.pushNamed(SurveyDetailModule.routePath);
+    context.navigator.pushNamed(
+      SurveyDetailModule.routePath,
+      arguments: SurveyDetailArguments(survey: survey),
+    );
   }
 }

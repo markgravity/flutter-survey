@@ -6,7 +6,7 @@ class UserInfo with Mappable {
 
   @override
   void mapping(Mapper map) {
-    map("email", email, (v) => email = v as String);
-    map("avatar_url", avatarUrl, (v) => avatarUrl = v as String);
+    map("attributes.email", email, (v) => email = v as String);
+    map("attributes.avatar_url", avatarUrl, (v) => avatarUrl = v as String);
   }
 }

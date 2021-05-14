@@ -12,6 +12,8 @@ part 'api_service_register.dart';
 
 part 'api_list_object.dart';
 
+part 'api_raw_response.dart';
+
 abstract class ApiService {
   Future<T> call<T>({
     required HttpMethod method,
@@ -146,17 +148,19 @@ class ApiServiceImpl implements ApiService {
   }
 
   T _convertResponseToObject<T>(Map<String, dynamic> response) {
+    if (T == ApiRawResponse) {
+      return Mapper.fromJson(response).toObject<T>()!;
+    }
+
     if (response["data"] == null && T.toString() == "void") {
       return null as T;
     }
 
-    if (response["data"] is! Map<String, dynamic> ||
-        response["data"]["attributes"] is! Map<String, dynamic>) {
+    if (response["data"] is! Map<String, dynamic>) {
       throw ApiException.wrongResponseStructure;
     }
 
-    return Mapper.fromJson(
-            response["data"]["attributes"] as Map<String, dynamic>)
+    return Mapper.fromJson(response["data"] as Map<String, dynamic>)
         .toObject<T>()!;
   }
 
@@ -167,9 +171,7 @@ class ApiServiceImpl implements ApiService {
     }
 
     final items = (response["data"] as List<dynamic>)
-        .where((e) => e["attributes"] is Map<String, dynamic>)
-        .map((e) => Mapper.fromJson(e["attributes"] as Map<String, dynamic>)
-            .toObject<T>()!)
+        .map((e) => Mapper.fromJson(e as Map<String, dynamic>).toObject<T>()!)
         .toList();
 
     return ApiListObject<T>(items: items);

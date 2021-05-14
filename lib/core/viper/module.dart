@@ -4,9 +4,13 @@ import 'package:survey/services/locator/locator_service.dart';
 
 export 'package:survey/core/extensions/build_context.dart';
 export 'package:survey/core/extensions/stream.dart';
+
 part 'presenter.dart';
+
 part 'interactor.dart';
+
 part 'router.dart';
+
 part 'view.dart';
 
 abstract class Module<V extends View, I extends Interactor, P extends Presenter,
@@ -21,10 +25,27 @@ abstract class Module<V extends View, I extends Interactor, P extends Presenter,
 
     view.delegate = presenter;
     interactor.delegate = presenter;
-    presenter.configure(view: view, interactor: interactor, router: router);
+    presenter.configure(
+      view: view,
+      interactor: interactor,
+      router: router,
+    );
   }
 
   void dispose() {
     presenter.dispose();
   }
 }
+
+abstract class ArgumentsModule<
+    V extends View,
+    I extends ArgumentsInteractor,
+    P extends Presenter,
+    R extends Router,
+    A extends ModuleArguments> extends Module<V, I, P, R> {
+  void setArguments(Object? arguments) {
+    interactor.arguments = arguments as A?;
+  }
+}
+
+abstract class ModuleArguments {}

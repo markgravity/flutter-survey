@@ -41,6 +41,7 @@ class Body extends StatelessWidget {
                     isShown: isLoading,
                     baseColor: Colors.white.withOpacity(0.12),
                     highlightColor: Colors.white.withOpacity(0.5),
+                    transition: BoneTransition.none,
                     child: child!,
                   ),
                   child: Stack(
