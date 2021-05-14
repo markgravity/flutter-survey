@@ -28,8 +28,7 @@ void main() {
             .thenReturn(navigatorState);
         when(navigatorState.pushNamed(any, arguments: anyNamed("arguments")))
             .thenAnswer((_) => Future.value());
-        router.pushToSurveyDetail(
-            context: buildContext, survey: SurveyInfo());
+        router.pushToSurveyDetail(context: buildContext, survey: SurveyInfo());
       });
 
       it("triggers navigator to push to Survey Detail screen", () {

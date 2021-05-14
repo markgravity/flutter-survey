@@ -8,6 +8,9 @@ abstract class SurveyDetailViewDelegate implements AlertViewMixinDelegate {
 
 abstract class SurveyDetailView extends View<SurveyDetailViewDelegate>
     with ProgressHUDViewMixin, AlertViewMixin {
+  static const backgroundImageKey = Key("background_image_");
+  static const startSurveyButtonKey = Key("start_survey_button");
+
   void setSurvey(SurveyInfo survey);
 }
 

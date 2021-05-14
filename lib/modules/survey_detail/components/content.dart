@@ -21,6 +21,7 @@ class Content extends StatelessWidget {
             StreamsSelector0<SurveyInfo>.value(
               stream: state._survey,
               builder: (_, survey, __) => Image(
+                key: SurveyDetailView.backgroundImageKey,
                 image: NetworkImage(survey.coverImageUrl!),
                 fit: BoxFit.fill,
               ),
@@ -67,6 +68,7 @@ class Content extends StatelessWidget {
                                     minWidth: 140,
                                   ),
                                   child: Button(
+                                    key: SurveyDetailView.startSurveyButtonKey,
                                     onPressed: () => state
                                         .delegate?.startSurveyButtonDidTap
                                         .add(null),

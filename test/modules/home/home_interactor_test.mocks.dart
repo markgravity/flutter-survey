@@ -2,15 +2,16 @@
 // in survey/test/modules/home/home_interactor_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i7;
+import 'dart:async' as _i8;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/src/subjects/behavior_subject.dart' as _i2;
-import 'package:survey/models/survey_info.dart' as _i4;
-import 'package:survey/models/user_info.dart' as _i5;
-import 'package:survey/modules/home/home_module.dart' as _i3;
-import 'package:survey/repositories/auth_repository.dart' as _i8;
-import 'package:survey/repositories/survey_repository.dart' as _i6;
+import 'package:survey/models/detailed_survey_info.dart' as _i3;
+import 'package:survey/models/survey_info.dart' as _i5;
+import 'package:survey/models/user_info.dart' as _i6;
+import 'package:survey/modules/home/home_module.dart' as _i4;
+import 'package:survey/repositories/auth_repository.dart' as _i9;
+import 'package:survey/repositories/survey_repository.dart' as _i7;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -22,11 +23,14 @@ import 'package:survey/repositories/survey_repository.dart' as _i6;
 class _FakeBehaviorSubject<T> extends _i1.Fake
     implements _i2.BehaviorSubject<T> {}
 
+class _FakeDetailedSurveyInfo extends _i1.Fake
+    implements _i3.DetailedSurveyInfo {}
+
 /// A class which mocks [HomeInteractorDelegate].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockHomeInteractorDelegate extends _i1.Mock
-    implements _i3.HomeInteractorDelegate {
+    implements _i4.HomeInteractorDelegate {
   MockHomeInteractorDelegate() {
     _i1.throwOnMissingStub(this);
   }
@@ -36,46 +40,52 @@ class MockHomeInteractorDelegate extends _i1.Mock
       Invocation.getter(#isSurveysCachedDidGet),
       returnValue: _FakeBehaviorSubject<bool>()) as _i2.BehaviorSubject<bool>);
   @override
-  _i2.BehaviorSubject<List<_i4.SurveyInfo>> get surveysDidFetch =>
+  _i2.BehaviorSubject<List<_i5.SurveyInfo>> get surveysDidFetch =>
       (super.noSuchMethod(Invocation.getter(#surveysDidFetch),
-              returnValue: _FakeBehaviorSubject<List<_i4.SurveyInfo>>())
-          as _i2.BehaviorSubject<List<_i4.SurveyInfo>>);
+              returnValue: _FakeBehaviorSubject<List<_i5.SurveyInfo>>())
+          as _i2.BehaviorSubject<List<_i5.SurveyInfo>>);
   @override
   _i2.BehaviorSubject<Exception> get surveysDidFailToFetch =>
       (super.noSuchMethod(Invocation.getter(#surveysDidFailToFetch),
               returnValue: _FakeBehaviorSubject<Exception>())
           as _i2.BehaviorSubject<Exception>);
   @override
-  _i2.BehaviorSubject<_i5.UserInfo> get authenticatedUserDidGet =>
+  _i2.BehaviorSubject<_i6.UserInfo> get authenticatedUserDidGet =>
       (super.noSuchMethod(Invocation.getter(#authenticatedUserDidGet),
-              returnValue: _FakeBehaviorSubject<_i5.UserInfo>())
-          as _i2.BehaviorSubject<_i5.UserInfo>);
+              returnValue: _FakeBehaviorSubject<_i6.UserInfo>())
+          as _i2.BehaviorSubject<_i6.UserInfo>);
 }
 
 /// A class which mocks [SurveyRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSurveyRepository extends _i1.Mock implements _i6.SurveyRepository {
+class MockSurveyRepository extends _i1.Mock implements _i7.SurveyRepository {
   MockSurveyRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<bool> get isSurveysCached =>
+  _i8.Future<bool> get isSurveysCached =>
       (super.noSuchMethod(Invocation.getter(#isSurveysCached),
-          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
   @override
-  _i7.Future<List<_i4.SurveyInfo>> fetchSurveys({bool? force}) =>
+  _i8.Future<List<_i5.SurveyInfo>> fetchSurveys({bool? force}) =>
       (super.noSuchMethod(Invocation.method(#fetchSurveys, [], {#force: force}),
               returnValue:
-                  Future<List<_i4.SurveyInfo>>.value(<_i4.SurveyInfo>[]))
-          as _i7.Future<List<_i4.SurveyInfo>>);
+                  Future<List<_i5.SurveyInfo>>.value(<_i5.SurveyInfo>[]))
+          as _i8.Future<List<_i5.SurveyInfo>>);
+  @override
+  _i8.Future<_i3.DetailedSurveyInfo> fetchDetailedSurvey(String? id) =>
+      (super.noSuchMethod(Invocation.method(#fetchDetailedSurvey, [id]),
+              returnValue: Future<_i3.DetailedSurveyInfo>.value(
+                  _FakeDetailedSurveyInfo()))
+          as _i8.Future<_i3.DetailedSurveyInfo>);
 }
 
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i8.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i9.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -85,29 +95,29 @@ class MockAuthRepository extends _i1.Mock implements _i8.AuthRepository {
           .noSuchMethod(Invocation.getter(#isAuthenticated), returnValue: false)
       as bool);
   @override
-  _i7.Future<void> login({String? email, String? password}) =>
+  _i8.Future<void> login({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#login, [], {#email: email, #password: password}),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
   @override
-  _i7.Future<void> logout() =>
+  _i8.Future<void> logout() =>
       (super.noSuchMethod(Invocation.method(#logout, []),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
   @override
-  _i7.Future<void> attempt() =>
+  _i8.Future<void> attempt() =>
       (super.noSuchMethod(Invocation.method(#attempt, []),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
   @override
-  _i7.Future<void> fetchUser() =>
+  _i8.Future<void> fetchUser() =>
       (super.noSuchMethod(Invocation.method(#fetchUser, []),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
   @override
-  _i7.Future<void> attemptAndFetchUser() =>
+  _i8.Future<void> attemptAndFetchUser() =>
       (super.noSuchMethod(Invocation.method(#attemptAndFetchUser, []),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
 }
