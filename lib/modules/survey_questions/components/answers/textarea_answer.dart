@@ -1,6 +1,8 @@
 part of '../../survey_questions_module.dart';
 
 class TextFieldAnswer extends StatefulWidget {
+  static const textFieldKey = Key("text_field_answer_text_field");
+
   const TextFieldAnswer({
     Key? key,
     this.isMultiLines = false,
@@ -30,6 +32,7 @@ class _TextFieldAnswerState extends State<TextFieldAnswer> {
   @override
   Widget build(BuildContext context) {
     return PlatformTextField(
+      key: TextFieldAnswer.textFieldKey,
       controller: textController,
       maxLines: widget.isMultiLines ? null : 1,
       minLines: widget.isMultiLines ? 10 : null,

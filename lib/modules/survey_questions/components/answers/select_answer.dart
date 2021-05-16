@@ -2,6 +2,16 @@ part of '../../survey_questions_module.dart';
 
 class SelectAnswer extends StatefulWidget {
   static const itemHeight = 50.0;
+  static const itemKey = Key("select_answer_item");
+  static const itemTextKey = Key("select_answer_item_text");
+  static const checkboxKey = Key("select_answer_check_box");
+  static const checkboxSelectedImageKey =
+      Key("select_answer_checkbox_selected_image");
+  static const checkboxNormalImageKey =
+      Key("select_answer_checkbox_normal_image");
+
+  static const highlightFontWeight = FontWeight.w800;
+  static const normalFontWeight = FontWeight.normal;
 
   const SelectAnswer({
     Key? key,
@@ -74,6 +84,7 @@ class _SelectAnswerState extends State<SelectAnswer> {
 
   Widget _itemBuilder(BuildContext context, int i) {
     return SizedBox(
+      key: SelectAnswer.itemKey,
       height: SelectAnswer.itemHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,13 +95,14 @@ class _SelectAnswerState extends State<SelectAnswer> {
               builder: (_, selectedIndexes, __) {
                 return Text(
                   widget.options[i].content!,
+                  key: SelectAnswer.itemTextKey,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: selectedIndexes.contains(i)
-                        ? FontWeight.w800
-                        : FontWeight.normal,
+                        ? SelectAnswer.highlightFontWeight
+                        : SelectAnswer.normalFontWeight,
                     fontSize: 20,
                   ),
                 );
@@ -99,12 +111,15 @@ class _SelectAnswerState extends State<SelectAnswer> {
           ),
           if (widget.isMultiSelection)
             GestureDetector(
+              key: SelectAnswer.checkboxKey,
               onTap: () => _onCheckboxTap(i),
               child: StreamsSelector0<List<int>>.value(
                 stream: selectedIndexes,
                 builder: (_, selectedIndexes, __) => selectedIndexes.contains(i)
-                    ? Assets.images.roundedCheckboxSelected.svg()
-                    : Assets.images.roundedCheckboxNormal.svg(),
+                    ? Assets.images.roundedCheckboxSelected
+                        .svg(key: SelectAnswer.checkboxSelectedImageKey)
+                    : Assets.images.roundedCheckboxNormal
+                        .svg(key: SelectAnswer.checkboxNormalImageKey),
               ),
             ),
         ],

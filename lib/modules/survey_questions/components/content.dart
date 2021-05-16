@@ -21,8 +21,11 @@ class Content extends StatelessWidget {
               stream: state._questions,
               builder: (_, questions, __) => CarouselSlider.builder(
                 itemCount: questions.length,
-                itemBuilder: (_, i, __) =>
-                    Slide(questions: questions, index: i),
+                itemBuilder: (_, i, __) => Slide(
+                  key: SurveyQuestionsView.slideKey,
+                  questions: questions,
+                  index: i,
+                ),
                 carouselController: state._carouselController,
                 options: CarouselOptions(
                   height: double.infinity,
@@ -38,6 +41,7 @@ class Content extends StatelessWidget {
                 isBackButtonHidden: true,
                 leftChildren: [
                   PlatformButton(
+                    key: SurveyQuestionsView.closeButtonKey,
                     onPressed: () =>
                         state.delegate?.closeButtonDidTap.add(null),
                     child: Assets.images.navCloseButton.svg(),

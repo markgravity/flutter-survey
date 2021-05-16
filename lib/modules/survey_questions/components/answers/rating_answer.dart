@@ -1,6 +1,10 @@
 part of '../../survey_questions_module.dart';
 
 class RatingAnswer extends StatefulWidget {
+  static const int numberOfItems = 5;
+  static const double normalOpacity = 0.5;
+  static const double highlightOpacity = 1;
+
   const RatingAnswer({
     Key? key,
     required this.symbol,
@@ -28,7 +32,7 @@ class _RatingAnswerState extends State<RatingAnswer> {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: _itemBuilder,
-        itemCount: 5,
+        itemCount: RatingAnswer.numberOfItems,
       ),
     );
   }
@@ -38,7 +42,9 @@ class _RatingAnswerState extends State<RatingAnswer> {
         stream: selected,
         builder: (_, selected, child) {
           return Opacity(
-            opacity: selected != null && i <= selected ? 1 : 0.5,
+            opacity: selected != null && i <= selected
+                ? RatingAnswer.highlightOpacity
+                : RatingAnswer.normalOpacity,
             child: child,
           );
         },

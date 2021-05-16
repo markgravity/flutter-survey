@@ -65,6 +65,7 @@ class Slide extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button(
+                        key: SurveyQuestionsView.submitButtonKey,
                         onPressed: () => state.delegate?.submitButtonDidTap
                             .add(_answers.value),
                         title: _isLast

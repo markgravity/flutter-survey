@@ -12,6 +12,10 @@ abstract class SurveyQuestionsViewDelegate implements AlertViewMixinDelegate {
 
 abstract class SurveyQuestionsView extends View<SurveyQuestionsViewDelegate>
     with AlertViewMixin, ProgressHUDViewMixin {
+  static const slideKey = Key("slide");
+  static const closeButtonKey = Key("close_button");
+  static const submitButtonKey = Key("submit_button");
+
   void setQuestions(List<SurveyQuestionInfo> questions);
 
   void showCloseConfirmDialog();

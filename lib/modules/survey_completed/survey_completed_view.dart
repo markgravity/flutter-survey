@@ -8,12 +8,14 @@ class SurveyCompletedViewImpl extends StatefulWidget {
   const SurveyCompletedViewImpl({Key? key}) : super(key: key);
 
   @override
-  _SurveyCompletedViewImplState createState() => _SurveyCompletedViewImplState();
+  _SurveyCompletedViewImplState createState() =>
+      _SurveyCompletedViewImplState();
 }
 
-class _SurveyCompletedViewImplState
-    extends ViewState<SurveyCompletedViewImpl, SurveyCompletedModule, SurveyCompletedViewDelegate>
-    implements SurveyCompletedView {
+class _SurveyCompletedViewImplState extends ViewState<
+    SurveyCompletedViewImpl,
+    SurveyCompletedModule,
+    SurveyCompletedViewDelegate> implements SurveyCompletedView {
   @override
   Widget build(BuildContext context) {
     return const Screen(

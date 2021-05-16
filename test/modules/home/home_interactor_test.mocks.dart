@@ -8,9 +8,10 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/src/subjects/behavior_subject.dart' as _i2;
 import 'package:survey/models/detailed_survey_info.dart' as _i3;
 import 'package:survey/models/survey_info.dart' as _i5;
+import 'package:survey/models/survey_submit_question_info.dart' as _i9;
 import 'package:survey/models/user_info.dart' as _i6;
 import 'package:survey/modules/home/home_module.dart' as _i4;
-import 'package:survey/repositories/auth_repository.dart' as _i9;
+import 'package:survey/repositories/auth_repository.dart' as _i10;
 import 'package:survey/repositories/survey_repository.dart' as _i7;
 
 // ignore_for_file: comment_references
@@ -80,12 +81,20 @@ class MockSurveyRepository extends _i1.Mock implements _i7.SurveyRepository {
               returnValue: Future<_i3.DetailedSurveyInfo>.value(
                   _FakeDetailedSurveyInfo()))
           as _i8.Future<_i3.DetailedSurveyInfo>);
+  @override
+  _i8.Future<void> submit(
+          {String? surveyId, List<_i9.SurveySubmitQuestionInfo>? questions}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #submit, [], {#surveyId: surveyId, #questions: questions}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
 }
 
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i9.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i10.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
