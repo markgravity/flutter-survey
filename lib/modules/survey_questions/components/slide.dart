@@ -1,7 +1,7 @@
 part of '../survey_questions_module.dart';
 
 class Slide extends StatelessWidget {
-  const Slide({
+  Slide({
     Key? key,
     required this.questions,
     required this.index,
@@ -11,6 +11,7 @@ class Slide extends StatelessWidget {
   final int index;
   bool get _isLast => index == questions.length - 1;
   SurveyQuestionInfo get question => questions[index];
+  final _answers = BehaviorSubject<List<SurveySubmitAnswerInfo>>.seeded([]);
 
   @override
   Widget build(BuildContext context) {
@@ -57,28 +58,32 @@ class Slide extends StatelessWidget {
                     child: _makeAnswer(),
                   ),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  if (_isLast)
-                    Button(
-                      title: AppLocalizations.of(context)!
-                          .surveyQuestionsScreenSubmitButtonTitle,
-                    )
-                  else
-                    PlatformButton(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(28),
-                          color: question.isMandatory ?? false
-                              ? Colors.grey
-                              : Colors.white,
-                        ),
-                        width: 56,
-                        height: 56,
-                        child:
-                            Assets.images.arrowRightIcon.svg(fit: BoxFit.none),
+                StreamsSelector0<bool>.value(
+                  stream: _answers.map((event) =>
+                      event.isNotEmpty || !(question.isMandatory ?? true)),
+                  builder: (_, isEnabled, __) => Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Button(
+                        onPressed: () => state.delegate?.submitButtonDidTap
+                            .add(_answers.value),
+                        title: _isLast
+                            ? AppLocalizations.of(context)!
+                                .surveyQuestionsScreenSubmitButtonTitle
+                            : null,
+                        borderRadius:
+                            _isLast ? null : BorderRadius.circular(28),
+                        width: _isLast ? null : 56,
+                        height: _isLast ? null : 56,
+                        isEnabled: isEnabled,
+                        child: _isLast
+                            ? null
+                            : Assets.images.arrowRightIcon
+                                .svg(fit: BoxFit.none),
                       ),
-                    ),
-                ]),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -93,25 +98,55 @@ class Slide extends StatelessWidget {
         return SelectAnswer(
           options: question.orderedAnswers,
           isMultiSelection: question.pickType == SurveyQuestionPickType.any,
+          onSelect: _onSelectSelect,
         );
       case SurveyQuestionDisplayType.heart:
-        return const RatingAnswer(symbol: "❤️");
+        return RatingAnswer(
+          symbol: "❤️",
+          onSelect: _onRatingSelect,
+        );
       case SurveyQuestionDisplayType.star:
-        return const RatingAnswer(symbol: "⭐️");
+        return RatingAnswer(
+          symbol: "⭐️",
+          onSelect: _onRatingSelect,
+        );
       case SurveyQuestionDisplayType.smiley:
-        return const RatingAnswer(symbol: "😃");
+        return RatingAnswer(
+          symbol: "😃",
+          onSelect: _onRatingSelect,
+        );
       case SurveyQuestionDisplayType.nps:
         return NPSAnswer(
           items: question.orderedAnswers.sublist(1),
+          onSelect: _onNPSSelect,
         );
       case SurveyQuestionDisplayType.textarea:
-        return const TextFieldAnswer(
+        return TextFieldAnswer(
           isMultiLines: true,
+          onTextChange: _onTextChange,
         );
       case SurveyQuestionDisplayType.textField:
-        return const TextFieldAnswer();
+        return TextFieldAnswer(
+          onTextChange: _onTextChange,
+        );
       default:
         return const SizedBox.shrink();
     }
+  }
+
+  void _onSelectSelect(List<SurveyQuestionAnswerInfo> questionAnswer) {
+    _answers.add(questionAnswer.map((e) => e.toAnswer()).toList());
+  }
+
+  void _onRatingSelect(int? i) {
+    _answers.add([if (i != null) question.orderedAnswers[i - 1].toAnswer()]);
+  }
+
+  void _onNPSSelect(SurveyQuestionAnswerInfo? questionAnswer) {
+    _answers.add([if (questionAnswer != null) questionAnswer.toAnswer()]);
+  }
+
+  void _onTextChange(String text) {
+    _answers.add([question.orderedAnswers.first.toAnswer(text)]);
   }
 }

@@ -6,15 +6,21 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:streams_provider/streams_provider.dart';
 import 'package:survey/components/alert/alert.dart';
 import 'package:survey/components/button/button.dart';
+import 'package:survey/components/common/progress_hud.dart';
 import 'package:survey/components/confirm/confirm.dart';
 import 'package:survey/components/navigation_bar/navigation_bar.dart';
 import 'package:survey/core/viper/module.dart';
 import 'package:survey/gen/assets.gen.dart';
 import 'package:survey/models/detailed_survey_info.dart';
-import 'package:survey/models/survey_answer_info.dart';
+import 'package:survey/models/survey_submit_answer_info.dart';
+import 'package:survey/models/survey_question_answer_info.dart';
 import 'package:survey/models/survey_question_info.dart';
+import 'package:survey/models/survey_submit_question_info.dart';
 import 'package:survey/modules/screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:survey/modules/survey_completed/survey_completed_module.dart';
+import 'package:survey/repositories/survey_repository.dart';
+import 'package:survey/services/locator/locator_service.dart';
 
 part 'survey_questions_view.dart';
 
@@ -42,7 +48,7 @@ class SurveyQuestionsModule extends ArgumentsModule<
     SurveyQuestionsPresenter,
     SurveyQuestionsRouter,
     SurveyQuestionsArguments> {
-  static const routePath = "";
+  static const routePath = "survey/questions";
 
   @override
   Widget build(BuildContext context) {

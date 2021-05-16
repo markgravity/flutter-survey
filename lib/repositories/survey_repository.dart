@@ -1,5 +1,7 @@
 import 'package:survey/models/detailed_survey_info.dart';
 import 'package:survey/models/survey_info.dart';
+import 'package:survey/models/survey_submit_question_info.dart';
+import 'package:survey/services/api/survey/params/survey_submit_params.dart';
 import 'package:survey/services/api/survey/survey_api_service.dart';
 import 'package:survey/services/local_storage/local_storage_service.dart';
 import 'package:survey/services/locator/locator_service.dart';
@@ -10,7 +12,13 @@ abstract class SurveyRepository {
   Future<bool> get isSurveysCached;
 
   Future<List<SurveyInfo>> fetchSurveys({bool force});
+
   Future<DetailedSurveyInfo> fetchDetailedSurvey(String id);
+
+  Future<void> submit({
+    required String surveyId,
+    required List<SurveySubmitQuestionInfo> questions,
+  });
 }
 
 class SurveyRepositoryImpl implements SurveyRepository {
@@ -51,5 +59,14 @@ class SurveyRepositoryImpl implements SurveyRepository {
   Future<DetailedSurveyInfo> fetchDetailedSurvey(String id) {
     final params = SurveyInfoParams(id: id);
     return _surveyApiService.info(params: params);
+  }
+
+  @override
+  Future<void> submit({
+    required String surveyId,
+    required List<SurveySubmitQuestionInfo> questions,
+  }) {
+    final params = SurveySubmitParams(surveyId: surveyId, questions: questions);
+    return _surveyApiService.submit(params: params);
   }
 }

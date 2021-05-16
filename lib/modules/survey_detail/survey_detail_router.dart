@@ -8,5 +8,10 @@ abstract class SurveyDetailRouter extends Router {
 class SurveyDetailRouterImpl extends SurveyDetailRouter {
   @override
   void pushToSurveyQuestionsScreen(BuildContext context,
-      {required DetailedSurveyInfo survey}) {}
+      {required DetailedSurveyInfo survey}) {
+    context.navigator.pushReplacementNamed(
+      SurveyQuestionsModule.routePath,
+      arguments: SurveyQuestionsArguments(survey: survey),
+    );
+  }
 }

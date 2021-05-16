@@ -7,4 +7,6 @@ final Map<String, WidgetBuilder> _routes = {
   ForgotPasswordModule.routePath: (_) => ForgotPasswordModule(),
   SideMenuModule.routePath: (_) => SideMenuModule(),
   SurveyDetailModule.routePath: (_) => SurveyDetailModule(),
+  SurveyQuestionsModule.routePath: (_) => SurveyQuestionsModule(),
+  SurveyCompletedModule.routePath: (_) => SurveyCompletedModule(),
 };

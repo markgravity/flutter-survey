@@ -113,7 +113,7 @@ class ApiServiceImpl implements ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> _request({
+  Future<Map<String, dynamic>?> _request({
     required HttpMethod method,
     String? baseUrl,
     required String endpoint,
@@ -136,23 +136,29 @@ class ApiServiceImpl implements ApiService {
 
     final url = finalBaseUrl! + endpoint;
     try {
-      return await _httpService.request(
+      final response = await _httpService.request(
         method: method,
         data: params?.toJson(),
         url: url,
         headers: headers,
-      ) as Map<String, dynamic>;
+      );
+
+      if (response is! Map<String, dynamic>) return null;
+
+      return response;
     } on HttpException catch (e) {
       throw ApiException.fromHttpException(e) ?? e;
     }
   }
 
-  T _convertResponseToObject<T>(Map<String, dynamic> response) {
+  T _convertResponseToObject<T>(Map<String, dynamic>? response) {
+    if (response == null && T.toString() == "void") return null as T;
+
     if (T == ApiRawResponse) {
-      return Mapper.fromJson(response).toObject<T>()!;
+      return Mapper.fromJson(response!).toObject<T>()!;
     }
 
-    if (response["data"] == null && T.toString() == "void") {
+    if (response!["data"] == null && T.toString() == "void") {
       return null as T;
     }
 
@@ -165,7 +171,9 @@ class ApiServiceImpl implements ApiService {
   }
 
   ApiListObject<T> _convertResponseToListObject<T>(
-      Map<String, dynamic> response) {
+      Map<String, dynamic>? response) {
+    if (response == null) return const ApiListObject(items: []);
+
     if (response["data"] is! List<dynamic>) {
       throw ApiException.wrongResponseStructure;
     }

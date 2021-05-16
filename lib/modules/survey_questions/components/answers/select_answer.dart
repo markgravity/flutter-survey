@@ -13,8 +13,8 @@ class SelectAnswer extends StatefulWidget {
 
   final bool isMultiSelection;
   final List<int> selectedIndexes;
-  final List<SurveyAnswerInfo> options;
-  final ValueChanged<List<SurveyAnswerInfo>>? onSelect;
+  final List<SurveyQuestionAnswerInfo> options;
+  final ValueChanged<List<SurveyQuestionAnswerInfo>>? onSelect;
 
   @override
   _SelectAnswerState createState() => _SelectAnswerState();

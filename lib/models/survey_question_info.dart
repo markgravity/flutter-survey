@@ -1,5 +1,5 @@
 import 'package:object_mapper/object_mapper.dart';
-import 'package:survey/models/survey_answer_info.dart';
+import 'package:survey/models/survey_question_answer_info.dart';
 
 class SurveyQuestionInfo with Mappable {
   String? id;
@@ -10,8 +10,8 @@ class SurveyQuestionInfo with Mappable {
   bool? isMandatory;
   String? coverImageUrl;
   double? coverImageOpacity;
-  List<SurveyAnswerInfo> answers = [];
-  List<SurveyAnswerInfo> get orderedAnswers => answers.toList()
+  List<SurveyQuestionAnswerInfo> answers = [];
+  List<SurveyQuestionAnswerInfo> get orderedAnswers => answers.toList()
     ..sort((a, b) => a.displayOrder!.compareTo(b.displayOrder!));
 
   @override

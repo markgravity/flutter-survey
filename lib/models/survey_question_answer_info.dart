@@ -1,6 +1,7 @@
 import 'package:object_mapper/object_mapper.dart';
+import 'package:survey/models/survey_submit_answer_info.dart';
 
-class SurveyAnswerInfo with Mappable {
+class SurveyQuestionAnswerInfo with Mappable {
   String? id;
   String? content;
   int? displayOrder;
@@ -22,5 +23,9 @@ class SurveyAnswerInfo with Mappable {
       displayOrder,
       (v) => displayOrder = v as int,
     );
+  }
+
+  SurveySubmitAnswerInfo toAnswer([String? answer]) {
+    return SurveySubmitAnswerInfo(id: id!, answer: answer);
   }
 }

@@ -1,17 +1,22 @@
 part of 'survey_questions_module.dart';
 
-abstract class SurveyQuestionsViewDelegate {
+abstract class SurveyQuestionsViewDelegate implements AlertViewMixinDelegate {
   BehaviorSubject<void> get stateDidInit;
 
   BehaviorSubject<void> get closeButtonDidTap;
 
   BehaviorSubject<OkCancelResult> get closeConfirmDialogDidClose;
+
+  BehaviorSubject<List<SurveySubmitAnswerInfo>> get submitButtonDidTap;
 }
 
-abstract class SurveyQuestionsView extends View<SurveyQuestionsViewDelegate> {
+abstract class SurveyQuestionsView extends View<SurveyQuestionsViewDelegate>
+    with AlertViewMixin, ProgressHUDViewMixin {
   void setQuestions(List<SurveyQuestionInfo> questions);
 
   void showCloseConfirmDialog();
+
+  void moveTo(int i);
 }
 
 class SurveyQuestionsViewImpl extends StatefulWidget {
@@ -22,12 +27,13 @@ class SurveyQuestionsViewImpl extends StatefulWidget {
       _SurveyQuestionsViewImplState();
 }
 
-class _SurveyQuestionsViewImplState extends ViewState<
-    SurveyQuestionsViewImpl,
-    SurveyQuestionsModule,
-    SurveyQuestionsViewDelegate> implements SurveyQuestionsView {
+class _SurveyQuestionsViewImplState extends ViewState<SurveyQuestionsViewImpl,
+        SurveyQuestionsModule, SurveyQuestionsViewDelegate>
+    with AlertViewMixin, ProgressHUDViewMixin
+    implements SurveyQuestionsView {
   final _questions = BehaviorSubject<List<SurveyQuestionInfo>>();
   final _navigationBarKey = GlobalKey();
+  final _carouselController = CarouselController();
 
   @override
   void initState() {
@@ -56,5 +62,10 @@ class _SurveyQuestionsViewImplState extends ViewState<
       okLabel: AppLocalizations.of(context)!
           .surveyQuestionsScreenCloseConfirmDialogOkLabel,
     ).then((value) => delegate?.closeConfirmDialogDidClose.add(value));
+  }
+
+  @override
+  void moveTo(int i) {
+    _carouselController.animateToPage(i);
   }
 }

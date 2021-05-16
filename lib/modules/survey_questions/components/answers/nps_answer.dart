@@ -9,8 +9,8 @@ class NPSAnswer extends StatefulWidget {
   }) : super(key: key);
 
   final int? score;
-  final List<SurveyAnswerInfo> items;
-  final ValueChanged<int?>? onSelect;
+  final List<SurveyQuestionAnswerInfo> items;
+  final ValueChanged<SurveyQuestionAnswerInfo?>? onSelect;
 
   @override
   _NPSAnswerState createState() => _NPSAnswerState();
@@ -86,7 +86,7 @@ class _NPSAnswerState extends State<NPSAnswer> {
     return GestureDetector(
       onTap: () {
         selected.add(i);
-        if (widget.onSelect != null) widget.onSelect!(i + 1);
+        if (widget.onSelect != null) widget.onSelect!(widget.items[i]);
       },
       child: SizedBox(
         width: 35,

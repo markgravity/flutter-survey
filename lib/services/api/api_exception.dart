@@ -16,7 +16,7 @@ class ApiException implements LocalizedException {
     final json = exception.response!.data as Map<String, dynamic>;
     final source = json["errors"][0]["source"] as String?;
     final message = json["errors"][0]["detail"] as String;
-    final code = json["errors"][0]["code"] as String;
+    final code = json["errors"][0]["code"] as String?;
 
     return ApiException(
       source: source,
@@ -33,5 +33,5 @@ class ApiException implements LocalizedException {
   final String? source;
   @override
   final String message;
-  final String code;
+  final String? code;
 }

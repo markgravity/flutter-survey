@@ -8,34 +8,45 @@ class Content extends StatelessWidget {
     final state =
         context.findRootAncestorStateOfType<_SurveyQuestionsViewImplState>()!;
 
-    return Screen(
-      body: Stack(
-        children: [
-          StreamsSelector0<List<SurveyQuestionInfo>>.value(
-            stream: state._questions,
-            builder: (_, questions, __) => CarouselSlider.builder(
-              itemCount: questions.length,
-              itemBuilder: (_, i, __) => Slide(questions: questions, index: i),
-              options: CarouselOptions(
-                height: double.infinity,
-                viewportFraction: 1,
-                enableInfiniteScroll: false,
+    return StreamsSelector0<bool>.value(
+      stream: state.isProgressHUDShown,
+      builder: (_, isShown, child) => ProgressHUD(
+        isShow: isShown,
+        child: child!,
+      ),
+      child: Screen(
+        body: Stack(
+          children: [
+            StreamsSelector0<List<SurveyQuestionInfo>>.value(
+              stream: state._questions,
+              builder: (_, questions, __) => CarouselSlider.builder(
+                itemCount: questions.length,
+                itemBuilder: (_, i, __) =>
+                    Slide(questions: questions, index: i),
+                carouselController: state._carouselController,
+                options: CarouselOptions(
+                  height: double.infinity,
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  viewportFraction: 1,
+                  enableInfiniteScroll: false,
+                ),
               ),
             ),
-          ),
-          SafeArea(
-            child: NavigationBar(
-              key: state._navigationBarKey,
-              isBackButtonHidden: true,
-              leftChildren: [
-                PlatformButton(
-                  onPressed: () => state.delegate?.closeButtonDidTap.add(null),
-                  child: Assets.images.navCloseButton.svg(),
-                )
-              ],
+            SafeArea(
+              child: NavigationBar(
+                key: state._navigationBarKey,
+                isBackButtonHidden: true,
+                leftChildren: [
+                  PlatformButton(
+                    onPressed: () =>
+                        state.delegate?.closeButtonDidTap.add(null),
+                    child: Assets.images.navCloseButton.svg(),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

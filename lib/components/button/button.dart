@@ -6,11 +6,20 @@ class Button extends StatelessWidget {
   final String? title;
   final VoidCallback? onPressed;
   final bool isEnabled;
+  final double? width;
+  final double? height;
+  final BorderRadius? borderRadius;
+  final Widget? child;
+
   const Button({
     Key? key,
     this.title,
     this.onPressed,
     this.isEnabled = true,
+    this.width,
+    this.height,
+    this.borderRadius,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -18,8 +27,10 @@ class Button extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isEnabled ? Colors.white : Colors.grey,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: borderRadius ?? BorderRadius.circular(12.0),
       ),
+      width: width,
+      height: height,
       child: PlatformButton(
         onPressed: isEnabled ? onPressed : null,
         materialFlat: (_, __) => MaterialFlatButtonData(),
@@ -35,6 +46,7 @@ class Button extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+            if (child != null) child!
           ],
         ),
       ),

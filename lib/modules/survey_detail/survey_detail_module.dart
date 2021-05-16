@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey/models/detailed_survey_info.dart';
 import 'package:survey/models/survey_info.dart';
 import 'package:survey/modules/screen.dart';
+import 'package:survey/modules/survey_questions/survey_questions_module.dart';
 import 'package:survey/repositories/survey_repository.dart';
 import 'package:survey/services/locator/locator_service.dart';
 
