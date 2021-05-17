@@ -17,6 +17,7 @@ class Content extends StatelessWidget {
             children: [
               Lottie.asset(
                 Assets.animations.surveyCompleted,
+                key: SurveyCompletedView.lottieKey,
                 repeat: false,
                 controller: state._animationController,
                 onLoaded: (composition) {

@@ -9,6 +9,8 @@ abstract class SurveyCompletedViewDelegate {
 }
 
 abstract class SurveyCompletedView extends View<SurveyCompletedViewDelegate> {
+  static const lottieKey = Key("survey_completed_view_lottie");
+
   void setOutro(SurveyQuestionInfo outro);
 
   void beginAnimation();
