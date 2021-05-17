@@ -50,7 +50,7 @@ void main() {
       });
     });
 
-    describe("it's beginAnimation() is called", () {
+    describe("its beginAnimation() is called", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         module.view.beginAnimation();
@@ -74,7 +74,7 @@ void main() {
       });
     });
 
-    describe("it's alert() is called", () {
+    describe("its alert() is called", () {
       const message = "A error message";
 
       beforeEach((tester) async {

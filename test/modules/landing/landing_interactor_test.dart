@@ -32,7 +32,7 @@ void main() {
       interactor.delegate = delegate;
     });
 
-    describe("it's validateAuthentication() is called", () {
+    describe("its validateAuthentication() is called", () {
       beforeEach(() {
         when(authRepository.isAuthenticated).thenReturn(true);
       });

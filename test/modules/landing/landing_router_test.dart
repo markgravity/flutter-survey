@@ -24,7 +24,7 @@ void main() {
       router = LandingRouterImpl();
     });
 
-    describe("it's replaceToLoginScreen() is called", () {
+    describe("its replaceToLoginScreen() is called", () {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);
@@ -43,7 +43,7 @@ void main() {
       });
     });
 
-    describe("it's replaceToHomeScreen() is called", () {
+    describe("its replaceToHomeScreen() is called", () {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);
