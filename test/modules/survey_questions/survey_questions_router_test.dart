@@ -26,8 +26,7 @@ void main() {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);
-        when(navigatorState.pushReplacementNamed(any,
-                arguments: anyNamed("arguments")))
+        when(navigatorState.pushReplacement(any))
             .thenAnswer((_) => Future.value());
         router.pushToSurveyCompletedScreen(buildContext,
             outro: SurveyQuestionInfo());
@@ -35,11 +34,10 @@ void main() {
 
       it("triggers navigator to push replacement to Survey Completed screen",
           () {
-        final routePath = verify(navigatorState.pushReplacementNamed(captureAny,
-                arguments: anyNamed("arguments")))
+        final routeBuilder = verify(navigatorState.pushReplacement(captureAny))
             .captured
-            .single as String;
-        expect(routePath, SurveyCompletedModule.routePath);
+            .single as PageRouteBuilder;
+        expect(routeBuilder.settings.name, SurveyCompletedModule.routePath);
       });
     });
 

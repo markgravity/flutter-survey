@@ -11,6 +11,7 @@ import 'package:survey/components/confirm/confirm.dart';
 import 'package:survey/components/navigation_bar/navigation_bar.dart';
 import 'package:survey/core/viper/module.dart';
 import 'package:survey/gen/assets.gen.dart';
+import 'package:survey/gen/configs.gen.dart';
 import 'package:survey/models/detailed_survey_info.dart';
 import 'package:survey/models/survey_submit_answer_info.dart';
 import 'package:survey/models/survey_question_answer_info.dart';
