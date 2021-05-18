@@ -11,7 +11,7 @@ import 'landing_interactor_test.mocks.dart';
 
 @GenerateMocks([AuthRepository, LandingInteractorDelegate])
 void main() {
-  describe("an Landing interactor", () {
+  describe("a Landing interactor", () {
     late LandingInteractor interactor;
     late MockAuthRepository authRepository;
     late MockLandingInteractorDelegate delegate;
