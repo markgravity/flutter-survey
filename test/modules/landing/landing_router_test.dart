@@ -9,7 +9,7 @@ import 'package:survey/modules/login/login_module.dart';
 import '../../mocks/build_context.dart';
 import '../../mocks/navigator_state.dart';
 
-class FakeAnimation extends Mock implements Animation<double> {}
+class FakeAnimation extends Fake implements Animation<double> {}
 
 void main() {
   describe("a Landing router", () {
