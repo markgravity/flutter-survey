@@ -13,7 +13,7 @@ class LandingPresenterImpl extends LandingPresenter
         .addTo(disposeBag);
 
     animationDidFinish
-        .zipWith<bool, bool>(authenticationDidValidate, (t, s) => s)
+        .zipWith<bool, bool>(authenticationDidValidate, (_, s) => s)
         .listen(_didAllFinish)
         .addTo(disposeBag);
   }
