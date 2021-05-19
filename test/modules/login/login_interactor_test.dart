@@ -31,7 +31,7 @@ void main() {
       interactor.delegate = delegate;
     });
 
-    describe("it's login() is called", () {
+    describe("its login() is called", () {
       context("when success", () {
         beforeEach(() {
           when(authRepository.login(

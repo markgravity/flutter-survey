@@ -25,7 +25,7 @@ void main() {
       presenter.configure(view: view, interactor: interactor, router: router);
     });
 
-    describe("it's didChangeEmailText and didChangePasswordText emit", () {
+    describe("its didChangeEmailText and didChangePasswordText emit", () {
       context("when one of them is emptied", () {
         beforeEach(() {
           presenter.passwordTextFieldDidChange.add("");
@@ -49,7 +49,7 @@ void main() {
       });
     });
 
-    describe("it's didInitState emits", () {
+    describe("its didInitState emits", () {
       beforeEach(() {
         presenter.stateDidInit.add(null);
       });
@@ -60,7 +60,7 @@ void main() {
       });
     });
 
-    describe("it's didTapForgotButton emits", () {
+    describe("its didTapForgotButton emits", () {
       beforeEach(() {
         presenter.forgotButtonDidTap.add(null);
       });
@@ -70,7 +70,7 @@ void main() {
       });
     });
 
-    describe("it's didTapLoginButton emits", () {
+    describe("its didTapLoginButton emits", () {
       beforeEach(() {
         presenter.loginButtonDidTap.add(["", ""]);
       });
@@ -84,7 +84,7 @@ void main() {
       });
     });
 
-    describe("it's didLogin emits", () {
+    describe("its didLogin emits", () {
       beforeEach(() {
         presenter.didLogin.add(null);
       });
@@ -94,7 +94,7 @@ void main() {
       });
     });
 
-    describe("it's didFailToLogin emits", () {
+    describe("its didFailToLogin emits", () {
       final error = Exception();
       beforeEach(() {
         presenter.didFailToLogin.add(error);

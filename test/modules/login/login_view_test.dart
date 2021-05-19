@@ -57,7 +57,7 @@ void main() {
       });
     });
 
-    describe("it's beginAnimation() is called", () {
+    describe("its beginAnimation() is called", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         module.view.beginAnimation();
@@ -75,7 +75,7 @@ void main() {
       });
     });
 
-    describe("it's showProgressHUD() is called", () {
+    describe("its showProgressHUD() is called", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         module.view.showProgressHUD();
@@ -89,7 +89,7 @@ void main() {
       });
     });
 
-    describe("it's dismissProgressHUD() is called", () {
+    describe("its dismissProgressHUD() is called", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         module.view.dismissProgressHUD();
@@ -103,7 +103,7 @@ void main() {
       });
     });
 
-    describe("it's setLoginButton() is called", () {
+    describe("its setLoginButton() is called", () {
       context("isEnabled is true", () {
         beforeEach((tester) async {
           await tester.pumpModule(module);
@@ -133,7 +133,7 @@ void main() {
       });
     });
 
-    describe("it's alert() is called", () {
+    describe("its alert() is called", () {
       const message = "a message";
       beforeEach((tester) async {
         await tester.pumpModule(module);
@@ -146,7 +146,7 @@ void main() {
       });
     });
 
-    describe("it's email text field is changed", () {
+    describe("its email text field is changed", () {
       const text = "a text";
       beforeEach((tester) async {
         await tester.pumpModule(module);
@@ -159,7 +159,7 @@ void main() {
       });
     });
 
-    context("it's password text field is changed", () {
+    context("its password text field is changed", () {
       const text = "a text";
       beforeEach((tester) async {
         await tester.pumpModule(module);
@@ -173,7 +173,7 @@ void main() {
       });
     });
 
-    context("it's login button is tapped", () {
+    context("its login button is tapped", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         module.view.setLoginButton(isEnabled: true);
@@ -187,7 +187,7 @@ void main() {
       });
     });
 
-    context("it's forgot button is tapped", () {
+    context("its forgot button is tapped", () {
       beforeEach((tester) async {
         await tester.pumpModule(module);
         await tester.pumpAndSettle();
