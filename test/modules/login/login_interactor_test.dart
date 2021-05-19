@@ -3,7 +3,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:quick_test/quick_test.dart';
 import 'package:survey/modules/login/login_module.dart';
-import 'package:survey/repositories/auth_repository.dart';
+import 'package:survey/repositories/auth/auth_repository.dart';
 import 'package:survey/services/locator/locator_service.dart';
 
 import '../../helpers/behavior_subject_generator.dart';

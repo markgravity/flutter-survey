@@ -2,6 +2,7 @@ part of 'landing_module.dart';
 
 abstract class LandingInteractor extends Interactor<LandingInteractorDelegate> {
   void validateAuthentication();
+  void logout();
 }
 
 abstract class LandingInteractorDelegate {
@@ -20,5 +21,10 @@ class LandingInteractorImpl extends LandingInteractor {
     }).onError<Exception>((exception, _) {
       delegate?.authenticationDidFailToValidate.add(exception);
     });
+  }
+
+  @override
+  void logout() {
+    _authRepository.logout().then((value) => null);
   }
 }

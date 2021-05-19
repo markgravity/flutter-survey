@@ -47,4 +47,7 @@ class MockLandingInteractor extends _i1.Mock implements _i2.LandingInteractor {
   void validateAuthentication() =>
       super.noSuchMethod(Invocation.method(#validateAuthentication, []),
           returnValueForMissingStub: null);
+  @override
+  void logout() => super.noSuchMethod(Invocation.method(#logout, []),
+      returnValueForMissingStub: null);
 }

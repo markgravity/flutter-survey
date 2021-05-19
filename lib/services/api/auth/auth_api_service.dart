@@ -7,16 +7,20 @@ import 'package:survey/services/http/http_service.dart';
 
 part 'params/auth_login_params.dart';
 
+part 'params/auth_refresh_token_params.dart';
+
 abstract class AuthApiService {
   static const loginEndpoint = "/oauth/token";
   static const logoutEndpoint = "/oauth/revoke";
+  static const refreshTokenEndpoint = loginEndpoint;
+
   static const preferenceTokenKey = "auth_service_preference_token";
 
-  Future<AuthTokenInfo> login({
-    required AuthLoginParams params,
-  });
+  Future<AuthTokenInfo> login({required AuthLoginParams params});
 
   Future<void> logout();
+
+  Future<AuthTokenInfo> refreshToken({required AuthRefreshTokenParams params});
 }
 
 class AuthApiServiceImpl implements AuthApiService {
@@ -38,6 +42,15 @@ class AuthApiServiceImpl implements AuthApiService {
     return _apiService.call(
       method: HttpMethod.post,
       endpoint: AuthApiService.logoutEndpoint,
+    );
+  }
+
+  @override
+  Future<AuthTokenInfo> refreshToken({required AuthRefreshTokenParams params}) {
+    return _apiService.call(
+      method: HttpMethod.post,
+      endpoint: AuthApiService.refreshTokenEndpoint,
+      params: params,
     );
   }
 }

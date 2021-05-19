@@ -2,6 +2,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:quick_test/quick_test.dart';
 import 'package:survey/modules/landing/landing_module.dart';
+import 'package:survey/services/api/api_service.dart';
 
 import '../../mocks/build_context.dart';
 import 'landing_presenter_test.mocks.dart';
@@ -54,12 +55,29 @@ void main() {
     });
 
     describe("it receives didFailToValidateAuthentication event", () {
-      beforeEach(() {
-        presenter.authenticationDidFailToValidate.add(Exception());
+      context("when exception is not InvalidToken", () {
+        beforeEach(() {
+          presenter.authenticationDidFailToValidate.add(Exception());
+        });
+
+        it("triggers view to show alert dialog", () {
+          verify(view.alert(any)).called(1);
+        });
       });
 
-      it("triggers view to show alert dialog", () {
-        verify(view.alert(any)).called(1);
+      context("when exception is InvalidToken", () {
+        beforeEach(() {
+          presenter.authenticationDidFailToValidate
+              .add(ApiException.invalidToken);
+        });
+
+        it("triggers interactor to logout", () {
+          verify(interactor.logout()).called(1);
+        });
+
+        it("triggers router to replace to Login screen", () {
+          verify(router.replaceToLoginScreen(context: buildContext)).called(1);
+        });
       });
     });
 

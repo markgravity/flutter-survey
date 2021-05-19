@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/src/subjects/behavior_subject.dart' as _i2;
 import 'package:survey/modules/login/login_module.dart' as _i5;
-import 'package:survey/repositories/auth_repository.dart' as _i3;
+import 'package:survey/repositories/auth/auth_repository.dart' as _i3;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -55,6 +55,11 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
   @override
   _i4.Future<void> attemptAndFetchUser() =>
       (super.noSuchMethod(Invocation.method(#attemptAndFetchUser, []),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> refreshToken() =>
+      (super.noSuchMethod(Invocation.method(#refreshToken, []),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i4.Future<void>);
 }
