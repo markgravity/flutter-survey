@@ -9,7 +9,7 @@ part 'http_response.dart';
 abstract class HttpService {
   Future<dynamic> request({
     required HttpMethod method,
-    dynamic? data,
+    dynamic data,
     required String url,
     Map<String, dynamic>? headers,
   });

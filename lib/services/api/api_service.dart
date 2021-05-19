@@ -151,7 +151,7 @@ class ApiServiceImpl implements ApiService {
 
     if (response["data"] is! Map<String, dynamic> ||
         response["data"]["attributes"] is! Map<String, dynamic>) {
-      throw ApiException.wrongResponseStructure;
+      throw ApiException.invalidResponseStructure;
     }
 
     return Mapper.fromJson(
@@ -162,7 +162,7 @@ class ApiServiceImpl implements ApiService {
   ApiListObject<T> _convertResponseToListObject<T>(
       Map<String, dynamic> response) {
     if (response["data"] is! List<dynamic>) {
-      throw ApiException.wrongResponseStructure;
+      throw ApiException.invalidResponseStructure;
     }
 
     final items = (response["data"] as List<dynamic>)

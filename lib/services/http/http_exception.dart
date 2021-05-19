@@ -64,5 +64,5 @@ class HttpException implements Exception {
 
   final HttpResponse? response;
   final HttpExceptionType type;
-  final dynamic? error;
+  final dynamic error;
 }
