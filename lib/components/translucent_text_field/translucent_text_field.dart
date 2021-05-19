@@ -7,14 +7,14 @@ class TranslucentTextField extends StatelessWidget {
   const TranslucentTextField({
     Key? key,
     this.placeholder,
-    this.after,
+    this.trailing,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.controller,
   }) : super(key: key);
 
   final String? placeholder;
-  final Widget? after;
+  final Widget? trailing;
   final bool obscureText;
   final TextInputType keyboardType;
   final TextEditingController? controller;
@@ -56,7 +56,7 @@ class TranslucentTextField extends StatelessWidget {
                     obscureText: obscureText),
               ),
             ),
-            if (after != null) after!
+            if (trailing != null) trailing!
           ],
         ),
       ),

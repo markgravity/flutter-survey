@@ -41,7 +41,7 @@ class _LoginViewImplState
     implements LoginView {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _isLoginButtonDisabled = BehaviorSubject<bool>.seeded(true);
+  final _isLoginButtonEnabled = BehaviorSubject<bool>.seeded(false);
 
   late final AnimationController _animationController = AnimationController(
     duration: LoginView.animationDuration,
@@ -134,6 +134,8 @@ class _LoginViewImplState
   @override
   void dispose() {
     _animationController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -144,6 +146,6 @@ class _LoginViewImplState
 
   @override
   void setLoginButton({required bool isEnabled}) {
-    _isLoginButtonDisabled.add(isEnabled);
+    _isLoginButtonEnabled.add(isEnabled);
   }
 }

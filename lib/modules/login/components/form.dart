@@ -29,12 +29,12 @@ class __FormState extends State<_Form> {
             height: 20,
           ),
           StreamsSelector0<bool>.value(
-            stream: _state._isLoginButtonDisabled,
-            builder: (_, isValid, __) {
+            stream: _state._isLoginButtonEnabled,
+            builder: (_, isEnabled, __) {
               return Button(
                 key: LoginView.loginButtonKey,
                 title: AppLocalizations.of(context)!.loginScreenLoginButtonText,
-                isEnabled: isValid,
+                isEnabled: isEnabled,
                 onPressed: () => _state.delegate?.loginButtonDidTap.add([
                   _state._emailController.text,
                   _state._passwordController.text
@@ -69,7 +69,7 @@ class __FormState extends State<_Form> {
             .loginScreenPasswordTextFieldPlaceholderText,
         obscureText: true,
         controller: _state._passwordController,
-        after: PlatformButton(
+        trailing: PlatformButton(
           key: LoginView.forgotButtonKey,
           onPressed: () => _state.delegate?.forgotButtonDidTap.add(null),
           materialFlat: (_, __) => MaterialFlatButtonData(

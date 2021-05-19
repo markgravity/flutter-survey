@@ -23,19 +23,17 @@ class Button extends StatelessWidget {
       child: PlatformButton(
         onPressed: isEnabled ? onPressed : null,
         materialFlat: (_, __) => MaterialFlatButtonData(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (title != null)
-              Text(
-                title!,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-          ],
+        child: Center(
+          child: title != null
+              ? Text(
+                  title!,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              : null,
         ),
       ),
     );
