@@ -2,9 +2,12 @@ import 'package:survey/models/auth_token_info.dart';
 import 'package:survey/services/api/api_service.dart';
 import 'package:survey/services/api/auth/auth_api_service.dart';
 import 'package:survey/services/api/user/user_api_service.dart';
+import 'package:survey/services/http/http_service.dart';
 import 'package:survey/services/local_storage/local_storage_service.dart';
 import 'package:survey/services/locator/locator_service.dart';
 import 'package:survey/models/user_info.dart';
+
+part 'auth_refresh_token_interceptor.dart';
 
 abstract class AuthRepository {
   static const tokenLocalStorageKey = "auth_repository_token";
@@ -27,6 +30,8 @@ abstract class AuthRepository {
   Future<void> fetchUser();
 
   Future<void> attemptAndFetchUser();
+
+  Future<void> refreshToken();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -83,6 +88,7 @@ class AuthRepositoryImpl implements AuthRepository {
     }
 
     _accessToken = token.accessToken;
+    _apiService.addGlobalInterceptors([AuthRefreshTokenInterceptor()]);
     _apiService.configureGlobalToken(_accessToken, token.tokenType);
   }
 
@@ -98,5 +104,19 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> attemptAndFetchUser() async {
     await attempt();
     await fetchUser();
+  }
+
+  @override
+  Future<void> refreshToken() async {
+    final oldToken = await _localStorageService
+        .getObject<AuthTokenInfo>(AuthRepository.tokenLocalStorageKey);
+
+    final params =
+        AuthRefreshTokenParams(refreshToken: oldToken!.refreshToken!);
+    final token = await _authApiService.refreshToken(params: params);
+
+    await _localStorageService.setObject(token,
+        key: AuthRepository.tokenLocalStorageKey);
+    await attemptAndFetchUser();
   }
 }

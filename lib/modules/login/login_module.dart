@@ -13,7 +13,7 @@ import 'package:survey/gen/assets.gen.dart';
 import 'package:survey/modules/forgot_password/forgot_password_module.dart';
 import 'package:survey/modules/home/home_module.dart';
 import 'package:survey/modules/screen.dart';
-import 'package:survey/repositories/auth_repository.dart';
+import 'package:survey/repositories/auth/auth_repository.dart';
 import 'package:survey/services/locator/locator_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

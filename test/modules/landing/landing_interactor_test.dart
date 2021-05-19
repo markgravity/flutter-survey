@@ -3,7 +3,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:quick_test/quick_test.dart';
 import 'package:survey/modules/landing/landing_module.dart';
-import 'package:survey/repositories/auth_repository.dart';
+import 'package:survey/repositories/auth/auth_repository.dart';
 import 'package:survey/services/locator/locator_service.dart';
 
 import '../../helpers/behavior_subject_generator.dart';
@@ -60,6 +60,18 @@ void main() {
         it("triggers delegate's didValidateAuthentication emits error", () {
           expect(delegate.authenticationDidFailToValidate, emits(error));
         });
+      });
+    });
+
+    describe("its logout()", () {
+      beforeEach(() {
+        when(authRepository.logout())
+            .thenAnswer((realInvocation) => Future.value(null));
+        interactor.logout();
+      });
+
+      it("triggers authRepository call logout()", () {
+        verify(authRepository.logout()).called(1);
       });
     });
   });

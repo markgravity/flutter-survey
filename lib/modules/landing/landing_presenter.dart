@@ -42,8 +42,14 @@ class LandingPresenterImpl extends LandingPresenter
     interactor.validateAuthentication();
   }
 
-  void _authenticationDidFailToValidate(Object error) {
-    view.alert(error);
+  void _authenticationDidFailToValidate(Exception exception) {
+    if (exception == ApiException.invalidToken) {
+      interactor.logout();
+      router.replaceToLoginScreen(context: view.context);
+      return;
+    }
+
+    view.alert(exception);
   }
 
   void _didAllFinish(bool isAuthenticated) {

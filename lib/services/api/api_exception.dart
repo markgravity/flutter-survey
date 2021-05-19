@@ -1,6 +1,6 @@
 part of 'api_service.dart';
 
-class ApiException implements LocalizedException {
+class ApiException extends Equatable implements LocalizedException {
   const ApiException({
     required this.source,
     required this.message,
@@ -26,13 +26,23 @@ class ApiException implements LocalizedException {
   }
 
   final String? source;
+  final String code;
+
   @override
   final String message;
-  final String code;
+
+  @override
+  List<Object?> get props => [source, code];
 
   static const invalidResponseStructure = ApiException(
     source: "local",
     message: "Wrong response structure",
     code: "wrong_response_structure",
+  );
+
+  static const invalidToken = ApiException(
+    source: "unauthorized",
+    message: "The access token is invalid",
+    code: "invalid_token",
   );
 }

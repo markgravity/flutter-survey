@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:survey/core/classes/localized_exception.dart';
 import 'package:survey/gen/configs.gen.dart';
 import 'package:survey/services/http/http_service.dart';
@@ -36,12 +37,16 @@ abstract class ApiService {
   void configureGlobalBaseUrl(String? baseUrl);
 
   void configureGlobalToken(String? token, String? tokenType);
+
+  void addGlobalInterceptors(List<HttpInterceptor> interceptor);
 }
 
 class ApiServiceImpl implements ApiService {
   static String? _baseUrl;
   static String? _token;
   static String _tokenType = "Bearer";
+  static final List<HttpInterceptor> _interceptor = [];
+
   final HttpService _httpService = locator.get();
 
   @override
@@ -111,6 +116,14 @@ class ApiServiceImpl implements ApiService {
     }
   }
 
+  @override
+  void addGlobalInterceptors(List<HttpInterceptor> interceptor) {
+    final identifiers = interceptor.map((e) => e.identifier);
+    _interceptor
+        .removeWhere((element) => identifiers.contains(element.identifier));
+    _interceptor.addAll(interceptor);
+  }
+
   Future<Map<String, dynamic>> _request({
     required HttpMethod method,
     String? baseUrl,
@@ -139,6 +152,7 @@ class ApiServiceImpl implements ApiService {
         data: params?.toJson(),
         url: url,
         headers: headers,
+        interceptors: _interceptor,
       ) as Map<String, dynamic>;
     } on HttpException catch (e) {
       throw ApiException.fromHttpException(e) ?? e;
