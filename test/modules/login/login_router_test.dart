@@ -43,7 +43,8 @@ void main() {
       });
 
       it("triggers navigator to push to Forgot Password screen", () {
-        verify(navigatorState.pushNamed(ForgotPasswordModule.routePath));
+        verify(navigatorState.pushNamed(ForgotPasswordModule.routePath))
+            .called(1);
       });
     });
   });

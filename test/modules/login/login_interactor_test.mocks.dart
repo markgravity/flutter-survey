@@ -73,8 +73,8 @@ class MockLoginInteractorDelegate extends _i1.Mock
       Invocation.getter(#didLogin),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
   @override
-  _i2.BehaviorSubject<Object> get didFailToLogin =>
+  _i2.BehaviorSubject<Exception> get didFailToLogin =>
       (super.noSuchMethod(Invocation.getter(#didFailToLogin),
-              returnValue: _FakeBehaviorSubject<Object>())
-          as _i2.BehaviorSubject<Object>);
+              returnValue: _FakeBehaviorSubject<Exception>())
+          as _i2.BehaviorSubject<Exception>);
 }
