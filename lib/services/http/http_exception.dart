@@ -58,7 +58,7 @@ class HttpException implements Exception {
     return HttpException(
       response: response,
       type: type,
-      error: error.error,
+      error: error,
     );
   }
 

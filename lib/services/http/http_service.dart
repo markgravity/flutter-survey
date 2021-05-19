@@ -3,8 +3,12 @@ import 'package:enumerated_class/enumerated_class.dart';
 import 'package:flutter/foundation.dart';
 
 part 'http_method.dart';
+
 part 'http_exception.dart';
+
 part 'http_response.dart';
+
+part 'http_interceptor.dart';
 
 abstract class HttpService {
   Future<dynamic> request({
@@ -12,6 +16,7 @@ abstract class HttpService {
     dynamic data,
     required String url,
     Map<String, dynamic>? headers,
+    List<HttpInterceptor> interceptors = const [],
   });
 }
 
@@ -33,7 +38,12 @@ class HttpServiceImpl implements HttpService {
     dynamic data,
     required String url,
     Map<String, dynamic>? headers,
+    List<HttpInterceptor> interceptors = const [],
   }) async {
+    _dio.interceptors.addAll(interceptors.map(
+      (e) => e.toInterceptor(_dio),
+    ));
+
     final options = Options(method: method.rawValue, headers: headers);
     try {
       final response = await _dio.request(url,
