@@ -27,7 +27,7 @@ void main() {
       router = LoginRouterImpl();
     });
 
-    describe("it's replaceToHomeScreen() is called", () {
+    describe("its replaceToHomeScreen() is called", () {
       beforeEach(() {
         router.replaceToHomeScreen(buildContext);
       });
@@ -37,7 +37,7 @@ void main() {
       });
     });
 
-    describe("it's pushToForgotPasswordScreen() is called", () {
+    describe("its pushToForgotPasswordScreen() is called", () {
       beforeEach(() {
         router.pushToForgotPasswordScreen(buildContext);
       });
