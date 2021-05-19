@@ -39,7 +39,7 @@ class LoginPresenterImpl extends LoginPresenter
   final didLogin = BehaviorSubject<void>();
 
   @override
-  final didFailToLogin = BehaviorSubject<Object>();
+  final didFailToLogin = BehaviorSubject<Exception>();
 
   void _didInitState() {
     view.setLoginButton(isEnabled: false);
@@ -64,8 +64,8 @@ class LoginPresenterImpl extends LoginPresenter
     router.replaceToHomeScreen(view.context);
   }
 
-  void _didFailToLogin(Object error) {
+  void _didFailToLogin(Exception exception) {
     view.dismissProgressHUD();
-    view.alert(error);
+    view.alert(exception);
   }
 }

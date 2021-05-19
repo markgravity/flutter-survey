@@ -7,7 +7,7 @@ abstract class LoginInteractor extends Interactor<LoginInteractorDelegate> {
 abstract class LoginInteractorDelegate {
   BehaviorSubject<void> get didLogin;
 
-  BehaviorSubject<Object> get didFailToLogin;
+  BehaviorSubject<Exception> get didFailToLogin;
 }
 
 class LoginInteractorImpl extends LoginInteractor {
