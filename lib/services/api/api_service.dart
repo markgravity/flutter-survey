@@ -1,3 +1,4 @@
+import 'package:survey/core/classes/localized_exception.dart';
 import 'package:survey/gen/configs.gen.dart';
 import 'package:survey/services/http/http_service.dart';
 import 'package:object_mapper/object_mapper.dart';

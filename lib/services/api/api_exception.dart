@@ -1,6 +1,6 @@
 part of 'api_service.dart';
 
-class ApiException implements Exception {
+class ApiException implements LocalizedException {
   const ApiException({
     required this.source,
     required this.message,
@@ -14,7 +14,7 @@ class ApiException implements Exception {
     }
 
     final json = exception.response!.data as Map<String, dynamic>;
-    final source = json["errors"][0]["source"] as String;
+    final source = json["errors"][0]["source"] as String?;
     final message = json["errors"][0]["detail"] as String;
     final code = json["errors"][0]["code"] as String;
 
@@ -25,7 +25,8 @@ class ApiException implements Exception {
     );
   }
 
-  final String source;
+  final String? source;
+  @override
   final String message;
   final String code;
 

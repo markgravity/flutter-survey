@@ -7,5 +7,5 @@ import 'package:survey/bootstrap.dart';
 void main() {
   Flavour.current = FlavorValue.staging;
   bootstrap();
-  runApp(App());
+  runApp(const App());
 }
