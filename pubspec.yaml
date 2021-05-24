@@ -36,7 +36,7 @@ dependencies:
   json_annotation: ^4.0.1
   enumerated_class: ^0.0.1+1
   object_mapper: ^1.1.0
-  streams_provider: ^0.0.8
+  streams_provider: ^0.1.0
   shared_preferences: ^2.0.5
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   adaptive_dialog: ^0.10.0+5
