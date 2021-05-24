@@ -26,7 +26,7 @@ class ForgotPasswordPresenterImpl extends ForgotPasswordPresenter
   final passwordDidReset = BehaviorSubject<void>();
 
   @override
-  final passwordDidFailToReset = BehaviorSubject<Object>();
+  final passwordDidFailToReset = BehaviorSubject<Exception>();
 
   void _emailTextFieldDidChange(String email) {
     view.setResetButton(isEnabled: email.isNotEmpty);
@@ -43,7 +43,7 @@ class ForgotPasswordPresenterImpl extends ForgotPasswordPresenter
     view.clearEmailTextField();
   }
 
-  void _passwordDidFailToReset(Object error) {
+  void _passwordDidFailToReset(Exception error) {
     view.dismissProgressHUD();
     view.alert(error);
   }

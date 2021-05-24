@@ -8,7 +8,7 @@ abstract class ForgotPasswordInteractor
 abstract class ForgotPasswordInteractorDelegate {
   BehaviorSubject<void> get passwordDidReset;
 
-  BehaviorSubject<Object> get passwordDidFailToReset;
+  BehaviorSubject<Exception> get passwordDidFailToReset;
 }
 
 class ForgotPasswordInteractorImpl extends ForgotPasswordInteractor {
