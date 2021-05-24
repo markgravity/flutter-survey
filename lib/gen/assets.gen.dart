@@ -14,6 +14,10 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/app-icon.png');
   SvgGenImage get logoWhite =>
       const SvgGenImage('assets/images/logo-white.svg');
+  AssetGenImage get mainBackgroundDimmed =>
+      const AssetGenImage('assets/images/main-background-dimmed.png');
+  SvgGenImage get navBackButton =>
+      const SvgGenImage('assets/images/nav-back-button.svg');
 }
 
 class Assets {
