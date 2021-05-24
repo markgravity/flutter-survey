@@ -12,6 +12,7 @@ part 'params/auth_reset_password_params.dart';
 abstract class AuthApiService {
   static const loginEndpoint = "/oauth/token";
   static const logoutEndpoint = "/oauth/revoke";
+  static const resetPasswordEndpoint = "/passwords";
   static const preferenceTokenKey = "auth_service_preference_token";
 
   Future<AuthTokenInfo> login({
@@ -49,7 +50,7 @@ class AuthApiServiceImpl implements AuthApiService {
   Future<void> resetPassword({required AuthResetPasswordParams params}) {
     return _apiService.call(
       method: HttpMethod.post,
-      endpoint: "/passwords",
+      endpoint: AuthApiService.resetPasswordEndpoint,
       params: params,
     );
   }

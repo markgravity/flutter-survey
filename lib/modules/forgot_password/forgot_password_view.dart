@@ -200,6 +200,7 @@ class _ForgotPasswordViewImplState extends ViewState<ForgotPasswordViewImpl,
 
   @override
   void dispose() {
+    _emailTextController.dispose();
     _notificationAnimationController.dispose();
     _dismissNotificationOperation?.cancel();
     super.dispose();
