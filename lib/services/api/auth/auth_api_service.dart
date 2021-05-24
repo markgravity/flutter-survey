@@ -28,7 +28,7 @@ class AuthApiServiceImpl implements AuthApiService {
   }) {
     return _apiService.call(
       method: HttpMethod.post,
-      endPoint: AuthApiService.loginEndpoint,
+      endpoint: AuthApiService.loginEndpoint,
       params: params,
     );
   }
@@ -37,7 +37,7 @@ class AuthApiServiceImpl implements AuthApiService {
   Future<void> logout() {
     return _apiService.call(
       method: HttpMethod.post,
-      endPoint: AuthApiService.logoutEndpoint,
+      endpoint: AuthApiService.logoutEndpoint,
     );
   }
 }

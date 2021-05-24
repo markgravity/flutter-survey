@@ -16,7 +16,7 @@ class UserApiServiceImpl implements UserApiService {
   Future<UserInfo> getProfile() {
     return _apiService.call(
       method: HttpMethod.get,
-      endPoint: UserApiService.getProfileEndpoint,
+      endpoint: UserApiService.getProfileEndpoint,
     );
   }
 }

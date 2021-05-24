@@ -28,4 +28,10 @@ class ApiException implements Exception {
   final String source;
   final String message;
   final String code;
+
+  static const invalidResponseStructure = ApiException(
+    source: "local",
+    message: "Wrong response structure",
+    code: "wrong_response_structure",
+  );
 }
