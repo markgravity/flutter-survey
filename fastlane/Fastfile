@@ -1,0 +1,48 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# default_platform(:ios)
+
+platform :ios do
+  desc "Export ipa and upload to Firebase"
+  lane :release_staging do |options|
+
+    build_app(
+      workspace: "ios/Runner.xcworkspace",
+      scheme: "staging",
+      silent: true,
+      configuration: "Release-staging",
+      export_options: {
+        method: "development"
+      }
+    )
+
+    firebase_app_distribution(
+      app: options[:app_id],
+      firebase_cli_token: options[:token],
+    )
+  end
+end
+
+platform :android do
+  lane :upload_firebase do |options|
+    firebase_app_distribution(
+      app: options[:app_id],
+      android_artifact_type: "APK",
+      android_artifact_path: options[:apk_path],
+      firebase_cli_token: options[:token],
+    )
+end
+end
