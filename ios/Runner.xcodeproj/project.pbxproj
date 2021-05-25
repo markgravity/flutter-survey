@@ -476,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 723E2E286422E7355D82CD8E /* Pods-Runner.debug-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-production";
@@ -484,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5EBA3F1CC940667DF79EE46 /* Pods-Runner.profile-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-production";
@@ -492,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD4D2DD9EF09CB23F1BFE775 /* Pods-Runner.release-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-production";
@@ -500,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 527D168B5B717A9D51E5BDE8 /* Pods-Runner.debug-staging.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-staging";
@@ -508,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C2F4412A61D42AC96F3D7D8A /* Pods-Runner.profile-staging.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-staging";
@@ -516,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2E32C4D4960E4DC124372C0 /* Pods-Runner.release-staging.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FM5NT9MLCT;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-staging";
