@@ -6,11 +6,11 @@ abstract class ForgotPasswordPresenter extends Presenter<ForgotPasswordView,
 class ForgotPasswordPresenterImpl extends ForgotPasswordPresenter
     implements ForgotPasswordViewDelegate, ForgotPasswordInteractorDelegate {
   ForgotPasswordPresenterImpl() {
-    emailTextFieldDidChange.listen(_emailTextFieldDidChange);
-    resetButtonDidTap.listen(_resetButtonDidTap);
+    emailTextFieldDidChange.listen(_emailTextFieldDidChange).addTo(disposeBag);
+    resetButtonDidTap.listen(_resetButtonDidTap).addTo(disposeBag);
 
-    passwordDidReset.voidListen(_passwordDidReset);
-    passwordDidFailToReset.listen(_passwordDidFailToReset);
+    passwordDidReset.voidListen(_passwordDidReset).addTo(disposeBag);
+    passwordDidFailToReset.listen(_passwordDidFailToReset).addTo(disposeBag);
   }
 
   @override
