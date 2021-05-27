@@ -2,6 +2,7 @@ part of 'login_module.dart';
 
 abstract class LoginRouter extends Router {
   void replaceToHomeScreen(BuildContext context);
+
   void pushToForgotPasswordScreen(BuildContext context);
 }
 

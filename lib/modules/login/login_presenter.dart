@@ -6,15 +6,16 @@ abstract class LoginPresenter
 class LoginPresenterImpl extends LoginPresenter
     implements LoginViewDelegate, LoginInteractorDelegate {
   LoginPresenterImpl() {
-    stateDidInit.voidListen(_didInitState);
-    forgotButtonDidTap.voidListen(_didTapForgotButton);
-    loginButtonDidTap.listen(_didTapLoginButton);
+    stateDidInit.voidListen(_didInitState).addTo(disposeBag);
+    forgotButtonDidTap.voidListen(_didTapForgotButton).addTo(disposeBag);
+    loginButtonDidTap.listen(_didTapLoginButton).addTo(disposeBag);
     [emailTextFieldDidChange, passwordTextFieldDidChange]
         .combineLatest()
-        .listen(_didChangeEmailOrPasswordText);
+        .listen(_didChangeEmailOrPasswordText)
+        .addTo(disposeBag);
 
-    didLogin.voidListen(_didLogin);
-    didFailToLogin.listen(_didFailToLogin);
+    didLogin.voidListen(_didLogin).addTo(disposeBag);
+    didFailToLogin.listen(_didFailToLogin).addTo(disposeBag);
   }
 
   @override
@@ -50,13 +51,18 @@ class LoginPresenterImpl extends LoginPresenter
     router.pushToForgotPasswordScreen(view.context);
   }
 
-  void _didTapLoginButton(List<String> data) {
+  void _didTapLoginButton(List<String> emailAndPassword) {
+    final email = emailAndPassword[0];
+    final password = emailAndPassword[1];
+
     view.showProgressHUD();
-    interactor.login(data[0], data[1]);
+    interactor.login(email, password);
   }
 
-  void _didChangeEmailOrPasswordText(List<String> data) {
-    final isEnabled = data[0].isNotEmpty && data[1].isNotEmpty;
+  void _didChangeEmailOrPasswordText(List<String> emailAndPassword) {
+    final email = emailAndPassword[0];
+    final password = emailAndPassword[1];
+    final isEnabled = email.isNotEmpty && password.isNotEmpty;
     view.setLoginButton(isEnabled: isEnabled);
   }
 

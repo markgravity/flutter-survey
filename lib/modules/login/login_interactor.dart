@@ -15,13 +15,11 @@ class LoginInteractorImpl extends LoginInteractor {
 
   @override
   void login(String email, String password) {
-    Future.microtask(() async {
-      try {
-        await _authRepository.login(email: email, password: password);
-        delegate?.didLogin.add(null);
-      } on Exception catch (e) {
-        delegate?.didFailToLogin.add(e);
-      }
-    });
+    _authRepository
+        .login(email: email, password: password)
+        .then((value) => null)
+        .then((value) => delegate?.didLogin.add(null))
+        .onError<Exception>(
+            (error, stackTrace) => delegate?.didFailToLogin.add(error));
   }
 }
