@@ -48,6 +48,9 @@ class TopBar extends StatelessWidget {
                 ],
               ),
               PlatformButton(
+                materialFlat: (_, __) => MaterialFlatButtonData(
+                  color: Colors.transparent,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),

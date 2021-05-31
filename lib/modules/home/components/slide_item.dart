@@ -15,7 +15,7 @@ class SlideItem extends StatelessWidget {
         Bone.hidden(
           child: Image(
             image: NetworkImage(survey.coverImageUrl!),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
         Align(
@@ -37,6 +37,8 @@ class SlideItem extends StatelessWidget {
                             variants: const [1, 0.5],
                             child: Text(
                               survey.title!,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 28,
@@ -51,6 +53,8 @@ class SlideItem extends StatelessWidget {
                             variants: const [1, 0.5],
                             child: Text(
                               survey.description!,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.7),
                                 fontSize: 17,
@@ -61,6 +65,9 @@ class SlideItem extends StatelessWidget {
                       ),
                     ),
                     PlatformButton(
+                      materialFlat: (_, __) => MaterialFlatButtonData(
+                        color: Colors.transparent,
+                      ),
                       child: Bone(
                         width: 56,
                         height: 56,
