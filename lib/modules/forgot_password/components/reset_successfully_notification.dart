@@ -20,18 +20,20 @@ class ResetSuccessfullyNotification extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 Text(
-                  "Check your email.",
-                  style: TextStyle(
+                  AppLocalizations.of(context)!
+                      .forgotPasswordScreenResetSuccessfullyNotificationTitle,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 13.0,
                   ),
                 ),
                 Text(
-                  "We’ve email you instructions to reset  your password.",
-                  style: TextStyle(
+                  AppLocalizations.of(context)!
+                      .forgotPasswordScreenResetSuccessfullyNotificationMessage,
+                  style: const TextStyle(
                     fontSize: 13.0,
                     color: Colors.white,
                   ),

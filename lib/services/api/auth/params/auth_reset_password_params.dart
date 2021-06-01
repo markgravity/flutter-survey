@@ -1,32 +1,18 @@
 part of '../auth_api_service.dart';
 
 class AuthResetPasswordParams extends ApiParams {
-  factory AuthResetPasswordParams({
-    required String email,
-    String? clientId,
-    String? clientSecret,
-  }) {
-    return AuthResetPasswordParams._(
-      email: email,
-      clientId: clientId ?? Configs.app.api.clientId,
-      clientSecret: clientSecret ?? Configs.app.api.clientSecret,
-    );
-  }
-
-  AuthResetPasswordParams._({
+  AuthResetPasswordParams({
     required this.email,
-    required this.clientId,
-    required this.clientSecret,
   });
 
   final String email;
-  final String clientId;
-  final String clientSecret;
+  final String _clientId = Configs.app.api.clientId;
+  final String _clientSecret = Configs.app.api.clientSecret;
 
   @override
   void mapping(Mapper map) {
     map("user.email", email, (_) {});
-    map<String>("client_id", clientId, (_) {});
-    map<String>("client_secret", clientSecret, (_) {});
+    map<String>("client_id", _clientId, (_) {});
+    map<String>("client_secret", _clientSecret, (_) {});
   }
 }
