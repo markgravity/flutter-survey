@@ -17,7 +17,6 @@ class LoginInteractorImpl extends LoginInteractor {
   void login(String email, String password) {
     _authRepository
         .login(email: email, password: password)
-        .then((value) => null)
         .then((value) => delegate?.didLogin.add(null))
         .onError<Exception>(
             (error, stackTrace) => delegate?.didFailToLogin.add(error));
