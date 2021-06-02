@@ -11,6 +11,7 @@ import 'package:survey/components/common/progress_hud.dart';
 import 'package:survey/components/translucent_text_field/translucent_text_field.dart';
 import 'package:survey/core/viper/module.dart';
 import 'package:survey/gen/assets.gen.dart';
+import 'package:survey/gen/configs.gen.dart';
 import 'package:survey/modules/screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

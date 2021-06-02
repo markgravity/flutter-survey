@@ -6,7 +6,7 @@ class ResetSuccessfullyNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xff252525).withOpacity(0.6),
+      color: Configs.colors.neroGray60,
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
       child: SafeArea(
         bottom: false,
