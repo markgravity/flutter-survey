@@ -20,11 +20,13 @@ class Screen extends StatelessWidget {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         child = Scaffold(
+          resizeToAvoidBottomInset: false,
           body: body,
         );
         break;
       default:
         child = CupertinoPageScaffold(
+          resizeToAvoidBottomInset: false,
           child: body,
         );
     }
