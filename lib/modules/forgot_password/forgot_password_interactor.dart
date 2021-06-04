@@ -16,13 +16,10 @@ class ForgotPasswordInteractorImpl extends ForgotPasswordInteractor {
 
   @override
   void resetPassword({required String email}) {
-    Future.microtask(() async {
-      try {
-        await _authRepository.resetPassword(email: email);
-        delegate?.passwordDidReset.add(null);
-      } on Exception catch (e) {
-        delegate?.passwordDidFailToReset.add(e);
-      }
-    });
+    _authRepository
+        .resetPassword(email: email)
+        .then((value) => delegate?.passwordDidReset.add(null))
+        .onError<Exception>(
+            (error, stackTrace) => delegate?.passwordDidFailToReset.add(error));
   }
 }
