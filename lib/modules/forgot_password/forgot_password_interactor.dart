@@ -1,8 +1,25 @@
 part of 'forgot_password_module.dart';
 
 abstract class ForgotPasswordInteractor
-    extends Interactor<ForgotPasswordInteractorDelegate> {}
+    extends Interactor<ForgotPasswordInteractorDelegate> {
+  void resetPassword({required String email});
+}
 
-abstract class ForgotPasswordInteractorDelegate {}
+abstract class ForgotPasswordInteractorDelegate {
+  BehaviorSubject<void> get passwordDidReset;
 
-class ForgotPasswordInteractorImpl extends ForgotPasswordInteractor {}
+  BehaviorSubject<Exception> get passwordDidFailToReset;
+}
+
+class ForgotPasswordInteractorImpl extends ForgotPasswordInteractor {
+  final AuthRepository _authRepository = locator.get();
+
+  @override
+  void resetPassword({required String email}) {
+    _authRepository
+        .resetPassword(email: email)
+        .then((value) => delegate?.passwordDidReset.add(null))
+        .onError<Exception>(
+            (error, stackTrace) => delegate?.passwordDidFailToReset.add(error));
+  }
+}
