@@ -8,7 +8,9 @@ abstract class SurveyRepository {
 
   Future<bool> get isSurveysCached;
 
-  Future<List<SurveyInfo>> fetchSurveys({bool force});
+  Future<List<SurveyInfo>> fetchSurveysFromCached();
+
+  Future<List<SurveyInfo>> fetchSurveysFromRemote();
 }
 
 class SurveyRepositoryImpl implements SurveyRepository {
@@ -23,16 +25,15 @@ class SurveyRepositoryImpl implements SurveyRepository {
   }
 
   @override
-  Future<List<SurveyInfo>> fetchSurveys({bool force = false}) async {
-    // Refer items from local storage
-    if (!force) {
-      final items = await _localStorageService
-          .getListObject<SurveyInfo>(SurveyRepository.listLocalStorageKey);
-      if (items != null) {
-        return items;
-      }
-    }
+  Future<List<SurveyInfo>> fetchSurveysFromCached() async {
+    final items = await _localStorageService
+        .getListObject<SurveyInfo>(SurveyRepository.listLocalStorageKey);
 
+    return items ?? [];
+  }
+
+  @override
+  Future<List<SurveyInfo>> fetchSurveysFromRemote() async {
     // Fetch from server
     final list = await _surveyApiService.list(params: SurveyListParams());
 

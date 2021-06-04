@@ -2,7 +2,6 @@ part of 'locator_service.dart';
 
 class LocatorServiceRegister {
   LocatorServiceRegister() {
-    //
     locator.registerFactory<NavigatorObserver>(() => NavigatorObserver());
 
     // Services
