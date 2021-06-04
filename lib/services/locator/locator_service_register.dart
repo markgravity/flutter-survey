@@ -2,16 +2,21 @@ part of 'locator_service.dart';
 
 class LocatorServiceRegister {
   LocatorServiceRegister() {
+    locator.registerFactory<NavigatorObserver>(() => NavigatorObserver());
+
+    // Services
     locator.registerFactory<HttpService>(() => HttpServiceImpl());
     locator.registerFactory<ApiService>(() => ApiServiceImpl());
     locator
         .registerFactory<LocalStorageService>(() => LocalStorageServiceImpl());
     locator.registerFactory<AuthApiService>(() => AuthApiServiceImpl());
     locator.registerFactory<UserApiService>(() => UserApiServiceImpl());
-
     locator.registerFactory<AuthRepository>(() => AuthRepositoryImpl());
+    locator.registerFactory<SurveyApiService>(() => SurveyApiServiceImpl());
 
-    locator.registerFactory<NavigatorObserver>(() => NavigatorObserver());
+    // Repositories
+    locator.registerSingleton<AuthRepository>(AuthRepositoryImpl());
+    locator.registerFactory<SurveyRepository>(() => SurveyRepositoryImpl());
 
     // Landing
     locator.registerFactory<LandingInteractor>(() => LandingInteractorImpl());

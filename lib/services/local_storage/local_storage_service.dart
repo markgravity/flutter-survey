@@ -10,6 +10,11 @@ abstract class LocalStorageService {
 
   Future<T?> getObject<T extends Mappable>(String key);
 
+  Future<void> setListObject<T extends Mappable>(List<T> list,
+      {required String key});
+
+  Future<List<T>?> getListObject<T extends Mappable>(String key);
+
   Future<void> remove(String key);
 }
 
@@ -18,7 +23,7 @@ class LocalStorageServiceImpl implements LocalStorageService {
   Future<void> setObject<T extends Mappable>(T object,
       {required String key}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, object.toJsonString());
+    await prefs.setString(key, object.toJsonString());
   }
 
   @override
@@ -35,8 +40,30 @@ class LocalStorageServiceImpl implements LocalStorageService {
   }
 
   @override
+  Future<List<T>?> getListObject<T extends Mappable>(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString(key);
+    if (jsonString == null) {
+      return null;
+    }
+
+    final json = jsonDecode(jsonString) as List<dynamic>;
+    return json
+        .map((e) => Mapper.fromJson(e as Map<String, dynamic>).toObject<T>()!)
+        .toList();
+  }
+
+  @override
+  Future<void> setListObject<T extends Mappable>(List<T> list,
+      {required String key}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final jsonList = list.map((e) => e.toJson()).toList();
+    await prefs.setString(key, jsonEncode(jsonList));
+  }
+
+  @override
   Future<void> remove(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(key);
+    await prefs.remove(key);
   }
 }
