@@ -1,6 +1,8 @@
 import 'package:object_mapper/object_mapper.dart';
+import 'package:equatable/equatable.dart';
 
-class SurveyInfo with Mappable {
+// ignore: must_be_immutable
+class SurveyInfo extends Equatable with Mappable {
   String? title;
   String? description;
   String? coverImageUrl;
@@ -12,4 +14,7 @@ class SurveyInfo with Mappable {
     map<String>(
         "cover_image_url", coverImageUrl, (v) => coverImageUrl = v as String?);
   }
+
+  @override
+  List<Object?> get props => [title, description, coverImageUrl];
 }

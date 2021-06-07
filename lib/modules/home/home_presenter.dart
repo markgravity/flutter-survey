@@ -10,9 +10,20 @@ class HomePresenterImpl extends HomePresenter
     showDetailButtonDidTap.listen(_showDetailButtonDidTap).addTo(disposeBag);
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
 
-    surveysDidFetch.listen(_surveysDidFetch).addTo(disposeBag);
-    surveysDidFailToFetch.listen(_surveysDidFailToFetch).addTo(disposeBag);
-    isSurveysCachedDidGet.listen(_isSurveysCachedDidGet).addTo(disposeBag);
+    surveysDidFetchFromCached
+        .listen(_surveysDidFetchFromCached)
+        .addTo(disposeBag);
+    surveysDidFailToFetchFromCached
+        .listen(_surveysDidFailToFetchFromCached)
+        .addTo(disposeBag);
+
+    surveysDidFetchFromRemote
+        .listen(_surveysDidFetchFromRemote)
+        .addTo(disposeBag);
+    surveysDidFailToFetchFromRemote
+        .listen(_surveysDidFailToFetchFromRemote)
+        .addTo(disposeBag);
+
     authenticatedUserDidGet.listen(_authenticatedUserDidGet).addTo(disposeBag);
   }
 
@@ -29,44 +40,62 @@ class HomePresenterImpl extends HomePresenter
   final alertDialogDidClose = BehaviorSubject<void>();
 
   @override
-  final surveysDidFailToFetch = BehaviorSubject<Exception>();
+  final surveysDidFailToFetchFromCached = BehaviorSubject<Exception>();
 
   @override
-  final surveysDidFetch = BehaviorSubject<List<SurveyInfo>>();
+  final surveysDidFetchFromCached = BehaviorSubject<List<SurveyInfo>>();
 
   @override
-  final isSurveysCachedDidGet = BehaviorSubject<bool>();
+  final surveysDidFailToFetchFromRemote = BehaviorSubject<Exception>();
+
+  @override
+  final surveysDidFetchFromRemote =
+      BehaviorSubject<Tuple2<List<SurveyInfo>, bool>>();
 
   @override
   final authenticatedUserDidGet = BehaviorSubject<UserInfo>();
 
   void _stateDidInit() {
-    interactor.getIsSurveysCached();
+    interactor.fetchSurveysFromCached();
     interactor.getAuthenticatedUser();
-    view.setDateTime(DateTime.now());
+
+    final text = DateFormat("EEEE, MMM d").format(DateTime.now()).toUpperCase();
+    view.setDateTimeText(text);
   }
 
   void _showDetailButtonDidTap(SurveyInfo survey) {
     router.pushToSurveyDetail(context: view.context, survey: survey);
   }
 
-  void _surveysDidFetch(List<SurveyInfo> surveys) {
-    view.stopSkeletonAnimation();
-    view.dismissProgressHUD();
-    view.showSurveys(surveys);
+  void _surveysDidFetchFromCached(List<SurveyInfo> surveys) {
+    // Show cached surveys
+    if (surveys.isNotEmpty) view.showSurveys(surveys);
+
+    // Begin skeleton animation when there are no cached surveys
+    if (surveys.isEmpty) view.beginSkeletonAnimation();
+
+    // Try to refresh data
+    interactor.fetchSurveysFromRemote();
   }
 
-  void _surveysDidFailToFetch(Exception exception) {
-    view.stopSkeletonAnimation();
-    view.dismissProgressHUD();
+  void _surveysDidFailToFetchFromCached(Exception exception) {
     view.alert(exception);
   }
 
-  void _isSurveysCachedDidGet(bool isCached) {
-    interactor.fetchSurveys();
-    if (!isCached) {
-      view.beginSkeletonAnimation();
-    }
+  void _surveysDidFetchFromRemote(Tuple2<List<SurveyInfo>, bool> data) {
+    final surveys = data.item1;
+    final hasChanges = data.item2;
+
+    view.stopSkeletonAnimation();
+    view.dismissProgressHUD();
+
+    if (hasChanges) view.showSurveys(surveys);
+  }
+
+  void _surveysDidFailToFetchFromRemote(Exception exception) {
+    view.stopSkeletonAnimation();
+    view.dismissProgressHUD();
+    view.alert(exception);
   }
 
   void _authenticatedUserDidGet(UserInfo user) {
@@ -75,6 +104,6 @@ class HomePresenterImpl extends HomePresenter
 
   void _didSwipeDown() {
     view.showProgressHUD();
-    interactor.fetchSurveys(force: true);
+    interactor.fetchSurveysFromRemote();
   }
 }
