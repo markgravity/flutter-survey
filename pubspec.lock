@@ -651,6 +651,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  simple_gesture_detector:
+    dependency: "direct main"
+    description:
+      name: simple_gesture_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   skeletor:
     dependency: "direct main"
     description:
