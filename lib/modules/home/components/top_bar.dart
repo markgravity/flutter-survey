@@ -20,12 +20,10 @@ class TopBar extends StatelessWidget {
                   Bone(
                     height: 18,
                     width: 117,
-                    child: StreamsSelector0<DateTime>.value(
-                      stream: state._dateTime,
-                      builder: (_, dateTime, __) => Text(
-                        DateFormat("EEEE, MMM d")
-                            .format(dateTime)
-                            .toUpperCase(),
+                    child: StreamsSelector0<String>.value(
+                      stream: state._dateTimeText,
+                      builder: (_, text, __) => Text(
+                        text,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,

@@ -3,7 +3,7 @@ part of 'home_module.dart';
 abstract class HomeViewDelegate {}
 
 abstract class HomeView extends View<HomeViewDelegate> {
-  void setDateTime(DateTime dateTime);
+  void setDateTimeText(String text);
   void setUser(UserInfo user);
   void setSurveys(List<SurveyInfo> surveys);
 }
@@ -18,7 +18,7 @@ class HomeViewImpl extends StatefulWidget {
 class _HomeViewImplState
     extends ViewState<HomeViewImpl, HomeModule, HomeViewDelegate>
     implements HomeView {
-  final _dateTime = BehaviorSubject<DateTime>();
+  final _dateTimeText = BehaviorSubject<String>();
   final _user = BehaviorSubject<UserInfo>();
   final _surveys = BehaviorSubject<List<SurveyInfo>>();
   final _pageController = CarouselController();
@@ -47,7 +47,9 @@ class _HomeViewImplState
         "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_";
     surveys.add(survey);
 
-    setDateTime(DateTime.now());
+    setDateTimeText(
+      DateFormat("EEEE, MMM d").format(DateTime.now()).toUpperCase(),
+    );
     setUser(user);
     setSurveys(surveys);
 
@@ -62,8 +64,8 @@ class _HomeViewImplState
   }
 
   @override
-  void setDateTime(DateTime dateTime) {
-    _dateTime.add(dateTime);
+  void setDateTimeText(String text) {
+    _dateTimeText.add(text);
   }
 
   @override
