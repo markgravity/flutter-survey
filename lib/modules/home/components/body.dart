@@ -8,8 +8,8 @@ class Body extends StatelessWidget {
     final state = context.findAncestorStateOfType<_HomeViewImplState>()!;
     return StreamsSelector0<bool>.value(
       stream: state.isProgressHUDShown,
-      builder: (_, isShown, child) => ProgressHUD(
-        isShow: isShown,
+      builder: (_, isProgressHUDShown, child) => ProgressHUD(
+        isShow: isProgressHUDShown,
         child: child!,
       ),
       child: Screen(
