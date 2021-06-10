@@ -61,7 +61,7 @@ class HomeInteractorImpl extends HomeInteractor {
 
     int count = 0;
     for (final survey in cachedSurveys) {
-      if (!remoteSurveys.contains(survey)) return false;
+      if (!remoteSurveys.contains(survey)) return true;
       count++;
     }
 
