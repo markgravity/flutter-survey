@@ -65,12 +65,12 @@ void main() {
         await tester.flingFrom(location, Offset(0, center.dy), center.dy);
       });
 
-      it("triggers delegate's didSwipeDown emits", (tester) async {
+      it("triggers delegate's didSwipeDown to emit", (tester) async {
         expect(delegate.didSwipeDown, emits(null));
       });
     });
 
-    describe("it's setDateTime(Text) is called", () {
+    describe("its setDateTimeText is called", () {
       const text = "SATURDAY, MAY 2";
       beforeEach((tester) async {
         module.view.setDateTimeText(text);
@@ -82,7 +82,7 @@ void main() {
       });
     });
 
-    describe("it's showUser() is called", () {
+    describe("its showUser() is called", () {
       final user = UserInfo();
       user.avatarUrl = "https://example.com";
 
@@ -91,7 +91,7 @@ void main() {
         await tester.pumpAndSettle();
       });
 
-      it("makes user's avatar image displays input user's avatar",
+      it("makes user's avatar image to display input user's avatar",
           (tester) async {
         final widget =
             tester.widget<Image>(find.byKey(HomeView.userAvatarImageKey));
@@ -101,13 +101,13 @@ void main() {
       });
     });
 
-    describe("it's showSurveys() is called", () {
+    describe("its showSurveys() is called", () {
       beforeEach((tester) async {
         module.view.showSurveys(surveys);
         await tester.pumpAndSettle();
       });
 
-      it("triggers carousel slider displays the first survey information",
+      it("triggers carousel slider to display the first survey information",
           (tester) async {
         final survey = surveys.first;
         expect(find.text(survey.title!), findsOneWidget);
@@ -119,7 +119,7 @@ void main() {
         expect(networkImage.url, survey.coverImageUrl);
       });
 
-      it("triggers page control displays correct number of dots and highlight the first dot",
+      it("triggers page control to display correct number of dots and highlight the first dot",
           (tester) async {
         expect(find.byKey(HomeView.dotPageControlKey),
             findsNWidgets(surveys.length));
@@ -145,7 +145,7 @@ void main() {
           await tester.pumpAndSettle();
         });
 
-        it("triggers carousel slider the second survey information",
+        it("triggers carousel slider to show the second survey information",
             (tester) async {
           final survey = surveys[1];
           expect(find.text(survey.title!), findsOneWidget);
@@ -157,7 +157,7 @@ void main() {
           expect(networkImage.url, survey.coverImageUrl);
         });
 
-        it("triggers page control highlights the second dot", (tester) async {
+        it("triggers page control to highlight the second dot", (tester) async {
           final dot = tester
               .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
               .toList()[1];
@@ -173,7 +173,7 @@ void main() {
           await tester.pumpAndSettle();
         });
 
-        it("triggers carousel slider displays the last survey information",
+        it("triggers carousel slider to display the last survey information",
             (tester) async {
           final survey = surveys.last;
           expect(find.text(survey.title!), findsOneWidget);
@@ -185,7 +185,7 @@ void main() {
           expect(networkImage.url, survey.coverImageUrl);
         });
 
-        it("triggers page control highlights the last dot", (tester) async {
+        it("triggers page control to highlight the last dot", (tester) async {
           final dot = tester
               .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
               .toList()
@@ -196,42 +196,42 @@ void main() {
       });
     });
 
-    describe("it's beginSkeletonAnimation() is called", () {
+    describe("its beginSkeletonAnimation() is called", () {
       beforeEach((tester) async {
         module.view.beginSkeletonAnimation();
         await tester.pump();
         await tester.pump();
       });
 
-      it("triggers skeleton begin animation", (tester) async {
+      it("triggers skeleton to begin animation", (tester) async {
         final widget =
             tester.widget<Skeleton>(find.byKey(HomeView.skeletonKey));
         expect(widget.isShown, isTrue);
       });
     });
 
-    describe("it's stopSkeletonAnimation() is called", () {
+    describe("its stopSkeletonAnimation() is called", () {
       beforeEach((tester) async {
         module.view.stopSkeletonAnimation();
         await tester.pump();
         await tester.pump();
       });
 
-      it("triggers skeleton stop animation", (tester) async {
+      it("triggers skeleton to stop animation", (tester) async {
         final widget =
             tester.widget<Skeleton>(find.byKey(HomeView.skeletonKey));
         expect(widget.isShown, isFalse);
       });
     });
 
-    describe("it's show detail button in one of slide items is tapped", () {
+    describe("its show detail button in one of slide items is tapped", () {
       beforeEach((tester) async {
         module.view.showSurveys(surveys);
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(HomeView.showDetailButtonKey));
       });
 
-      it("triggers delegate's showDetailButtonDidTap emits", (tester) async {
+      it("triggers delegate's showDetailButtonDidTap to emit", (tester) async {
         expect(delegate.showDetailButtonDidTap, emits(surveys.first));
       });
     });

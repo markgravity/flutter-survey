@@ -32,7 +32,7 @@ void main() {
       presenter.configure(view: view, interactor: interactor, router: router);
     });
 
-    describe("it's stateDidInit emits", () {
+    describe("its stateDidInit emits", () {
       beforeEach(() {
         presenter.stateDidInit.add(null);
       });
@@ -44,7 +44,7 @@ void main() {
       });
     });
 
-    describe("it's showDetailButtonDidTap emits", () {
+    describe("its showDetailButtonDidTap emits", () {
       final survey = SurveyInfo();
 
       beforeEach(() {
@@ -57,7 +57,7 @@ void main() {
       });
     });
 
-    describe("it's surveysDidFetchFromCached emits", () {
+    describe("its surveysDidFetchFromCached emits", () {
       context("when cached surveys is emptied", () {
         final surveys = List<SurveyInfo>.empty();
 
@@ -91,7 +91,7 @@ void main() {
       });
     });
 
-    describe("it's surveysDidFailToFetchFromCached emits", () {
+    describe("its surveysDidFailToFetchFromCached emits", () {
       final exception = Exception();
 
       beforeEach(() {
@@ -103,7 +103,7 @@ void main() {
       });
     });
 
-    describe("it's surveysDidFetchFromRemote emits", () {
+    describe("its surveysDidFetchFromRemote emits", () {
       final surveys = List<SurveyInfo>.empty();
 
       context("when remote provides new data", () {
@@ -132,7 +132,7 @@ void main() {
       });
     });
 
-    describe("it's surveysDidFailToFetchFromRemote emits", () {
+    describe("its surveysDidFailToFetchFromRemote emits", () {
       final exception = Exception();
 
       beforeEach(() {
@@ -147,7 +147,7 @@ void main() {
       });
     });
 
-    describe("it's didSwipeDown emits", () {
+    describe("its didSwipeDown emits", () {
       beforeEach(() {
         presenter.didSwipeDown.add(null);
       });
@@ -161,7 +161,7 @@ void main() {
       });
     });
 
-    describe("it's authenticatedUserDidGet emits", () {
+    describe("its authenticatedUserDidGet emits", () {
       final user = UserInfo();
       beforeEach(() {
         presenter.authenticatedUserDidGet.add(user);

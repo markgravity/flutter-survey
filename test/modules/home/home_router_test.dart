@@ -22,7 +22,7 @@ void main() {
       router = HomeRouterImpl();
     });
 
-    describe("it's pushToSurveyDetail() is called", () {
+    describe("its pushToSurveyDetail() is called", () {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);

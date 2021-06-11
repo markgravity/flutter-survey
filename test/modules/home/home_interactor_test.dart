@@ -46,20 +46,21 @@ void main() {
       interactor.delegate = delegate;
     });
 
-    describe("it's getAuthenticatedUser is called", () {
+    describe("its getAuthenticatedUser is called", () {
       final user = UserInfo();
       beforeEach(() {
         when(authRepository.user).thenReturn(user);
         interactor.getAuthenticatedUser();
       });
 
-      it("triggers delegate's authenticatedUserDidGet emits", () {
+      it("triggers delegate's authenticatedUserDidGet to emit", () {
         expect(delegate.authenticatedUserDidGet, emits(user));
       });
     });
 
-    describe("it's fetchSurveysFromCached is called", () {
-      context("when surveyRepository's fetchSurveysFromCached return success",
+    describe("its fetchSurveysFromCached is called", () {
+      context(
+          "when surveyRepository's fetchSurveysFromCached to return success",
           () {
         final surveys = List<SurveyInfo>.empty();
         beforeEach(() {
@@ -68,12 +69,13 @@ void main() {
           interactor.fetchSurveysFromCached();
         });
 
-        it("triggers delegate's surveysDidFetchFromCached emits", () {
+        it("triggers delegate's surveysDidFetchFromCached to emit", () {
           expect(delegate.surveysDidFetchFromCached, emits(surveys));
         });
       });
 
-      context("when surveyRepository's fetchSurveysFromCached return failure",
+      context(
+          "when surveyRepository's fetchSurveysFromCached to return failure",
           () {
         final exception = Exception();
         beforeEach(() {
@@ -82,17 +84,18 @@ void main() {
           interactor.fetchSurveysFromCached();
         });
 
-        it("triggers delegate's surveysDidFailToFetchFromCached emits", () {
+        it("triggers delegate's surveysDidFailToFetchFromCached to emit", () {
           expect(delegate.surveysDidFailToFetchFromCached, emits(exception));
         });
       });
     });
 
-    describe("it's fetchSurveysFromRemote is called", () {
-      context("when surveyRepository's fetchSurveysFromRemote return success",
+    describe("its fetchSurveysFromRemote is called", () {
+      context(
+          "when surveyRepository's fetchSurveysFromRemote to return success",
           () {
         context(
-            "when surveyRepository's surveysDidFailToFetchFromCached return out of update data",
+            "when surveyRepository's surveysDidFailToFetchFromCached to return outdated data",
             () {
           final cachedSurveys = [
             SurveyInfo()..description = "cached description"
@@ -109,14 +112,14 @@ void main() {
             interactor.fetchSurveysFromRemote();
           });
 
-          it("triggers delegate's surveysDidFetchFromRemote emits", () {
+          it("triggers delegate's surveysDidFetchFromRemote to emit", () {
             expect(delegate.surveysDidFetchFromRemote,
                 emits(Tuple2(remoteSurveys, true)));
           });
         });
 
         context(
-            "when surveyRepository's surveysDidFailToFetchFromCached return in of update data",
+            "when surveyRepository's surveysDidFailToFetchFromCached to return the same data",
             () {
           final cachedSurveys = [SurveyInfo()..description = "description"];
 
@@ -131,14 +134,15 @@ void main() {
             interactor.fetchSurveysFromRemote();
           });
 
-          it("triggers delegate's surveysDidFetchFromRemote emits", () {
+          it("triggers delegate's surveysDidFetchFromRemote to emit", () {
             expect(delegate.surveysDidFetchFromRemote,
                 emits(Tuple2(remoteSurveys, false)));
           });
         });
       });
 
-      context("when surveyRepository's fetchSurveysFromRemote return failure",
+      context(
+          "when surveyRepository's fetchSurveysFromRemote to return failure",
           () {
         final exception = Exception();
         beforeEach(() {
@@ -150,7 +154,7 @@ void main() {
           interactor.fetchSurveysFromRemote();
         });
 
-        it("triggers delegate's surveysDidFailToFetchFromRemote emits", () {
+        it("triggers delegate's surveysDidFailToFetchFromRemote to emit", () {
           expect(delegate.surveysDidFailToFetchFromRemote, emits(exception));
         });
       });
