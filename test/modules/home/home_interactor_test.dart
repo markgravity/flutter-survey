@@ -59,8 +59,7 @@ void main() {
     });
 
     describe("its fetchSurveysFromCached is called", () {
-      context(
-          "when surveyRepository's fetchSurveysFromCached to return success",
+      context("when surveyRepository's fetchSurveysFromCached returns success",
           () {
         final surveys = List<SurveyInfo>.empty();
         beforeEach(() {
@@ -74,8 +73,7 @@ void main() {
         });
       });
 
-      context(
-          "when surveyRepository's fetchSurveysFromCached to return failure",
+      context("when surveyRepository's fetchSurveysFromCached returns failure",
           () {
         final exception = Exception();
         beforeEach(() {
@@ -91,11 +89,10 @@ void main() {
     });
 
     describe("its fetchSurveysFromRemote is called", () {
-      context(
-          "when surveyRepository's fetchSurveysFromRemote to return success",
+      context("when surveyRepository's fetchSurveysFromRemote returns success",
           () {
         context(
-            "when surveyRepository's surveysDidFailToFetchFromCached to return outdated data",
+            "when surveyRepository's surveysDidFailToFetchFromCached returns outdated data",
             () {
           final cachedSurveys = [
             SurveyInfo()..description = "cached description"
@@ -119,7 +116,7 @@ void main() {
         });
 
         context(
-            "when surveyRepository's surveysDidFailToFetchFromCached to return the same data",
+            "when surveyRepository's surveysDidFailToFetchFromCached returns the same data",
             () {
           final cachedSurveys = [SurveyInfo()..description = "description"];
 
@@ -141,8 +138,7 @@ void main() {
         });
       });
 
-      context(
-          "when surveyRepository's fetchSurveysFromRemote to return failure",
+      context("when surveyRepository's fetchSurveysFromRemote returns failure",
           () {
         final exception = Exception();
         beforeEach(() {
