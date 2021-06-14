@@ -12,8 +12,8 @@ class SurveyInfo extends Equatable with Mappable {
     map<String>("title", title, (v) => title = v as String?);
     map<String>("description", description, (v) => description = v as String?);
     map<String>("cover_image_url", coverImageUrl, (v) {
-      coverImageUrl = v as String?;
-      coverImageUrl = coverImageUrl != null ? "${coverImageUrl!}_l" : null;
+      final url = v as String?;
+      coverImageUrl = url != null ? "${url}l" : null;
     });
   }
 
