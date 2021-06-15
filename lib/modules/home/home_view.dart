@@ -8,8 +8,7 @@ abstract class HomeViewDelegate implements AlertViewMixinDelegate {
   BehaviorSubject<void> get didSwipeDown;
 }
 
-abstract class HomeView extends View<HomeViewDelegate>
-    with AlertViewMixin, ProgressHUDViewMixin {
+abstract class HomeView extends View<HomeViewDelegate> with AlertViewMixin {
   static const currentDateTextKey = Key("current_date_text");
   static const userAvatarImageKey = Key("user_avatar_image");
   static const titleTextSlideItemKey = Key("title_text_slide_item");
@@ -32,6 +31,10 @@ abstract class HomeView extends View<HomeViewDelegate>
   void beginSkeletonAnimation();
 
   void stopSkeletonAnimation();
+
+  void showRefreshIndicator();
+
+  void dismissRefreshIndicator();
 }
 
 class HomeViewImpl extends StatefulWidget {
@@ -41,9 +44,8 @@ class HomeViewImpl extends StatefulWidget {
   _HomeViewImplState createState() => _HomeViewImplState();
 }
 
-class _HomeViewImplState
-    extends ViewState<HomeViewImpl, HomeModule, HomeViewDelegate>
-    with AlertViewMixin, ProgressHUDViewMixin
+class _HomeViewImplState extends ViewState<HomeViewImpl, HomeModule, HomeViewDelegate>
+    with AlertViewMixin, SingleTickerProviderStateMixin
     implements HomeView {
   final _dateTimeText = BehaviorSubject<String>();
   final _user = BehaviorSubject<UserInfo>();
@@ -51,6 +53,17 @@ class _HomeViewImplState
   final _pageController = CarouselController();
   final _currentPage = BehaviorSubject<int>.seeded(0);
   final _isLoading = BehaviorSubject<bool>.seeded(false);
+  final _isRefreshing = BehaviorSubject<bool>.seeded(false);
+
+  late final AnimationController _refreshIndicatorAnimationController = AnimationController(
+    duration: const Duration(milliseconds: 300),
+    vsync: this,
+  );
+
+  late final Animation<Offset> _refreshIndicatorAnimation = Tween<Offset>(
+    begin: const Offset(0.0, -1.0),
+    end: Offset.zero,
+  ).animate(_refreshIndicatorAnimationController);
 
   @override
   void initState() {
@@ -88,5 +101,17 @@ class _HomeViewImplState
   @override
   void beginSkeletonAnimation() {
     _isLoading.add(true);
+  }
+
+  @override
+  void showRefreshIndicator() {
+    _isRefreshing.add(true);
+    _refreshIndicatorAnimationController.forward(from: 0);
+  }
+
+  @override
+  void dismissRefreshIndicator() {
+    _isRefreshing.add(false);
+    _refreshIndicatorAnimationController.reverse(from: 1);
   }
 }

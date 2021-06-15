@@ -87,14 +87,14 @@ class HomePresenterImpl extends HomePresenter
     final hasChanges = data.item2;
 
     view.stopSkeletonAnimation();
-    view.dismissProgressHUD();
+    view.dismissRefreshIndicator();
 
     if (hasChanges) view.showSurveys(surveys);
   }
 
   void _surveysDidFailToFetchFromRemote(Exception exception) {
     view.stopSkeletonAnimation();
-    view.dismissProgressHUD();
+    view.dismissRefreshIndicator();
     view.alert(exception);
   }
 
@@ -103,7 +103,7 @@ class HomePresenterImpl extends HomePresenter
   }
 
   void _didSwipeDown() {
-    view.showProgressHUD();
+    view.showRefreshIndicator();
     interactor.fetchSurveysFromRemote();
   }
 }

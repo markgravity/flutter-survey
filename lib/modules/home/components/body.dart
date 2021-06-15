@@ -7,10 +7,23 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.findAncestorStateOfType<_HomeViewImplState>()!;
     return StreamsSelector0<bool>.value(
-      stream: state.isProgressHUDShown,
-      builder: (_, isProgressHUDShown, child) => ProgressHUD(
-        isShow: isProgressHUDShown,
-        child: child!,
+      stream: state._isRefreshing,
+      builder: (_, isRefresh, child) => Stack(
+        children: [
+          child!,
+          SlideTransition(
+            position: state._refreshIndicatorAnimation,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: SafeArea(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 100),
+                  child: const RefreshIndicator(),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       child: Screen(
         body: SimpleGestureDetector(
@@ -45,8 +58,7 @@ class Body extends StatelessWidget {
                               viewportFraction: 1,
                               initialPage: state._currentPage.value,
                               height: double.infinity,
-                              onPageChanged: (index, _) =>
-                                  state._currentPage.add(index),
+                              onPageChanged: (index, _) => state._currentPage.add(index),
                             ),
                           )
                         : SlideItem.empty(),

@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart' hide Router;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/widgets.dart' hide Router;
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -35,6 +37,7 @@ part 'components/slide_item.dart';
 
 part 'components/page_control.dart';
 part 'components/body.dart';
+part 'components/refresh_indicator.dart';
 
 class HomeModule
     extends Module<HomeView, HomeInteractor, HomePresenter, HomeRouter> {
