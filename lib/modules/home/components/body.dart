@@ -56,12 +56,12 @@ class Body extends StatelessWidget {
                                     survey: surveys[index],
                                   ),
                                   options: CarouselOptions(
-                                    viewportFraction: 1,
-                                    initialPage: state._currentPage.value,
-                                    height: double.infinity,
-                                    onPageChanged: (index, _) =>
-                                        state._currentPage.add(index),
-                                  ),
+                                      viewportFraction: 1,
+                                      initialPage: state._currentPage.value,
+                                      height: double.infinity,
+                                      onPageChanged: (index, _) => state
+                                          .delegate?.currentPageDidChange
+                                          .add(index)),
                                 )
                               : SlideItem.empty();
                         },

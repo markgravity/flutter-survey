@@ -12,6 +12,8 @@ abstract class HomeViewDelegate implements AlertViewMixinDelegate {
   BehaviorSubject<void> get sideMenuDidShow;
 
   BehaviorSubject<void> get sideMenuDidDismiss;
+
+  BehaviorSubject<int> get currentPageDidChange;
 }
 
 abstract class HomeView extends View<HomeViewDelegate>
@@ -44,6 +46,8 @@ abstract class HomeView extends View<HomeViewDelegate>
   void showSideMenu();
 
   void setUserInteractionEnable({required bool isEnabled});
+
+  void setCurrentPage(int page);
 }
 
 class HomeViewImpl extends StatefulWidget {
@@ -129,5 +133,10 @@ class _HomeViewImplState
   @override
   void setUserInteractionEnable({required bool isEnabled}) {
     _isUserInteractionEnabled.add(isEnabled);
+  }
+
+  @override
+  void setCurrentPage(int page) {
+    _currentPage.add(page);
   }
 }

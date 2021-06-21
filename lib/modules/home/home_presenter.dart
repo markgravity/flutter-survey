@@ -10,6 +10,7 @@ class HomePresenterImpl extends HomePresenter
     showDetailButtonDidTap.listen(_showDetailButtonDidTap).addTo(disposeBag);
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
     userAvatarDidTap.voidListen(_userAvatarDidTap).addTo(disposeBag);
+    currentPageDidChange.listen(_currentPageDidChange).addTo(disposeBag);
 
     surveysDidFetchFromCached
         .listen(_surveysDidFetchFromCached)
@@ -65,6 +66,9 @@ class HomePresenterImpl extends HomePresenter
   @override
   final authenticatedUserDidGet = BehaviorSubject<UserInfo>();
 
+  @override
+  final currentPageDidChange = BehaviorSubject<int>();
+
   void _stateDidInit() {
     interactor.fetchSurveysFromCached();
     interactor.getAuthenticatedUser();
@@ -119,5 +123,9 @@ class HomePresenterImpl extends HomePresenter
 
   void _userAvatarDidTap() {
     view.showSideMenu();
+  }
+
+  void _currentPageDidChange(int page) {
+    view.setCurrentPage(page);
   }
 }
