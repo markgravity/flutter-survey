@@ -18,36 +18,55 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  flutter_svg: ^0.22.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
+  flutter_platform_widgets: ^1.6.1
+  dio: ^4.0.0
+  get_it: ^7.0.0
+  json_annotation: ^4.0.1
+  enumerated_class: ^0.0.1+1
+  object_mapper: ^1.1.0
+  streams_provider: ^0.1.0
+  shared_preferences: ^2.0.5
+  modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  adaptive_dialog: ^0.10.0+5
+  async: ^2.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_flavorizr: ^2.0.0
+  flutter_launcher_icons: ^0.9.0
+  build_runner: ^2.0.2
+  flutter_gen_runner: ^3.1.1
+  lint: ^1.5.3
+  json_serializable: ^4.1.1
+  mockito: ^5.0.7
+  quick_test: ^0.0.7
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -74,3 +93,32 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  image_path: 'assets/images/app-icon.png'
+  android: true
+  ios: true
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "stage"
+  flavors:
+    production:
+      app:
+        name: "Survey"
+      android:
+        applicationId: "dev.markg.survey"
+      ios:
+        bundleId: "dev.markg.survey"
+    staging:
+      app:
+        name: "Survey-Staging"
+      android:
+        applicationId: "dev.markg.survey.staging"
+      ios:
+        bundleId: "dev.markg.survey.staging"
+
+flutter_gen:
+  integrations:
+    flutter_svg: true

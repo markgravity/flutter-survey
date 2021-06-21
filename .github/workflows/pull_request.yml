@@ -3,13 +3,7 @@
 name: Pull Request
 
 on:
-  # Trigger this workflow on all pull request types, and push action is only for feature/chore/bug branches
   pull_request:
-    types: [ assigned, opened, synchronize, reopened, ready_for_review ]
-  push:
-    branches-ignore:
-      - develop
-      - 'release/**'
 jobs:
   lint_and_test:
     name: Static code analyze & Unit test

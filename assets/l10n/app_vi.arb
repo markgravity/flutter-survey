@@ -1,0 +1,15 @@
+{
+    "helloWorld": "Xin chào Thế giới!",
+    "alertErrorTitle": "Lỗi",
+    "alertErrorOKLabel": "OK",
+    "alertErrorFallbackMessage": "Lỗi không xác định",
+    "loginScreenLoginButtonText": "Đăng nhập",
+    "loginScreenForgotButtonText": "Quên?",
+    "loginScreenEmailTextFieldPlaceholderText": "Email",
+    "loginScreenPasswordTextFieldPlaceholderText": "Mật khẩu",
+    "forgotPasswordScreenDescription": "Nhập tài khoản email của bạn để nhận huớng dẫn khôi phục mật khẩu.",
+    "forgotPasswordScreenEmailTextFieldPlaceholder": "Email",
+    "forgotPasswordScreenResetButtonTitle": "Khôi phục",
+    "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Kiểm tra hộp thư email của bạn.",
+    "forgotPasswordScreenResetSuccessfullyNotificationMessage": "Chúng tôi vừa gửi email huớng dẫn khôi phục mật khẩu về email của bạn."
+}

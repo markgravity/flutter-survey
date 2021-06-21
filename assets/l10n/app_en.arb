@@ -1,0 +1,14 @@
+{
+    "alertErrorTitle": "Error",
+    "alertErrorOKLabel": "OK",
+    "alertErrorFallbackMessage": "Unknown error",
+    "loginScreenLoginButtonText": "Login",
+    "loginScreenForgotButtonText": "Forgot?",
+    "loginScreenEmailTextFieldPlaceholderText": "Email",
+    "loginScreenPasswordTextFieldPlaceholderText": "Password",
+    "forgotPasswordScreenDescription": "Enter your email to receive instructions for resetting your password.",
+    "forgotPasswordScreenEmailTextFieldPlaceholder": "Email",
+    "forgotPasswordScreenResetButtonTitle": "Reset",
+    "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Check your email.",
+    "forgotPasswordScreenResetSuccessfullyNotificationMessage": "We’ve email you instructions to reset \u2028your password."
+}
