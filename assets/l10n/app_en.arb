@@ -10,5 +10,6 @@
     "forgotPasswordScreenEmailTextFieldPlaceholder": "Email",
     "forgotPasswordScreenResetButtonTitle": "Reset",
     "forgotPasswordScreenResetSuccessfullyNotificationTitle": "Check your email.",
-    "forgotPasswordScreenResetSuccessfullyNotificationMessage": "We’ve email you instructions to reset \u2028your password."
+    "forgotPasswordScreenResetSuccessfullyNotificationMessage": "We’ve email you instructions to reset \u2028your password.",
+    "homeScreenTodayText": "Today"
 }

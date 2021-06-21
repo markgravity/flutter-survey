@@ -35,5 +35,10 @@ class LocatorServiceRegister {
         () => ForgotPasswordPresenterImpl());
     locator.registerFactory<ForgotPasswordRouter>(
         () => ForgotPasswordRouterImpl());
+
+    // Home
+    locator.registerFactory<HomeInteractor>(() => HomeInteractorImpl());
+    locator.registerFactory<HomeRouter>(() => HomeRouterImpl());
+    locator.registerFactory<HomePresenter>(() => HomePresenterImpl());
   }
 }
