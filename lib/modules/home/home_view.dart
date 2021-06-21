@@ -69,28 +69,15 @@ class _HomeViewImplState
   final _isLoading = BehaviorSubject<bool>.seeded(false);
   final _isUserInteractionEnabled = BehaviorSubject<bool>.seeded(true);
   final _sliderMenuContainerKey = GlobalKey<SliderMenuContainerState>();
+  final _widgetsBinding = WidgetsBinding.instance!;
 
   @override
   void initState() {
     super.initState();
     delegate?.stateDidInit.add(null);
 
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      final animationController =
-          _sliderMenuContainerKey.currentState?.animationController;
-      animationController?.addListener(() {
-        switch (animationController.status) {
-          case AnimationStatus.completed:
-            delegate?.sideMenuDidShow.add(null);
-            break;
-          case AnimationStatus.dismissed:
-            delegate?.sideMenuDidDismiss.add(null);
-            break;
-          default:
-            break;
-        }
-      });
-    });
+    _widgetsBinding
+        .scheduleFrameCallback(_listenSliderMenuContainerAnimationController);
   }
 
   @override
@@ -138,5 +125,28 @@ class _HomeViewImplState
   @override
   void setCurrentPage(int page) {
     _currentPage.add(page);
+  }
+
+  void _listenSliderMenuContainerAnimationController(Duration timestamp) {
+    final animationController =
+        _sliderMenuContainerKey.currentState?.animationController;
+    if (animationController == null) {
+      _widgetsBinding
+          .scheduleFrameCallback(_listenSliderMenuContainerAnimationController);
+      return;
+    }
+
+    animationController.addListener(() {
+      switch (animationController.status) {
+        case AnimationStatus.completed:
+          delegate?.sideMenuDidShow.add(null);
+          break;
+        case AnimationStatus.dismissed:
+          delegate?.sideMenuDidDismiss.add(null);
+          break;
+        default:
+          break;
+      }
+    });
   }
 }
