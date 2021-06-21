@@ -65,6 +65,8 @@ void main() {
           .thenAnswer((realInvocation) => generator.make(3));
       when(delegate.didSwipeDown)
           .thenAnswer((realInvocation) => generator.make(4));
+      when(delegate.currentPageDidChange)
+          .thenAnswer((realInvocation) => generator.make(5));
 
       module = FakeModule(
         builder: () => const HomeViewImpl(),
@@ -174,14 +176,6 @@ void main() {
           final networkImage = widget.image as NetworkImage;
           expect(networkImage.url, survey.coverImageUrl);
         });
-
-        it("triggers page control to highlight the second dot", (tester) async {
-          final dot = tester
-              .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
-              .toList()[1];
-          final boxDecoration = dot.decoration! as BoxDecoration;
-          expect(boxDecoration.color, HomeView.dotPageControlHighlightColor);
-        });
       });
 
       context("when swipes left to right on screen", () {
@@ -201,15 +195,6 @@ void main() {
               .widget<Image>(find.byKey(HomeView.backgroundImageSlideItemKey));
           final networkImage = widget.image as NetworkImage;
           expect(networkImage.url, survey.coverImageUrl);
-        });
-
-        it("triggers page control to highlight the last dot", (tester) async {
-          final dot = tester
-              .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
-              .toList()
-              .last;
-          final boxDecoration = dot.decoration! as BoxDecoration;
-          expect(boxDecoration.color, HomeView.dotPageControlHighlightColor);
         });
       });
     });

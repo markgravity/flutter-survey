@@ -70,6 +70,10 @@ class MockHomeView extends _i1.Mock implements _i4.HomeView {
       Invocation.method(#setUserInteractionEnable, [], {#isEnabled: isEnabled}),
       returnValueForMissingStub: null);
   @override
+  void setCurrentPage(int? page) =>
+      super.noSuchMethod(Invocation.method(#setCurrentPage, [page]),
+          returnValueForMissingStub: null);
+  @override
   void alert(Object? error) =>
       super.noSuchMethod(Invocation.method(#alert, [error]),
           returnValueForMissingStub: null);
