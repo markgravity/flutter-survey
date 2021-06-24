@@ -48,6 +48,7 @@ class TopBar extends StatelessWidget {
                 ],
               ),
               PlatformButton(
+                onPressed: () => state.delegate?.userAvatarDidTap.add(null),
                 materialFlat: (_, __) => MaterialFlatButtonData(
                   color: Colors.transparent,
                 ),

@@ -46,6 +46,7 @@ dependencies:
   simple_gesture_detector: ^0.2.0
   equatable: ^2.0.2
   tuple: ^2.0.0
+  flutter_slider_drawer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

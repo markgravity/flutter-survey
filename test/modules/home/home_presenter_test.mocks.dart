@@ -62,6 +62,18 @@ class MockHomeView extends _i1.Mock implements _i4.HomeView {
       super.noSuchMethod(Invocation.method(#stopSkeletonAnimation, []),
           returnValueForMissingStub: null);
   @override
+  void showSideMenu() =>
+      super.noSuchMethod(Invocation.method(#showSideMenu, []),
+          returnValueForMissingStub: null);
+  @override
+  void setUserInteractionEnable({bool? isEnabled}) => super.noSuchMethod(
+      Invocation.method(#setUserInteractionEnable, [], {#isEnabled: isEnabled}),
+      returnValueForMissingStub: null);
+  @override
+  void setCurrentPage(int? page) =>
+      super.noSuchMethod(Invocation.method(#setCurrentPage, [page]),
+          returnValueForMissingStub: null);
+  @override
   void alert(Object? error) =>
       super.noSuchMethod(Invocation.method(#alert, [error]),
           returnValueForMissingStub: null);

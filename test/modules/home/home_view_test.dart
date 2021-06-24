@@ -11,12 +11,20 @@ import 'package:survey/models/user_info.dart';
 import 'package:survey/modules/home/home_module.dart';
 import 'package:survey/core/viper/module.dart';
 import 'package:mockito/mockito.dart';
+import 'package:survey/modules/side_menu/side_menu_module.dart';
+import 'package:survey/services/locator/locator_service.dart';
 import '../../fakers/fake_module.dart';
 import '../../helpers/behavior_subject_generator.dart';
 import '../../helpers/extensions/widget_tester.dart';
 import 'home_view_test.mocks.dart';
 
-@GenerateMocks([HomeViewDelegate])
+class MockSideMenuPresenter extends Mock
+    implements
+        SideMenuPresenter,
+        SideMenuViewDelegate,
+        SideMenuInteractorDelegate {}
+
+@GenerateMocks([HomeViewDelegate, SideMenuInteractor, SideMenuRouter])
 void main() {
   describe("a Home view", () {
     late FakeModule<HomeView, HomeViewDelegate> module;
@@ -47,6 +55,12 @@ void main() {
           .thenAnswer((realInvocation) => generator.make(3));
       when(delegate.didSwipeDown)
           .thenAnswer((realInvocation) => generator.make(4));
+      when(delegate.currentPageDidChange)
+          .thenAnswer((realInvocation) => generator.make(5));
+
+      locator.registerSingleton<SideMenuPresenter>(MockSideMenuPresenter());
+      locator.registerSingleton<SideMenuInteractor>(MockSideMenuInteractor());
+      locator.registerSingleton<SideMenuRouter>(MockSideMenuRouter());
 
       module = FakeModule(
         builder: () => const HomeViewImpl(),
@@ -156,14 +170,6 @@ void main() {
           final networkImage = widget.image as NetworkImage;
           expect(networkImage.url, survey.coverImageUrl);
         });
-
-        it("triggers page control to highlight the second dot", (tester) async {
-          final dot = tester
-              .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
-              .toList()[1];
-          final boxDecoration = dot.decoration! as BoxDecoration;
-          expect(boxDecoration.color, HomeView.dotPageControlHighlightColor);
-        });
       });
 
       context("when swipes left to right on screen", () {
@@ -184,21 +190,13 @@ void main() {
           final networkImage = widget.image as NetworkImage;
           expect(networkImage.url, survey.coverImageUrl);
         });
-
-        it("triggers page control to highlight the last dot", (tester) async {
-          final dot = tester
-              .widgetList<Container>(find.byKey(HomeView.dotPageControlKey))
-              .toList()
-              .last;
-          final boxDecoration = dot.decoration! as BoxDecoration;
-          expect(boxDecoration.color, HomeView.dotPageControlHighlightColor);
-        });
       });
     });
 
     describe("its beginSkeletonAnimation() is called", () {
       beforeEach((tester) async {
         module.view.beginSkeletonAnimation();
+        await tester.pump();
         await tester.pump();
         await tester.pump();
       });
@@ -213,6 +211,7 @@ void main() {
     describe("its stopSkeletonAnimation() is called", () {
       beforeEach((tester) async {
         module.view.stopSkeletonAnimation();
+        await tester.pump();
         await tester.pump();
         await tester.pump();
       });
