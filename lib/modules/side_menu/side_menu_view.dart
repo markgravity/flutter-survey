@@ -1,12 +1,13 @@
 part of 'side_menu_module.dart';
 
-abstract class SideMenuViewDelegate {
+abstract class SideMenuViewDelegate with AlertViewMixinDelegate {
   BehaviorSubject<void> get stateDidInit;
 
   BehaviorSubject<void> get logoutButtonDidTap;
 }
 
-abstract class SideMenuView extends View<SideMenuViewDelegate> {
+abstract class SideMenuView extends View<SideMenuViewDelegate>
+    with AlertViewMixin {
   void setUser(UserInfo user);
 }
 
@@ -19,6 +20,7 @@ class SideMenuViewImpl extends StatefulWidget {
 
 class _SideMenuViewImplState
     extends ViewState<SideMenuViewImpl, SideMenuModule, SideMenuViewDelegate>
+    with AlertViewMixin
     implements SideMenuView {
   final _user = BehaviorSubject<UserInfo>();
 

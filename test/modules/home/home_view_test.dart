@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:quick_test/quick_widget_test.dart';
 import 'package:skeletor/skeletor.dart';
+import 'package:streams_provider/streams_provider.dart';
 import 'package:survey/models/survey_info.dart';
 import 'package:survey/models/user_info.dart';
 import 'package:survey/modules/home/home_module.dart';
@@ -22,7 +23,10 @@ class MockSideMenuPresenter extends Mock
     implements
         SideMenuPresenter,
         SideMenuViewDelegate,
-        SideMenuInteractorDelegate {}
+        SideMenuInteractorDelegate {
+  @override
+  final stateDidInit = BehaviorSubject<void>();
+}
 
 @GenerateMocks([HomeViewDelegate, SideMenuInteractor, SideMenuRouter])
 void main() {

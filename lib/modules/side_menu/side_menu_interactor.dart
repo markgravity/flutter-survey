@@ -2,6 +2,7 @@ part of 'side_menu_module.dart';
 
 abstract class SideMenuInteractorDelegate {
   BehaviorSubject<void> get logoutDidSuccess;
+  BehaviorSubject<Exception> get logoutDidFail;
 }
 
 abstract class SideMenuInteractor
@@ -22,6 +23,6 @@ class SideMenuInteractorImpl extends SideMenuInteractor {
         .logout()
         .then((value) => delegate?.logoutDidSuccess.add(null))
         .onError<Exception>(
-            (error, stackTrace) => delegate?.logoutDidSuccess.add(null));
+            (error, stackTrace) => delegate?.logoutDidFail.add(error));
   }
 }
