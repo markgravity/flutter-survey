@@ -18,22 +18,13 @@ import '../../helpers/behavior_subject_generator.dart';
 import '../../helpers/extensions/widget_tester.dart';
 import 'home_view_test.mocks.dart';
 
-class FakeSideMenuModule extends SideMenuModule {
-  @override
-  SideMenuInteractor get interactor => throw UnimplementedError();
+class MockSideMenuPresenter extends Mock
+    implements
+        SideMenuPresenter,
+        SideMenuViewDelegate,
+        SideMenuInteractorDelegate {}
 
-  @override
-  SideMenuPresenter get presenter => throw UnimplementedError();
-  @override
-  SideMenuRouter get router => throw UnimplementedError();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-@GenerateMocks([HomeViewDelegate])
+@GenerateMocks([HomeViewDelegate, SideMenuInteractor, SideMenuRouter])
 void main() {
   describe("a Home view", () {
     late FakeModule<HomeView, HomeViewDelegate> module;
@@ -53,7 +44,6 @@ void main() {
 
     beforeEach((tester) async {
       HttpOverrides.global = null;
-      locator.registerSingleton<SideMenuModule>(FakeSideMenuModule());
 
       generator = BehaviorSubjectGenerator();
       delegate = MockHomeViewDelegate();
@@ -67,6 +57,10 @@ void main() {
           .thenAnswer((realInvocation) => generator.make(4));
       when(delegate.currentPageDidChange)
           .thenAnswer((realInvocation) => generator.make(5));
+
+      locator.registerSingleton<SideMenuPresenter>(MockSideMenuPresenter());
+      locator.registerSingleton<SideMenuInteractor>(MockSideMenuInteractor());
+      locator.registerSingleton<SideMenuRouter>(MockSideMenuRouter());
 
       module = FakeModule(
         builder: () => const HomeViewImpl(),

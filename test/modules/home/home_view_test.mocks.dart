@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/src/subjects/behavior_subject.dart' as _i2;
 import 'package:survey/models/survey_info.dart' as _i4;
 import 'package:survey/modules/home/home_module.dart' as _i3;
+import 'package:survey/modules/side_menu/side_menu_module.dart' as _i5;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -58,4 +59,28 @@ class MockHomeViewDelegate extends _i1.Mock implements _i3.HomeViewDelegate {
   _i2.BehaviorSubject<void> get alertDialogDidClose => (super.noSuchMethod(
       Invocation.getter(#alertDialogDidClose),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
+}
+
+/// A class which mocks [SideMenuInteractor].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSideMenuInteractor extends _i1.Mock
+    implements _i5.SideMenuInteractor {
+  MockSideMenuInteractor() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set delegate(_i5.SideMenuInteractorDelegate? _delegate) =>
+      super.noSuchMethod(Invocation.setter(#delegate, _delegate),
+          returnValueForMissingStub: null);
+}
+
+/// A class which mocks [SideMenuRouter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSideMenuRouter extends _i1.Mock implements _i5.SideMenuRouter {
+  MockSideMenuRouter() {
+    _i1.throwOnMissingStub(this);
+  }
 }

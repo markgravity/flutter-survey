@@ -18,7 +18,7 @@ class Body extends StatelessWidget {
         hasAppBar: false,
         drawerIcon: const SizedBox.shrink(),
         slideDirection: SlideDirection.RIGHT_TO_LEFT,
-        sliderMenu: locator.get<SideMenuModule>(),
+        sliderMenu: SideMenuModule(),
         sliderMain: StreamsSelector0<bool>.value(
           stream: state._isUserInteractionEnabled,
           builder: (_, isUserInteractionEnabled, child) => IgnorePointer(
