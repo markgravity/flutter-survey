@@ -2,11 +2,13 @@
 // in survey/test/modules/home/home_view_test.dart.
 // Do not manually edit this file.
 
+import 'package:flutter/src/widgets/framework.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/src/subjects/behavior_subject.dart' as _i2;
-import 'package:survey/models/survey_info.dart' as _i4;
-import 'package:survey/modules/home/home_module.dart' as _i3;
-import 'package:survey/modules/side_menu/side_menu_module.dart' as _i5;
+import 'package:survey/models/survey_info.dart' as _i5;
+import 'package:survey/models/user_info.dart' as _i3;
+import 'package:survey/modules/home/home_module.dart' as _i4;
+import 'package:survey/modules/side_menu/side_menu_module.dart' as _i6;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -18,10 +20,12 @@ import 'package:survey/modules/side_menu/side_menu_module.dart' as _i5;
 class _FakeBehaviorSubject<T> extends _i1.Fake
     implements _i2.BehaviorSubject<T> {}
 
+class _FakeUserInfo extends _i1.Fake implements _i3.UserInfo {}
+
 /// A class which mocks [HomeViewDelegate].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeViewDelegate extends _i1.Mock implements _i3.HomeViewDelegate {
+class MockHomeViewDelegate extends _i1.Mock implements _i4.HomeViewDelegate {
   MockHomeViewDelegate() {
     _i1.throwOnMissingStub(this);
   }
@@ -31,17 +35,17 @@ class MockHomeViewDelegate extends _i1.Mock implements _i3.HomeViewDelegate {
       Invocation.getter(#stateDidInit),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
   @override
-  _i2.BehaviorSubject<_i4.SurveyInfo> get showDetailButtonDidTap =>
+  _i2.BehaviorSubject<_i5.SurveyInfo> get showDetailButtonDidTap =>
       (super.noSuchMethod(Invocation.getter(#showDetailButtonDidTap),
-              returnValue: _FakeBehaviorSubject<_i4.SurveyInfo>())
-          as _i2.BehaviorSubject<_i4.SurveyInfo>);
+              returnValue: _FakeBehaviorSubject<_i5.SurveyInfo>())
+          as _i2.BehaviorSubject<_i5.SurveyInfo>);
   @override
   _i2.BehaviorSubject<void> get didSwipeDown => (super.noSuchMethod(
       Invocation.getter(#didSwipeDown),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
   @override
-  _i2.BehaviorSubject<void> get userAvatarDidTap => (super.noSuchMethod(
-      Invocation.getter(#userAvatarDidTap),
+  _i2.BehaviorSubject<void> get userAvatarButtonDidTap => (super.noSuchMethod(
+      Invocation.getter(#userAvatarButtonDidTap),
       returnValue: _FakeBehaviorSubject<void>()) as _i2.BehaviorSubject<void>);
   @override
   _i2.BehaviorSubject<void> get sideMenuDidShow => (super.noSuchMethod(
@@ -65,22 +69,34 @@ class MockHomeViewDelegate extends _i1.Mock implements _i3.HomeViewDelegate {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSideMenuInteractor extends _i1.Mock
-    implements _i5.SideMenuInteractor {
+    implements _i6.SideMenuInteractor {
   MockSideMenuInteractor() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set delegate(_i5.SideMenuInteractorDelegate? _delegate) =>
+  _i3.UserInfo get authenticatedUser =>
+      (super.noSuchMethod(Invocation.getter(#authenticatedUser),
+          returnValue: _FakeUserInfo()) as _i3.UserInfo);
+  @override
+  set delegate(_i6.SideMenuInteractorDelegate? _delegate) =>
       super.noSuchMethod(Invocation.setter(#delegate, _delegate),
           returnValueForMissingStub: null);
+  @override
+  void logout() => super.noSuchMethod(Invocation.method(#logout, []),
+      returnValueForMissingStub: null);
 }
 
 /// A class which mocks [SideMenuRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSideMenuRouter extends _i1.Mock implements _i5.SideMenuRouter {
+class MockSideMenuRouter extends _i1.Mock implements _i6.SideMenuRouter {
   MockSideMenuRouter() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  void replaceToLoginScreen(_i7.BuildContext? context) =>
+      super.noSuchMethod(Invocation.method(#replaceToLoginScreen, [context]),
+          returnValueForMissingStub: null);
 }

@@ -22,6 +22,7 @@ class Body extends StatelessWidget {
         sliderMain: StreamsSelector0<bool>.value(
           stream: state._isUserInteractionEnabled,
           builder: (_, isUserInteractionEnabled, child) => IgnorePointer(
+            key: HomeView.mainIgnorePointer,
             ignoring: !isUserInteractionEnabled,
             child: child,
           ),

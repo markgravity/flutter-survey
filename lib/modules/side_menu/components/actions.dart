@@ -8,6 +8,7 @@ class Actions extends StatelessWidget {
     final state = context.findAncestorStateOfType<_SideMenuViewImplState>()!;
 
     return PlatformButton(
+      key: SideMenuView.logoutButtonKey,
       onPressed: () => state.delegate?.logoutButtonDidTap.add(null),
       cupertino: (_, __) => CupertinoButtonData(
         padding: EdgeInsets.zero,
