@@ -11,6 +11,8 @@ class HomePresenterImpl extends HomePresenter
     didSwipeDown.voidListen(_didSwipeDown).addTo(disposeBag);
     userAvatarDidTap.voidListen(_userAvatarDidTap).addTo(disposeBag);
     currentPageDidChange.listen(_currentPageDidChange).addTo(disposeBag);
+    sideMenuDidShow.voidListen(_sideMenuDidShow).addTo(disposeBag);
+    sideMenuDidDismiss.voidListen(_sideMenuDidDismiss).addTo(disposeBag);
 
     surveysDidFetchFromCached
         .listen(_surveysDidFetchFromCached)
@@ -127,5 +129,13 @@ class HomePresenterImpl extends HomePresenter
 
   void _currentPageDidChange(int page) {
     view.setCurrentPage(page);
+  }
+
+  void _sideMenuDidShow() {
+    view.setUserInteractionEnable(isEnabled: false);
+  }
+
+  void _sideMenuDidDismiss() {
+    view.setUserInteractionEnable(isEnabled: true);
   }
 }
