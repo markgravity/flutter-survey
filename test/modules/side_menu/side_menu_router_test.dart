@@ -21,7 +21,7 @@ void main() {
       router = SideMenuRouterImpl();
     });
 
-    describe("it's replaceToLoginScreen() is called", () {
+    describe("its replaceToLoginScreen() is called", () {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);

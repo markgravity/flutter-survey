@@ -32,7 +32,7 @@ void main() {
       presenter.configure(view: view, interactor: interactor, router: router);
     });
 
-    describe("it's logoutButtonDidTap emits", () {
+    describe("its logoutButtonDidTap emits", () {
       beforeEach(() {
         presenter.logoutButtonDidTap.add(null);
       });
@@ -42,7 +42,7 @@ void main() {
       });
     });
 
-    describe("it's logoutDidSuccess emits", () {
+    describe("its logoutDidSuccess emits", () {
       beforeEach(() {
         presenter.logoutDidSuccess.add(null);
       });
@@ -52,7 +52,7 @@ void main() {
       });
     });
 
-    describe("it's stateDidInit emits", () {
+    describe("its stateDidInit emits", () {
       beforeEach(() {
         presenter.stateDidInit.add(null);
       });

@@ -45,7 +45,7 @@ void main() {
       debugDefaultTargetPlatformOverride = null;
     });
 
-    describe("it's setUser() is called", () {
+    describe("its setUser() is called", () {
       final user = UserInfo();
       user.avatarUrl = "http://example.com";
       user.email = "email";
@@ -65,12 +65,12 @@ void main() {
       });
     });
 
-    describe("it's logout button is tapped", () {
+    describe("its logout button is tapped", () {
       beforeEach((tester) async {
         await tester.tap(find.byKey(SideMenuView.logoutButtonKey));
       });
 
-      it("triggers delegate's logoutButtonDidTap emits", (tester) async {
+      it("triggers delegate's logoutButtonDidTap to emit", (tester) async {
         expect(delegate.logoutButtonDidTap, emits(null));
       });
     });

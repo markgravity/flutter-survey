@@ -33,7 +33,7 @@ void main() {
       interactor.delegate = delegate;
     });
 
-    describe("it's logout() is called", () {
+    describe("its logout() is called", () {
       context("when auth repository's logout() return success", () {
         beforeEach(() {
           when(authRepository.logout())
@@ -41,7 +41,7 @@ void main() {
           interactor.logout();
         });
 
-        it("triggers delegate's logoutDidSuccess emits", () {
+        it("triggers delegate's logoutDidSuccess to emit", () {
           expect(delegate.logoutDidSuccess, emits(null));
         });
       });
@@ -54,7 +54,7 @@ void main() {
           interactor.logout();
         });
 
-        it("triggers delegate's logoutDidSuccess emits", () {
+        it("triggers delegate's logoutDidSuccess to emit", () {
           expect(delegate.logoutDidFail, emits(exception));
         });
       });
