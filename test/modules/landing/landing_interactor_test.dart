@@ -44,7 +44,7 @@ void main() {
           interactor.validateAuthentication();
         });
 
-        it("triggers delegate's didValidateAuthentication emits true", () {
+        it("triggers delegate's didValidateAuthentication to emit true", () {
           expect(delegate.authenticationDidValidate, emits(true));
         });
       });
@@ -57,7 +57,8 @@ void main() {
           interactor.validateAuthentication();
         });
 
-        it("triggers delegate's didValidateAuthentication emits error", () {
+        it("triggers delegate's didValidateAuthentication to emit an error",
+            () {
           expect(delegate.authenticationDidFailToValidate, emits(error));
         });
       });

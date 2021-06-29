@@ -172,7 +172,7 @@ void main() {
       });
     });
 
-    describe("it's sideMenuDidShow emits", () {
+    describe("its sideMenuDidShow emits", () {
       beforeEach(() {
         presenter.sideMenuDidShow.add(null);
       });
@@ -182,7 +182,7 @@ void main() {
       });
     });
 
-    describe("it's sideMenuDidDismiss emits", () {
+    describe("its sideMenuDidDismiss emits", () {
       beforeEach(() {
         presenter.sideMenuDidDismiss.add(null);
       });
@@ -192,7 +192,7 @@ void main() {
       });
     });
 
-    describe("it's userAvatarButtonDidTap emits", () {
+    describe("its userAvatarButtonDidTap emits", () {
       beforeEach(() {
         presenter.userAvatarButtonDidTap.add(null);
       });

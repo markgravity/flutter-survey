@@ -147,7 +147,7 @@ void main() {
         await tester.tap(find.byKey(ForgotPasswordView.resetButtonKey));
       });
 
-      it("triggers delegate's resetButtonDidTap emits", (tester) async {
+      it("triggers delegate's resetButtonDidTap to emit", (tester) async {
         expect(delegate.resetButtonDidTap, emits(""));
       });
     });
@@ -159,7 +159,7 @@ void main() {
             find.byKey(ForgotPasswordView.emailTextFieldKey), text);
       });
 
-      it("triggers delegate's emailTextFieldDidChange emits", (tester) async {
+      it("triggers delegate's emailTextFieldDidChange to emit", (tester) async {
         expect(delegate.emailTextFieldDidChange, emits(text));
       });
     });

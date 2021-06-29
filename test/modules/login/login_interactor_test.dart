@@ -40,7 +40,7 @@ void main() {
           interactor.login("email", "password");
         });
 
-        it("triggers delegate's didLogin emits", () {
+        it("triggers delegate's didLogin to emit", () {
           expect(delegate.didLogin, emits(null));
         });
       });

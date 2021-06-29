@@ -245,14 +245,14 @@ void main() {
       });
     });
 
-    describe("it's showSideMenu() is called", () {
+    describe("its showSideMenu() is called", () {
       beforeEach((tester) async {
         await tester.pumpAndSettle();
         module.view.showSideMenu();
         await tester.pumpAndSettle();
       });
 
-      it("triggers delegate's sideMenuDidShow emits", (tester) async {
+      it("triggers delegate's sideMenuDidShow to emit", (tester) async {
         expect(delegate.sideMenuDidShow, emits(null));
       });
 
@@ -263,24 +263,24 @@ void main() {
           await tester.pumpAndSettle();
         });
 
-        it("triggers delegate's sideMenuDidDismiss emits", (tester) async {
+        it("triggers delegate's sideMenuDidDismiss to emit", (tester) async {
           expect(delegate.sideMenuDidDismiss, emits(null));
         });
       });
     });
 
-    describe("it's user avatar button is tapped", () {
+    describe("its user avatar button is tapped", () {
       beforeEach((tester) async {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(HomeView.userAvatarButtonKey));
       });
 
-      it("triggers delegate's userAvatarButtonDidTap emits", (tester) async {
+      it("triggers delegate's userAvatarButtonDidTap to emit", (tester) async {
         expect(delegate.userAvatarButtonDidTap, emits(null));
       });
     });
 
-    describe("it's setUserInteractionEnable() is called", () {
+    describe("its setUserInteractionEnable() is called", () {
       beforeEach((tester) async {
         module.view.setUserInteractionEnable(isEnabled: false);
         await tester.pumpAndSettle();

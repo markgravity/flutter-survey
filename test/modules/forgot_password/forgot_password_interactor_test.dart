@@ -32,7 +32,7 @@ void main() {
       interactor.delegate = delegate;
     });
 
-    describe("its resetPassword is called", () {
+    describe("its resetPassword() is called", () {
       context("when authRepository's resetPassword return success", () {
         beforeEach(() {
           when(authRepository.resetPassword(email: anyNamed("email")))
@@ -40,7 +40,7 @@ void main() {
           interactor.resetPassword(email: "email");
         });
 
-        it("trigger delegate's passwordDidReset emits", () {
+        it("trigger delegate's passwordDidReset to emit", () {
           expect(delegate.passwordDidReset, emits(null));
         });
       });
@@ -53,7 +53,7 @@ void main() {
           interactor.resetPassword(email: "email");
         });
 
-        it("trigger delegate's passwordDidFailToReset emits", () {
+        it("trigger delegate's passwordDidFailToReset to emit", () {
           expect(delegate.passwordDidFailToReset, emits(exception));
         });
       });

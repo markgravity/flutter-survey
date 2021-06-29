@@ -12,7 +12,7 @@ void main() {
       module = HomeModule();
     });
 
-    describe("its build is called", () {
+    describe("its build() is called", () {
       late Widget widget;
 
       beforeEach(() {

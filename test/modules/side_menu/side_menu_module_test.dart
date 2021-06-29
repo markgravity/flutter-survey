@@ -12,7 +12,7 @@ void main() {
       module = SideMenuModule();
     });
 
-    describe("its build is called", () {
+    describe("its build() is called", () {
       late Widget widget;
 
       beforeEach(() {
