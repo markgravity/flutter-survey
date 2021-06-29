@@ -1,3 +1,4 @@
+import 'package:survey/models/detailed_survey_info.dart';
 import 'package:survey/models/survey_info.dart';
 import 'package:survey/services/api/survey/survey_api_service.dart';
 import 'package:survey/services/local_storage/local_storage_service.dart';
@@ -11,6 +12,8 @@ abstract class SurveyRepository {
   Future<List<SurveyInfo>> fetchSurveysFromCached();
 
   Future<List<SurveyInfo>> fetchSurveysFromRemote();
+
+  Future<DetailedSurveyInfo> fetchDetailedSurvey(String id);
 }
 
 class SurveyRepositoryImpl implements SurveyRepository {
@@ -44,5 +47,11 @@ class SurveyRepositoryImpl implements SurveyRepository {
     );
 
     return list.items;
+  }
+
+  @override
+  Future<DetailedSurveyInfo> fetchDetailedSurvey(String id) {
+    final params = SurveyInfoParams(id: id);
+    return _surveyApiService.info(params: params);
   }
 }

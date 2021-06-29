@@ -8,11 +8,13 @@ class AuthTokenInfo with Mappable {
 
   @override
   void mapping(Mapper map) {
-    map<String>("access_token", accessToken, (v) => accessToken = v as String);
-    map<String>("token_type", tokenType, (v) => tokenType = v as String);
-    map<DateTime>("expires_in", expiresIn, (v) => expiresIn = v as DateTime,
-        DateTransform());
+    map<String>("attributes.access_token", accessToken,
+        (v) => accessToken = v as String);
     map<String>(
-        "refresh_token", refreshToken, (v) => refreshToken = v as String);
+        "attributes.token_type", tokenType, (v) => tokenType = v as String);
+    map<DateTime>("attributes.expires_in", expiresIn,
+        (v) => expiresIn = v as DateTime, const DateTransform());
+    map<String>("attributes.refresh_token", refreshToken,
+        (v) => refreshToken = v as String);
   }
 }

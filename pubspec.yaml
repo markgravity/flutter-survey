@@ -35,14 +35,14 @@ dependencies:
   get_it: ^7.0.0
   json_annotation: ^4.0.1
   enumerated_class: ^0.0.1+1
-  object_mapper: ^1.1.0
-  streams_provider: ^0.1.0
+  object_mapper: ^1.2.0
+  streams_provider: ^0.1.1
   shared_preferences: ^2.0.5
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   adaptive_dialog: ^0.10.0+5
   async: ^2.5.0
   carousel_slider: ^4.0.0-nullsafety.0
-  skeletor: ^0.0.2
+  skeletor: ^0.0.3
   simple_gesture_detector: ^0.2.0
   equatable: ^2.0.2
   tuple: ^2.0.0
