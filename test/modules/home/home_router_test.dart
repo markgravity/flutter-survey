@@ -26,12 +26,14 @@ void main() {
       beforeEach(() {
         when(buildContext.findAncestorStateOfType<NavigatorState>())
             .thenReturn(navigatorState);
-        when(navigatorState.pushNamed(any)).thenAnswer((_) => Future.value());
+        when(navigatorState.pushNamed(any, arguments: anyNamed("arguments")))
+            .thenAnswer((_) => Future.value());
         router.pushToSurveyDetail(context: buildContext, survey: SurveyInfo());
       });
 
       it("triggers navigator to push to Survey Detail screen", () {
-        final routePath = verify(navigatorState.pushNamed(captureAny))
+        final routePath = verify(navigatorState.pushNamed(captureAny,
+                arguments: anyNamed("arguments")))
             .captured
             .single as String;
         expect(routePath, SurveyDetailModule.routePath);
