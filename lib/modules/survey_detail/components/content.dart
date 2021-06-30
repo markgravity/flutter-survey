@@ -39,20 +39,6 @@ class Content extends StatelessWidget {
                             fontSize: 17,
                           ),
                         ),
-                        Expanded(child: Container()),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 140,
-                                ),
-                                child: Button(
-                                  title: AppLocalizations.of(context)!
-                                      .surveyDetailScreenStartSurveyButtonTitle,
-                                ),
-                              ),
-                            ]),
                       ],
                     ),
                   ),
@@ -60,6 +46,21 @@ class Content extends StatelessWidget {
               ],
             ),
           ),
+          Positioned(
+            right: 20,
+            bottom: 0,
+            child: SafeArea(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  minWidth: 140,
+                ),
+                child: Button(
+                  title: AppLocalizations.of(context)!
+                      .surveyDetailScreenStartSurveyButtonTitle,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
