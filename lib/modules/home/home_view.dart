@@ -7,7 +7,7 @@ abstract class HomeViewDelegate implements AlertViewMixinDelegate {
 
   BehaviorSubject<void> get didSwipeDown;
 
-  BehaviorSubject<void> get userAvatarDidTap;
+  BehaviorSubject<void> get userAvatarButtonDidTap;
 
   BehaviorSubject<void> get sideMenuDidShow;
 
@@ -20,6 +20,7 @@ abstract class HomeView extends View<HomeViewDelegate>
     with AlertViewMixin, ProgressHUDViewMixin {
   static const currentDateTextKey = Key("current_date_text");
   static const userAvatarImageKey = Key("user_avatar_image");
+  static const userAvatarButtonKey = Key("user_avatar_button");
   static const titleTextSlideItemKey = Key("title_text_slide_item");
   static const descriptionTextSlideItemKey = Key("description_text_slide_item");
   static const backgroundImageSlideItemKey = Key("background_image_slide_item");
@@ -27,6 +28,7 @@ abstract class HomeView extends View<HomeViewDelegate>
   static const skeletonKey = Key("skeleton_key");
   static const showDetailButtonKey = Key("show_detail_button");
   static const sliderMenuContainerKey = Key("slider_menu_container");
+  static const mainIgnorePointer = Key("home_ignore_pointer");
 
   static const dotPageControlHighlightColor = Colors.white;
   static const dotPageControlNormalColor = Color.fromRGBO(255, 255, 255, 0.2);

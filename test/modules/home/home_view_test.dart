@@ -61,6 +61,12 @@ void main() {
           .thenAnswer((realInvocation) => generator.make(4));
       when(delegate.currentPageDidChange)
           .thenAnswer((realInvocation) => generator.make(5));
+      when(delegate.sideMenuDidShow)
+          .thenAnswer((realInvocation) => generator.make(6));
+      when(delegate.sideMenuDidDismiss)
+          .thenAnswer((realInvocation) => generator.make(7));
+      when(delegate.userAvatarButtonDidTap)
+          .thenAnswer((realInvocation) => generator.make(8));
 
       locator.registerSingleton<SideMenuPresenter>(MockSideMenuPresenter());
       locator.registerSingleton<SideMenuInteractor>(MockSideMenuInteractor());
@@ -236,6 +242,55 @@ void main() {
 
       it("triggers delegate's showDetailButtonDidTap to emit", (tester) async {
         expect(delegate.showDetailButtonDidTap, emits(surveys.first));
+      });
+    });
+
+    describe("its showSideMenu() is called", () {
+      beforeEach((tester) async {
+        await tester.pumpAndSettle();
+        module.view.showSideMenu();
+        await tester.pumpAndSettle();
+      });
+
+      it("triggers delegate's sideMenuDidShow to emit", (tester) async {
+        expect(delegate.sideMenuDidShow, emits(null));
+      });
+
+      describe("then wipes from left to right", () {
+        beforeEach((tester) async {
+          final location = tester.getCenter(find.byKey(HomeView.bodyKey));
+          await tester.flingFrom(location, Offset(location.dx, 0), location.dx);
+          await tester.pumpAndSettle();
+        });
+
+        it("triggers delegate's sideMenuDidDismiss to emit", (tester) async {
+          expect(delegate.sideMenuDidDismiss, emits(null));
+        });
+      });
+    });
+
+    describe("its user avatar button is tapped", () {
+      beforeEach((tester) async {
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(HomeView.userAvatarButtonKey));
+      });
+
+      it("triggers delegate's userAvatarButtonDidTap to emit", (tester) async {
+        expect(delegate.userAvatarButtonDidTap, emits(null));
+      });
+    });
+
+    describe("its setUserInteractionEnable() is called", () {
+      beforeEach((tester) async {
+        module.view.setUserInteractionEnable(isEnabled: false);
+        await tester.pumpAndSettle();
+      });
+
+      it("triggers main ignore pointer updates with correct ignoring value",
+          (tester) async {
+        final widget = tester
+            .widget<IgnorePointer>(find.byKey(HomeView.mainIgnorePointer));
+        expect(widget.ignoring, true);
       });
     });
   });

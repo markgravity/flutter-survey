@@ -171,5 +171,35 @@ void main() {
         verify(view.showUser(user)).called(1);
       });
     });
+
+    describe("its sideMenuDidShow emits", () {
+      beforeEach(() {
+        presenter.sideMenuDidShow.add(null);
+      });
+
+      it("trigger view to disable user interaction", () {
+        verify(view.setUserInteractionEnable(isEnabled: false)).called(1);
+      });
+    });
+
+    describe("its sideMenuDidDismiss emits", () {
+      beforeEach(() {
+        presenter.sideMenuDidDismiss.add(null);
+      });
+
+      it("trigger view to enable user interaction", () {
+        verify(view.setUserInteractionEnable(isEnabled: true)).called(1);
+      });
+    });
+
+    describe("its userAvatarButtonDidTap emits", () {
+      beforeEach(() {
+        presenter.userAvatarButtonDidTap.add(null);
+      });
+
+      it("trigger view to show side menu", () {
+        verify(view.showSideMenu()).called(1);
+      });
+    });
   });
 }

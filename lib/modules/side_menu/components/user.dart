@@ -37,6 +37,7 @@ class User extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(18),
                   child: Image(
+                    key: SideMenuView.userAvatarImageKey,
                     image: NetworkImage(user.avatarUrl!),
                   ),
                 ),

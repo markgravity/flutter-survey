@@ -1,15 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quick_test/quick_test.dart';
-import 'package:survey/modules/home/home_module.dart';
+import 'package:survey/modules/side_menu/side_menu_module.dart';
 
 import '../../mocks/build_context.dart';
 
 void main() {
-  describe("a Home module", () {
-    late HomeModule module;
+  describe("a SideMenu module", () {
+    late SideMenuModule module;
     beforeEach(() {
-      module = HomeModule();
+      module = SideMenuModule();
     });
 
     describe("its build() is called", () {
@@ -20,7 +20,7 @@ void main() {
       });
 
       it("returns LandingViewImpl", () {
-        expect(widget, isA<HomeViewImpl>());
+        expect(widget, isA<SideMenuViewImpl>());
       });
     });
   });

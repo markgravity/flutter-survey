@@ -154,7 +154,7 @@ void main() {
         await tester.enterText(find.byKey(LoginView.emailTextFieldKey), text);
       });
 
-      it("triggers to delegate's didChangeEmailText emits", (tester) async {
+      it("triggers to delegate's didChangeEmailText to emit", (tester) async {
         expect(delegate.emailTextFieldDidChange, emits(text));
       });
     });
@@ -168,7 +168,8 @@ void main() {
             find.byKey(LoginView.passwordTextFieldKey), text);
       });
 
-      it("triggers to delegate's didChangePasswordText emits", (tester) async {
+      it("triggers to delegate's didChangePasswordText to emit",
+          (tester) async {
         expect(delegate.passwordTextFieldDidChange, emits(text));
       });
     });
@@ -182,7 +183,7 @@ void main() {
         await tester.tap(find.byKey(LoginView.loginButtonKey));
       });
 
-      it("triggers to delegate's didTapLoginButton emits", (tester) async {
+      it("triggers to delegate's didTapLoginButton to emit", (tester) async {
         expect(delegate.loginButtonDidTap, emits(["", ""]));
       });
     });
@@ -195,7 +196,7 @@ void main() {
         await tester.tap(find.byKey(LoginView.forgotButtonKey));
       });
 
-      it("triggers to delegate's didTapLoginButton emits", (tester) async {
+      it("triggers to delegate's didTapLoginButton to emit", (tester) async {
         expect(delegate.forgotButtonDidTap, emits(null));
       });
     });
