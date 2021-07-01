@@ -1,22 +1,47 @@
 part of '../home_module.dart';
 
 class SlideItem extends StatelessWidget {
-  final SurveyInfo survey;
-  const SlideItem({
+  final SurveyInfo? survey;
+  bool get _isEmptied => survey == null;
+
+  factory SlideItem({
+    Key? key,
+    required SurveyInfo survey,
+  }) {
+    return SlideItem._(
+      key: key,
+      survey: survey,
+    );
+  }
+
+  factory SlideItem.empty({
+    Key? key,
+  }) {
+    return SlideItem._(
+      key: key,
+      survey: null,
+    );
+  }
+
+  const SlideItem._({
     Key? key,
     required this.survey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = context.findAncestorStateOfType<_HomeViewImplState>()!;
     return Stack(
       fit: StackFit.expand,
       children: [
         Bone.hidden(
-          child: Image(
-            image: NetworkImage(survey.coverImageUrl!),
-            fit: BoxFit.cover,
-          ),
+          child: _isEmptied
+              ? const SizedBox.shrink()
+              : Image(
+                  key: HomeView.backgroundImageSlideItemKey,
+                  image: NetworkImage(survey!.coverImageUrl!),
+                  fit: BoxFit.cover,
+                ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -34,11 +59,12 @@ class SlideItem extends StatelessWidget {
                         children: [
                           Bone.multiple(
                             number: 2,
+                            height: 18,
+                            borderRadius: BorderRadius.circular(16),
                             variants: const [1, 0.5],
                             child: Text(
-                              survey.title!,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                              survey?.title ?? "",
+                              key: HomeView.titleTextSlideItemKey,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 28,
@@ -50,9 +76,12 @@ class SlideItem extends StatelessWidget {
                           ),
                           Bone.multiple(
                             number: 2,
+                            height: 18,
+                            borderRadius: BorderRadius.circular(16),
                             variants: const [1, 0.5],
                             child: Text(
-                              survey.description!,
+                              survey?.description ?? "",
+                              key: HomeView.descriptionTextSlideItemKey,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -65,6 +94,13 @@ class SlideItem extends StatelessWidget {
                       ),
                     ),
                     PlatformButton(
+                      key: HomeView.showDetailButtonKey,
+                      onPressed: _isEmptied
+                          ? null
+                          : () {
+                              state.delegate?.showDetailButtonDidTap
+                                  .add(survey!);
+                            },
                       materialFlat: (_, __) => MaterialFlatButtonData(
                         color: Colors.transparent,
                       ),
